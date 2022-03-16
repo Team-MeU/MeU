@@ -1,3 +1,18 @@
+DROP TABLE IF EXISTS Comment;
+DROP TABLE IF EXISTS Likes;
+DROP TABLE IF EXISTS Regram;
+DROP TABLE IF EXISTS Tag;
+DROP TABLE IF EXISTS Contact;
+DROP TABLE IF EXISTS User;
+DROP TABLE IF EXISTS Post;
+DROP TABLE IF EXISTS UserSession;
+DROP TABLE IF EXISTS Follow;
+DROP TABLE IF EXISTS tagPostMapping;
+DROP TABLE IF EXISTS Feed;
+DROP TABLE IF EXISTS deletePost;
+DROP TABLE IF EXISTS Trending;
+DROP TABLE IF EXISTS Explore;
+
 CREATE TABLE `Comment` (
     `commentId`	    int PRIMARY KEY AUTO_INCREMENT,
     `userId`	    int	NOT NULL,
@@ -49,7 +64,7 @@ CREATE TABLE `User` (
     `notificationSet`	int	NOT NULL DEFAULT 0,
     `createdAt`	    datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updatedAt`	    datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    `nickname`	    varchar(100) NULL,
+    `nickname`	    varchar(100) NOT NULL,
     `introduce`	    varchar(200) NULL
 );
 
