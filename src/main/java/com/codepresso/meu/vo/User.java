@@ -22,4 +22,9 @@ public class User {
     Date updatedAt;
     String nickname;
     String introduce;
+
+    public User(String userName, String nickName) {
+        this.userName = userName;
+        this.nickname = nickName;
+    }
 }

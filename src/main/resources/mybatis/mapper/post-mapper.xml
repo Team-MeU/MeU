@@ -4,5 +4,20 @@
 
 <mapper namespace="com.codepresso.meu.mapper.PostMapper">
 
+    <insert id="save">
+        INSERT INTO Post(userId, content)
+        VALUES (#{post.userId}, #{post.content});
+    </insert>
+
+    <update id="update">
+        UPDATE Post
+        SET content=#{post.content}
+        WHERE postId=#{post.postId};
+    </update>
+
+    <delete id="delete">
+    DELETE FROM Post
+    WHERE postId=#{id};
+    </delete>
 
 </mapper>
