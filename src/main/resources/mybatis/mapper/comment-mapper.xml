@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.codepresso.meu.mapper.CommentMapper">
+    <select id="findByCommentOfPostIdInFeed" resultType="com.codepresso.meu.vo.Comment">
+        SELECT c.commentId, c.userId, c.postId, c.content, c.createdAt, c.updatedAt,
+            u.nickname, u.profileImg
+        FROM comment as c
+        JOIN user as u
+        ON c.userId = u.userId
+        WHERE c.postId=#{postId}
+        LIMIT 3;
+    </select>
+
+    <select id="findByCommentOfPostIdInPostPage" resultType="com.codepresso.meu.vo.Comment">
+        SELECT *
+        FROM comment
+        WHERE postId=#{postId}
+        LIMIT #{limit} OFFSET #{offset};
+    </select>
+
+    <select id="count" resultType="Integer">
+        SELECT count(*)
+        FROM comment
+        WHERE post_id=#{postId};
+    </select>
+
+    <insert id="save">
+        INSERT INTO comment(post_id, content, username)
+        VALUES (#{comment.postId}, #{comment.content}, #{comment.username});
+    </insert>
+
+    <update id="update">
+        UPDATE comment
+        SET content=#{comment.content}
+        WHERE id=#{comment.id};
+    </update>
+
+    <delete id="delete">
+        DELETE FROM comment
+        WHERE id=#{id};
+    </delete>
+</mapper>

@@ -10,9 +10,7 @@ import org.springframework.stereotype.Service;
 public class PostService {
     private PostMapper postMapper;
 
-    public Post getPostById(Integer id) {
-        return postMapper.findOne(id);
-    }
+    //public Post getPostById(Integer id){}
 
     public Boolean savePost(Post post) {
         Integer result = postMapper.save(post);
