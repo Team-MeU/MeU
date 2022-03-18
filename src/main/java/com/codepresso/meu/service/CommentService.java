@@ -13,7 +13,7 @@ public class CommentService {
     private CommentMapper commentMapper;
 
     public List<Comment> getCommentListByPostInFeed(Integer postId){
-        return commentMapper.findByCommentOfPostIdInFeed(postId);
+        return commentMapper.findByCommentOfPostId(postId);
     }
 
     public List<Comment> getCommentListByPostInPostPage(Integer postId, Integer page, Integer size){
@@ -21,17 +21,17 @@ public class CommentService {
     }
 
     public boolean saveComment(Comment comment){
-        Integer result = commentMapper.save(comment);
+        Integer result = commentMapper.commentSave(comment);
         return result == 1;
     }
 
     public boolean updateComment(Comment comment) {
-        Integer result = commentMapper.update(comment);
+        Integer result = commentMapper.commentUpdate(comment);
         return result == 1;
     }
 
-    public boolean deleteComment(Integer id) {
-        Integer result = commentMapper.delete(id);
+    public boolean deleteComment(Integer commentId) {
+        Integer result = commentMapper.commentDelete(commentId);
         return result == 1;
     }
 
