@@ -12,9 +12,13 @@ import java.util.List;
 public class PostService {
     private PostMapper postMapper;
 
+<<<<<<< HEAD
     public List<Post> getPostByFeed(Integer id) {
         return postMapper.findByFeed(id);
     }
+=======
+    //public Post getPostById(Integer id){}
+>>>>>>> feature/comment
 
     public Boolean savePost(Post post) {
         Integer result = postMapper.save(post);

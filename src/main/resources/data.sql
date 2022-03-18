@@ -18,3 +18,12 @@ insert into Post(postId, userId, content)
 values (5, 3, 'Rite Aid Corporation');
 insert into Post(postId, userId, content)
 values (6, 3, 'Summer Infant, Inc.');
+
+Insert into Comment values (2, 2, 1, 'hi two', '2022-03-15 18:09:42', '2022-03-15 18:09:42');
+Insert into Comment values (1, 2, 1, 'hi one', '2022-03-15 18:09:42', '2022-03-15 18:09:42');
+Insert into Comment values (3, 3, 1, 'hi three', '2022-03-15 18:09:42', '2022-03-15 18:09:42');
+Insert into Comment values (4, 1, 2, 'yes one', '2022-03-15 18:09:42', '2022-03-15 18:09:42');
+Insert into Comment values (5, 2, 2, 'yes two', '2022-03-15 18:09:42', '2022-03-15 18:09:42');
+Insert into Comment values (6, 3, 2, 'yes three', '2022-03-15 18:09:42', '2022-03-15 18:09:42');
+Insert into Comment values (7, 1, 3, 'wow one', '2022-03-15 18:09:42', '2022-03-15 18:09:42');
+Insert into Comment values (8, 2, 3, 'wow two', '2022-03-15 18:09:42', '2022-03-15 18:09:42');
