@@ -8,6 +8,68 @@ Version: 1.0
 (function ($) {
 	"use strict"; // Start of use strict
 
+	$("#signup-submitButton").click(function(){
+		var email = $("#name").val();
+		var nickname = $("#nickname").val();
+		var password = $("#password").val();
+
+		$.ajax({
+			method: "POST",
+			url: "/user",
+			data: JSON.stringify({
+				"email": email,
+				"nickname": nickname,
+				"password": password
+			}),
+			contentType: "application/json"
+		})
+			.done(function(response) {
+				console.log("signup success");
+				window.location.href="../../";
+			})
+			.fail(function(response) {
+				alert("입력 정보를 확인해주세요.")
+			});
+	});
+
+	$("#login-submitButton").click(function(){
+		var email = $("#name").val();
+		var password = $("#password").val();
+
+		$.ajax({
+			method: "POST",
+			url: "/user/login",
+			data: JSON.stringify({
+				"email": email,
+				"password": password
+			}),
+			contentType: "application/json"
+		})
+			.done(function(response) {
+				console.log("login success");
+				window.location.href="../../";
+			})
+			.fail(function(response) {
+				alert("입력 정보를 확인해주세요.")
+			});
+	});
+
+	$(document).on("click","#logout-button",function(){
+		var session_id = $.cookie('id');
+
+		$.ajax({
+			method: "DELETE",
+			url: "/user/session",
+			data: {
+				"id": session_id,
+			}
+		})
+			.done(function(response) {
+				document.cookie = "id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+				window.location.href = "/";
+			});
+	});
+
 	var Popular = {
 		init: function () {
 			this.Basic.init();
