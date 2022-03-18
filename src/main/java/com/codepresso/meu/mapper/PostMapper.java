@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface PostMapper {
-    List<Post> findAll();
+
     List<Post> findByFeed(@Param("id") Integer id);
     Integer save(@Param("post") Post post);
     Integer update(@Param("post") Post post);

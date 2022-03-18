@@ -5,13 +5,15 @@ import com.codepresso.meu.vo.Post;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class PostService {
     private PostMapper postMapper;
 
-    public Post getPostById(Integer id) {
-        return postMapper.findOne(id);
+    public List<Post> getPostByFeed(Integer id) {
+        return postMapper.findByFeed(id);
     }
 
     public Boolean savePost(Post post) {

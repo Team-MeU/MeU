@@ -16,8 +16,8 @@
     </update>
 
     <delete id="delete">
-    DELETE FROM Post
-    WHERE postId=#{id};
+        DELETE FROM Post
+        WHERE postId=#{id};
     </delete>
 
 </mapper>

@@ -25,4 +25,18 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.OK).body("success");
     }
 
+    @PutMapping("/post")
+    public ResponseEntity<String> updatePost(@RequestBody @Validated PostRequestDto postDto) {
+        Post post = postDto.getPost();
+        postService.updatePost(post);
+
+        return ResponseEntity.status(HttpStatus.OK).body("success");
+    }
+
+    @DeleteMapping("/post")
+    public ResponseEntity<String> deletePost(@RequestParam Integer id) {
+        postService.deletePost(id);
+        return ResponseEntity.status(HttpStatus.OK).body("success");
+    }
+
 }
