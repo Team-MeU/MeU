@@ -5,5 +5,6 @@
     <mappers>
         <mapper resource="mybatis/mapper/user-mapper.xml"/>
         <mapper resource="mybatis/mapper/user-session-mapper.xml"/>
+        <mapper resource="mybatis/mapper/post-mapper.xml"/>
     </mappers>
 </configuration>

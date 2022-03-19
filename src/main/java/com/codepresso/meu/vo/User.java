@@ -24,9 +24,15 @@ public class User {
     String nickname;
     String introduce;
 
+
     public User(String email, String nickname, String password) {
         this.email = email;
         this.nickname = nickname;
         this.password = password;
+
+    public User(String userName, String nickName) {
+        this.userName = userName;
+        this.nickname = nickName;
+
     }
 }

@@ -5,10 +5,6 @@ values (2, 'snieass1@delicious.com', 'Stefa Nieass', 'JzOSMD', 'http://dummyimag
 insert into User(userId, email, userName, password, profileImg, birthDate, gender, videoSet, NotificationSet, nickname, introduce)
 values (3, 'acrush2@nhs.uk', 'Arlen Crush', 'MRLEpJo', 'http://dummyimage.com/216x100.png/cc0000/ffffff', '2022-03-11', true, true, true, 'Cervus unicolor', 'Philosophy, Inc.');
 
-insert into User(userId, email, userName, password, profileImg, birthDate, gender, videoSet, NotificationSet, nickname, introduce)
-values (4, 'aa@naver.com', 'tester', '1234', 'http://dummyimage.com/216x100.png/cc0000/ffffff', '2022-03-11', true, true, true, 'aa', 'Philosophy, Inc.');
-
-
 insert into Post(postId, userId, content)
 values (1, 1, 'BB&T Corporation');
 insert into Post(postId, userId, content)
