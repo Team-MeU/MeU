@@ -132,4 +132,48 @@ Version: 1.0
 		Popular.init();
 	});
 
+	$("#post-create").click(function(){
+		var content = $("#post-content").val();
+
+		$.ajax({
+			method: "POST",
+			url: "/post",
+			data: JSON.stringify({
+				"content": content
+			}),
+			contentType: "application/json"
+		})
+		.done(function(response) {
+			console.log("Post creation success!");
+			window.location.href = "/";
+		})
+		.fail(function(response) {
+			alert("로그인 후 이용할 수 있습니다.");
+			window.location.href = "/user/login";
+		});
+	});
+
+	$("#post-edit").click(function(){
+
+	});
+
+	$("#post-delete").click(function(){
+		var id = $("#post-id").val();
+
+		$.ajax({
+			method: "DELETE",
+			url: "/post",
+			data: {
+				"id": id,
+			}
+		})
+		.done(function(response) {
+			console.log("Post delete success!");
+			window.location.href = "/";
+		})
+		.fail(function(response) {
+			alert("게시물 삭제 권한이 없습니다.");
+		});
+	});
+
 })(jQuery); // End of use strict

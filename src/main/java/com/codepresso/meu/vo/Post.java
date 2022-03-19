@@ -23,10 +23,12 @@ public class Post {
         this.content = content;
     }
 
-    public Post(Integer postId, Integer userId, String content, String userName, String nickName) {
+    public Post(Integer postId, Integer userId, String content, Date createdAt, String email, String nickname) {
         this.postId = postId;
         this.userId = userId;
         this.content = content;
-        this.user = new User(userName, nickName);
+        this.createdAt = createdAt;
+        this.user = new User(email, nickname);
+
     }
 }
