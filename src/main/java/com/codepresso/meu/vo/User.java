@@ -1,13 +1,14 @@
 package com.codepresso.meu.vo;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
 @AllArgsConstructor
-@Getter @Setter
+@NoArgsConstructor
+@ToString
+@Setter
+@Getter
 public class User {
     Integer userId;
     String email;
@@ -23,8 +24,15 @@ public class User {
     String nickname;
     String introduce;
 
+
+    public User(String email, String nickname, String password) {
+        this.email = email;
+        this.nickname = nickname;
+        this.password = password;
+
     public User(String userName, String nickName) {
         this.userName = userName;
         this.nickname = nickName;
+
     }
 }
