@@ -19,10 +19,9 @@ public class CommentController {
     public List<CommentResponseDto> getCommentListByPost(@RequestParam("postId") Integer postId){
         List<Comment> comments = commentService.getCommentListByPostInFeed(postId);
         List<CommentResponseDto> commentResponseDtos = new ArrayList<>();
-        CommentResponseDto c = new CommentResponseDto(postId);
+
         for(Comment comment : comments){
-            c.addComment(comment);
-            commentResponseDtos.add(c);
+            commentResponseDtos.add(new CommentResponseDto(comment));
         }
         return commentResponseDtos;
     }

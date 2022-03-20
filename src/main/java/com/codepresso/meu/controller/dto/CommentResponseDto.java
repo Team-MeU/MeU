@@ -12,11 +12,19 @@ public class CommentResponseDto {
     Integer postId;
     List<CommentInfo> commentInfoList = new ArrayList<>();
 
+    public CommentResponseDto(Integer post_id){
+        this.postId = post_id;
+    }
+
     public CommentResponseDto(Comment comment) {
         this.postId = comment.getPostId();
-        CommentInfo commentInfo = new CommentInfo(comment);
-        this.commentInfoList.add(commentInfo);
+        this.commentInfoList.add(new CommentInfo(comment));
     }
+
+    public void AddComment(Comment comment){
+        this.commentInfoList.add(new CommentInfo(comment));
+    }
+
 }
 
 

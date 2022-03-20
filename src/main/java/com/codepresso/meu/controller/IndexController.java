@@ -6,6 +6,7 @@ import com.codepresso.meu.service.CommentService;
 import com.codepresso.meu.service.PostService;
 import com.codepresso.meu.vo.Comment;
 import com.codepresso.meu.vo.Post;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
+@Controller
 public class IndexController {
 
     private PostService postService;
@@ -24,28 +25,25 @@ public class IndexController {
         this.commentService = commentService;
     }
     @RequestMapping(value="/")
-    public List<CommentResponseDto> index(Model model) {
+    public String index(Model model) {
         List<Post> postList = postService.getAllPost();
         List<PostResponseDto> postResponseDtos = new ArrayList<>();
-
         List<CommentResponseDto> commentResponseDtos = new ArrayList<>();
 
         for(Post post : postList) {
             int postId = post.getPostId();
             postResponseDtos.add(new PostResponseDto(post));
-
-
             List<Comment> commentList = commentService.getCommentListByPostInFeed(postId);
             CommentResponseDto commentResponseDto = new CommentResponseDto(postId);
 
             for(Comment comment : commentList){
-
+                commentResponseDto.AddComment(comment);
             }
             commentResponseDtos.add(commentResponseDto);
         }
         model.addAttribute("posts", postResponseDtos);
         model.addAttribute("comments",commentResponseDtos);
-        return commentResponseDtos;
+        return "index";
     }
 }
 //if(postByComment.isEmpty()) continue;
