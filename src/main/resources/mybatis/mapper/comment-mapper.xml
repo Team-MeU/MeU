@@ -11,7 +11,7 @@
         ON c.userId = u.userId
         WHERE c.postId=#{postId}
         ORDER BY c.updatedAt
-        LIMIT 10 ;
+        LIMIT 3 ;
     </select>
 
     <select id="findByCommentOfPostIdInPostPage" resultType="com.codepresso.meu.vo.Comment">

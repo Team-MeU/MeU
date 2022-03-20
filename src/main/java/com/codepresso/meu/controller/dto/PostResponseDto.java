@@ -3,19 +3,25 @@ package com.codepresso.meu.controller.dto;
 import com.codepresso.meu.vo.Post;
 import lombok.Getter;
 
+import java.util.Date;
+
 @Getter
 public class PostResponseDto {
     Integer postId;
     Integer userId;
     String content;
-    String userName;
-    String nickName;
+    Date createdAt;
+    String email;
+    String nickname;
+
 
     public PostResponseDto(Post post) {
         this.postId = post.getPostId();
         this.userId = post.getUserId();
         this.content = post.getContent();
-        this.userName = post.getUser().getUserName();
-        this.nickName = post.getUser().getNickname();
+        this.createdAt = post.getCreatedAt();
+        this.email = post.getUser().getEmail();
+        this.nickname = post.getUser().getNickname();
+
     }
 }

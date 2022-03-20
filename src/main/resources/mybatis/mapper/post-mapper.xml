@@ -20,4 +20,34 @@
         WHERE postId=#{id};
     </delete>
 
+    <select id="findOne" resultType="com.codepresso.meu.vo.Post">
+        select
+            p.postId,
+            p.userId,
+            p.content,
+            p.createdAt,
+            u.email,
+            u.nickname
+        FROM Post as p
+        JOIN User as u
+        ON p.userId = u.userId
+        WHERE p.postId=#{id};
+    </select>
+
+    <select id="findAll" resultType="com.codepresso.meu.vo.Post">
+        select
+            p.postId,
+            p.userId,
+            p.content,
+            p.createdAt,
+            u.email,
+            u.nickname
+        FROM Post as p
+        JOIN User as u
+        ON p.userId = u.userId
+        ORDER BY p.postId DESC
+    </select>
+
+
+
 </mapper>
