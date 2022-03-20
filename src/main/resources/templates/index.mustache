@@ -217,6 +217,7 @@
                               <div class="pt-4 feeds">
                                  <!-- Feed Item -->
                                  {{#posts}}
+                                     {{#comments}}
                                  <div class="bg-white p-3 feed-item rounded-4 mb-3 shadow-sm">
                                     <div class="d-flex">
                                        <img src="img/rmate2.jpg" class="img-fluid rounded-circle user-img" alt="profile-img">
@@ -273,7 +274,7 @@
 
 
 
-                                                {{#comments}}
+
                                                     {{#commentInfoList}}
                                                  <div class="comments">
                                                    <div class="d-flex mb-2">
@@ -298,12 +299,12 @@
                                                    </div>
                                                 </div>
                                                     {{/commentInfoList}}
-                                                {{/comments}}
                                              </div>
                                           </div>
                                        </div>
                                     </div>
                                  </div>
+                                     {{/comments}}
                                  {{/posts}}
                               </div>
 
