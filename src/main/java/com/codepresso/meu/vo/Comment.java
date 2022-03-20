@@ -33,4 +33,5 @@ public class Comment {
         this.profileImg = profileImg;
         //this.updatedAt
     }
+
 }

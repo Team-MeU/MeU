@@ -19,8 +19,10 @@ public class CommentController {
     public List<CommentResponseDto> getCommentListByPost(@RequestParam("postId") Integer postId){
         List<Comment> comments = commentService.getCommentListByPostInFeed(postId);
         List<CommentResponseDto> commentResponseDtos = new ArrayList<>();
+        CommentResponseDto c = new CommentResponseDto(postId);
         for(Comment comment : comments){
-            commentResponseDtos.add(new CommentResponseDto(comment));
+            c.addComment(comment);
+            commentResponseDtos.add(c);
         }
         return commentResponseDtos;
     }

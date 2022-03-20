@@ -24,27 +24,28 @@ public class IndexController {
         this.commentService = commentService;
     }
     @RequestMapping(value="/")
-    public List<List<CommentResponseDto>> index(Model model) {
+    public List<CommentResponseDto> index(Model model) {
         List<Post> postList = postService.getAllPost();
         List<PostResponseDto> postResponseDtos = new ArrayList<>();
 
-        List<List<CommentResponseDto>> CommentResponseDtosByPostId = new ArrayList<List<CommentResponseDto>>();
+        List<CommentResponseDto> commentResponseDtos = new ArrayList<>();
 
         for(Post post : postList) {
             int postId = post.getPostId();
             postResponseDtos.add(new PostResponseDto(post));
 
+
             List<Comment> commentList = commentService.getCommentListByPostInFeed(postId);
-            List<CommentResponseDto> commentResponseDtos = new ArrayList<>();
+            CommentResponseDto commentResponseDto = new CommentResponseDto(postId);
+
             for(Comment comment : commentList){
-                commentResponseDtos.add(new CommentResponseDto(comment));
+
             }
-            CommentResponseDtosByPostId.add(commentResponseDtos);
+            commentResponseDtos.add(commentResponseDto);
         }
-        System.out.println(CommentResponseDtosByPostId);
         model.addAttribute("posts", postResponseDtos);
-        model.addAttribute("comments",CommentResponseDtosByPostId);
-        return CommentResponseDtosByPostId;
+        model.addAttribute("comments",commentResponseDtos);
+        return commentResponseDtos;
     }
 }
 //if(postByComment.isEmpty()) continue;

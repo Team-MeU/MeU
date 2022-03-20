@@ -2,22 +2,21 @@ package com.codepresso.meu.controller.dto;
 
 import com.codepresso.meu.vo.Comment;
 import lombok.Getter;
+import org.apache.tomcat.util.digester.ArrayStack;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 public class CommentResponseDto {
-    Integer commentId;
     Integer postId;
-    Integer userId;
-    String content;
-    String nickname;
-    String profileImg;
+    List<CommentInfo> commentInfoList = new ArrayList<>();
 
     public CommentResponseDto(Comment comment) {
-        this.commentId = comment.getCommentId();
         this.postId = comment.getPostId();
-        this.content = comment.getContent();
-        this.userId = comment.getUserId();
-        this.nickname = comment.getNickname();
-        this.profileImg = comment.getProfileImg();
+        CommentInfo commentInfo = new CommentInfo(comment);
+        this.commentInfoList.add(commentInfo);
     }
 }
+
+
