@@ -2,12 +2,14 @@ package com.codepresso.meu.controller.dto;
 
 import com.codepresso.meu.vo.Comment;
 import lombok.Getter;
+import lombok.Setter;
 import org.apache.tomcat.util.digester.ArrayStack;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Setter
 public class CommentResponseDto {
     Integer postId;
     List<CommentInfo> commentInfoList = new ArrayList<>();
@@ -24,7 +26,6 @@ public class CommentResponseDto {
     public void AddComment(Comment comment){
         this.commentInfoList.add(new CommentInfo(comment));
     }
-
 }
 
 

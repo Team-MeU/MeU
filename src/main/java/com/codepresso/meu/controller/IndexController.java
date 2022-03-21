@@ -5,6 +5,7 @@ import com.codepresso.meu.controller.dto.PostResponseDto;
 import com.codepresso.meu.service.CommentService;
 import com.codepresso.meu.service.PostService;
 import com.codepresso.meu.vo.Comment;
+import com.codepresso.meu.vo.FeedItem;
 import com.codepresso.meu.vo.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,22 +28,17 @@ public class IndexController {
     @RequestMapping(value="/")
     public String index(Model model) {
         List<Post> postList = postService.getAllPost();
-        List<PostResponseDto> postResponseDtos = new ArrayList<>();
-        List<CommentResponseDto> commentResponseDtos = new ArrayList<>();
+        //List<PostResponseDto> postResponseDtos = new ArrayList<>();
+        //List<Comment> commentList = new ArrayList<>();
+        List<FeedItem> feedItems = new ArrayList<>();
 
         for(Post post : postList) {
-            int postId = post.getPostId();
-            postResponseDtos.add(new PostResponseDto(post));
-            List<Comment> commentList = commentService.getCommentListByPostInFeed(postId);
-            CommentResponseDto commentResponseDto = new CommentResponseDto(postId);
-
-            for(Comment comment : commentList){
-                commentResponseDto.AddComment(comment);
-            }
-            commentResponseDtos.add(commentResponseDto);
+            //postResponseDtos.add(new PostResponseDto(post));
+            List<Comment> commentList = commentService.getCommentListByPostInFeed(post.getPostId());
+            FeedItem feeditem = new FeedItem(new PostResponseDto(post), commentList);
+            feedItems.add(feeditem);
         }
-        model.addAttribute("posts", postResponseDtos);
-        model.addAttribute("comments",commentResponseDtos);
+        model.addAttribute("feedItems", feedItems);
         return "index";
     }
 }
