@@ -17,7 +17,6 @@ public class CommentService {
     public List<Comment> getCommentListByPostInFeed(Integer postId){
         List<Comment> commentList = commentMapper.findByCommentOfPostId(postId);
 
-        if (commentList == null) return new ArrayList<Comment>();
         if(commentList.isEmpty()) return new ArrayList<Comment>();
         return commentList;
     }
