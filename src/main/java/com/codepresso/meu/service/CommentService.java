@@ -14,8 +14,8 @@ import java.util.List;
 public class CommentService {
     private CommentMapper commentMapper;
 
-    public List<Comment> getCommentListByPostInFeed(Integer postId){
-        List<Comment> commentList = commentMapper.findByCommentOfPostId(postId);
+    public List<Comment> getCommentListByPostInFeed(Integer postId, Integer page){
+        List<Comment> commentList = commentMapper.findByCommentOfPostId(postId, page, 3);
 
         if(commentList.isEmpty()) return new ArrayList<Comment>();
         return commentList;
@@ -30,12 +30,21 @@ public class CommentService {
         return result == 1;
     }
 
-    public boolean updateComment(Comment comment) {
+
+    public boolean updateComment(Comment comment, Integer logInUserId) {
+        Comment originalComment = commentMapper.commentFindOne(comment.getCommentId());
+        if(!originalComment.getUserId().equals(logInUserId)) {
+            return false;
+        }
         Integer result = commentMapper.commentUpdate(comment);
         return result == 1;
     }
 
-    public boolean deleteComment(Integer commentId) {
+    public boolean deleteComment(Integer commentId, Integer logInUserId) {
+        Comment originalComment = commentMapper.commentFindOne(commentId);
+        if(!originalComment.getUserId().equals(logInUserId)) {
+            return false;
+        }
         Integer result = commentMapper.commentDelete(commentId);
         return result == 1;
     }

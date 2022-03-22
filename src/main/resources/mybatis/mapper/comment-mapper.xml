@@ -11,7 +11,7 @@
         ON c.userId = u.userId
         WHERE c.postId=#{postId}
         ORDER BY c.updatedAt
-        LIMIT 3 ;
+        LIMIT #{limit} OFFSET #{offset}
     </select>
 
     <select id="findByCommentOfPostIdInPostPage" resultType="com.codepresso.meu.vo.Comment">
@@ -19,6 +19,21 @@
         FROM comment
         WHERE postId=#{postId}
         LIMIT #{limit} OFFSET #{offset};
+    </select>
+
+    <select id="commentFindOne" resultType="com.codepresso.meu.vo.Comment">
+        select
+        c.commentId,
+        c.postId,
+        c.userId,
+        c.content,
+        c.createdAt,
+        c.email,
+        c.nickname
+        FROM comment as c
+        JOIN user as u
+        ON p.userId = u.userId
+        WHERE p.postId=#{id};
     </select>
 
     <select id="count" resultType="Integer">

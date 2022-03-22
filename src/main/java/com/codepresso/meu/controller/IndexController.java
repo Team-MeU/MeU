@@ -34,7 +34,7 @@ public class IndexController {
 
         for(Post post : postList) {
             postResponseDtos.add(new PostResponseDto(post));
-            List<Comment> commentList = commentService.getCommentListByPostInFeed(post.getPostId());
+            List<Comment> commentList = commentService.getCommentListByPostInFeed(post.getPostId(), );
             FeedItem feeditem = new FeedItem(new PostResponseDto(post), commentList);
             feedItems.add(feeditem);
         }

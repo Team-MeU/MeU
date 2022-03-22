@@ -17,6 +17,7 @@ public class Comment {
     Date createdAt;
     String nickname;
     String profileImg;
+    Integer page;
 
     public Comment(Integer commentId, Integer postId, Integer userId, String content) {
         this.commentId = commentId;
@@ -24,13 +25,14 @@ public class Comment {
         this.userId = userId;
         this.content = content;
     }
-    public Comment(Integer commentId, Integer postId, Integer userId, String content, String nickname, String profileImg) {
+    public Comment(Integer commentId, Integer postId, Integer userId, String content, String nickname, String profileImg, Integer page) {
         this.commentId = commentId;
         this.postId = postId;
         this.userId = userId;
         this.content = content;
         this.nickname = nickname;
         this.profileImg = profileImg;
+        this.page = page;
         //this.updatedAt
     }
 

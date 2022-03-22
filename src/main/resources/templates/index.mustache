@@ -266,12 +266,21 @@
                                                       <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-18 me-2">share</span><span>Share</span></a>
                                                    </div>
                                                 </div>
-                                                <div class="d-flex align-items-center mb-3" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                   <span class="material-icons bg-white border-0 text-primary pe-2 md-36">account_circle</span>
-                                                   <input type="text" class="form-control form-control-sm rounded-3 fw-light" placeholder="Write Your comment">
+                                                <div class="d-flex align-items-center mb-3">
+                                                    <span class="material-icons bg-white border-0 text-primary pe-2 md-36">account_circle</span>
+                                                    <input type="hidden" id="post-id" value="{{postId}}">
+                                                    <input type="text" name="comment-content" id="comment-create" class="form-control form-control-sm rounded-3 fw-light" style="height: 30px;" placeholder="Write comment >>> {{postId}} now !!" />
+                                                    <!--div class="comment_btn">
+                                                        <button id="comment-save-button">등록</button>
+                                                    </div -->
                                                 </div>
 
-
+                                                <!--
+                                                 <div class="d-flex align-items-center mb-3" data-bs-toggle="modal" data-bs-target="#commentModal">
+                                                     <span class="material-icons bg-white border-0 text-primary pe-2 md-36">account_circle</span>
+                                                     <input type="text" class="form-control form-control-sm rounded-3 fw-light" placeholder="Write Your comment">
+                                                 </div>
+                                                 -->
 
                                                  {{#commentListByPost}}
                                                  <div class="comments">
@@ -294,9 +303,13 @@
                                                             <span class="small text-muted">1h</span>
                                                          </div>
                                                       </div>
+
                                                    </div>
                                                 </div>
                                                 {{/commentListByPost}}
+                                                 <div class ="more-comment" style=" text-align: center;">
+                                                     <a button id="more-comment-buttin" style="height: 150px;" > more </a>
+                                                 </div>
                                              </div>
                                           </div>
                                        </div>
@@ -489,7 +502,7 @@
                            </div>
                         </div>
                         <div class="tab-pane fade" id="pills-trending" role="tabpanel" aria-labelledby="pills-trending-tab">
-                           <!-- Post Tab -->
+                           <!-- Post Tab 포스트 입력 창  -->
                            <div class="input-group shadow-sm mb-3 rounded-4 overflow-hidden py-2 bg-white" data-bs-toggle="modal" data-bs-target="#postModal">
                               <span class="input-group-text material-icons border-0 bg-white text-primary">account_circle</span>
                               <input type="text" class="form-control border-0 fw-light ps-1" placeholder="What's on your mind.">
@@ -497,7 +510,7 @@
                            </div>
                            <!-- Feeds -->
                            <div class="feeds">
-                              <!-- Feed Item -->
+                              <!-- Feed Item
                               <div class="bg-white p-3 feed-item rounded-4 mb-3 shadow-sm">
                                  <div class="d-flex">
                                     <img src="img/rmate1.jpg" class="img-fluid rounded-circle user-img" alt="profile-img">
@@ -614,7 +627,7 @@
                                        </div>
                                     </div>
                                  </div>
-                              </div>
+                              </div>-->
                               <!-- Feed Item -->
                               <div class="bg-white p-3 feed-item rounded-4 mb-3 shadow-sm">
                                  <div class="d-flex">
@@ -663,6 +676,8 @@
                                                 <span class="material-icons bg-white border-0 text-primary pe-2 md-36">account_circle</span>
                                                 <input type="text" class="form-control form-control-sm rounded-3 fw-light" placeholder="Write Your comment">
                                              </div>
+                                              <!-- 상세보기 댓글 창 -->
+
                                              <div class="comments">
                                                 <div class="d-flex mb-2">
                                                    <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
@@ -1253,6 +1268,9 @@
             </div>
          </div>
       </div>
+
+
+
       <!-- Comment Modal -->
       <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
          <div class="modal-dialog modal-dialog-centered">
@@ -1294,6 +1312,10 @@
                            </div>
                         </div>
                      </div>
+
+
+
+
                      <div class="col-sm-5 content-body px-web-0">
                         <div class="d-flex flex-column h-600">
                            <div class="d-flex p-3 border-bottom">
@@ -1301,10 +1323,10 @@
                               <div class="d-flex align-items-center justify-content-between w-100">
                                  <a href="profile.html" class="text-decoration-none ms-3">
                                     <div class="d-flex align-items-center">
-                                       <h6 class="fw-bold text-body mb-0">iamosahan</h6>
+                                       <h6 class="fw-bold text-body mb-0">this is POST DETAIL VIEW </h6>
                                        <p class="ms-2 material-icons bg-primary p-0 md-16 fw-bold text-white rounded-circle ov-icon mb-0">done</p>
                                     </div>
-                                    <p class="text-muted mb-0 small">@johnsmith</p>
+                                    <p class="text-muted mb-0 small">@post_detail</p>
                                  </a>
                                  <div class="small dropdown">
                                     <a href="#" class="text-muted text-decoration-none material-icons ms-2 md-" data-bs-dismiss="modal">close</a>
@@ -1361,6 +1383,7 @@
                                  </div>
                               </div>
                            </div>
+
                            <div class="border-top p-3 mt-auto">
                               <div class="d-flex align-items-center justify-content-between mb-2">
                                  <div>

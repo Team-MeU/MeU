@@ -1,5 +1,5 @@
 /*
-Template Name: Vogel - Social Network & Community HTML Template 
+Template Name: Vogel - Social Network & Community HTML Template
 Author: Askbootstrap
 Author URI: https://themeforest.net/user/askbootstrap
 Version: 1.0
@@ -175,5 +175,54 @@ Version: 1.0
 			alert("게시물 삭제 권한이 없습니다.");
 		});
 	});
+
+    $("#comment-save-button").click(function(){
+         var id = $("#post-id").val();
+         var content = $("#comment-create").val();
+         $.ajax({
+            method: "POST",
+            url: "/comment",
+            data: JSON.stringify({
+                "postId":  id,
+                "content": content
+         }),
+         contentType: "application/json"
+         })
+         .done(function(response) {
+            console.log("Comment creation success!");
+            window.location.href = "/";
+         })
+         .fail(function(response) {
+            alert("로그인이 필요한 서비스입니다 \n post Id : "+id+"   content  : "+content);
+            window.location.href = "/";
+         });
+    });
+
+    $("#comment-create").keydown(function(key){
+        if(key.keyCode == 13){
+            var id = $("#post-id").val();
+            var content = $("#comment-create").val();
+            $.ajax({
+                		method: "POST",
+                		url: "/comment",
+                		data: JSON.stringify({
+                		    "postId":  id,
+                			"content": content
+                			}),
+                		contentType: "application/json"
+            })
+            .done(function(response) {
+                console.log("Comment creation success!");
+                window.location.href = "/";
+            })
+            .fail(function(response) {
+                alert("로그인이 필요한 서비스입니다 \n post Id : "+id+"   content  : "+content);
+                window.location.href = "/";
+            });
+        }
+    });
+
+
+
 
 })(jQuery); // End of use strict
