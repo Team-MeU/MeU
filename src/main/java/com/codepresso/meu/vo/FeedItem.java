@@ -3,6 +3,7 @@ package com.codepresso.meu.vo;
 import com.codepresso.meu.controller.dto.CommentInfo;
 import com.codepresso.meu.controller.dto.CommentResponseDto;
 import com.codepresso.meu.controller.dto.PostResponseDto;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class FeedItem {
     Integer postId;
     Integer userId;
