@@ -6,8 +6,8 @@
     <select id="findByCommentOfPostId" resultType="com.codepresso.meu.vo.Comment">
         SELECT c.commentId, c.userId, c.postId, c.content, c.createdAt, c.updatedAt,
             u.nickname, u.profileImg
-        FROM comment as c
-        JOIN user as u
+        FROM Comment as c
+        JOIN User as u
         ON c.userId = u.userId
         WHERE c.postId=#{postId}
         ORDER BY c.updatedAt DESC
@@ -15,6 +15,7 @@
     </select>
 
     <select id="findByCommentOfPostIdInPostPage" resultType="com.codepresso.meu.vo.Comment">
+
         SELECT c.commentId, c.userId, c.postId, c.content, c.createdAt, c.updatedAt,
         u.nickname, u.profileImg
         FROM comment as c
@@ -42,23 +43,23 @@
 
     <select id="count" resultType="Integer">
         SELECT count(*)
-        FROM comment
-        WHERE post_id=#{postId};
+        FROM Comment
+        WHERE postId=#{postId};
     </select>
 
     <insert id="commentSave">
-        INSERT INTO comment(postId, userId, content)
+        INSERT INTO Comment(postId, userId, content)
         VALUES (#{comment.postId}, #{comment.userId}, #{comment.content});
     </insert>
 
     <update id="commentUpdate">
-        UPDATE comment
+        UPDATE Comment
         SET content=#{comment.content}
         WHERE commentId=#{comment.commentId};
     </update>
 
     <delete id="commentDelete">
-        DELETE FROM comment
+        DELETE FROM Comment
         WHERE commentId=#{comment.commentId};
     </delete>
 </mapper>

@@ -21,6 +21,9 @@
       <link href="css/style.css" rel="stylesheet">
       <!-- Material Icons -->
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
    </head>
    <body class="bg-light">
       <div class="web-none d-flex align-items-center px-3 pt-3">
@@ -243,11 +246,6 @@
                                                 </div>
                                              </div>
                                              <div class="my-2">
-<!--                                                <p class="mb-3 text-primary">Welcome to the Vogel family 🙂</p>-->
-<!--                                                <ul class="list-unstyled mb-3">-->
-<!--                                                   <li>1. Follow people you like by clicking on the ’+ Follow’ button to see their posts in your feed.</li>-->
-<!--                                                   <li>2. Share your thoughts with others and gain a following.</li>-->
-<!--                                                </ul>-->
                                                 <p class="text-dark">{{content}}</p>
                                                 <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
                                                 <img src="img/post1.png" class="img-fluid rounded mb-3" alt="post-img">
@@ -270,17 +268,7 @@
                                                     <span class="material-icons bg-white border-0 text-primary pe-2 md-36">account_circle</span>
                                                     <input type="hidden" id="post-id" value="{{postId}}">
                                                     <input type="text" name="comment-content" id="comment-create" class="form-control form-control-sm rounded-3 fw-light" style="height: 30px;" placeholder="Write comment >>> {{postId}} now !!" />
-                                                    <!--div class="comment_btn">
-                                                        <button id="comment-save-button">등록</button>
-                                                    </div -->
                                                 </div>
-
-                                                <!--
-                                                 <div class="d-flex align-items-center mb-3" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                     <span class="material-icons bg-white border-0 text-primary pe-2 md-36">account_circle</span>
-                                                     <input type="text" class="form-control form-control-sm rounded-3 fw-light" placeholder="Write Your comment">
-                                                 </div>
-                                                 -->
 
                                                  {{#commentListByPost}}
                                                  <div class="comments">
@@ -779,9 +767,12 @@
                            <li class="nav-item">
                               <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#languageModal"><span class="material-icons me-3">translate</span> <span>Language</span></a>
                            </li>
-                           <li class="nav-item">
-                              <a href="#" class="nav-link"><span class="material-icons me-3" id="logout-button">logout</span> <span>Logout</span></a>
-                           </li>
+                            <li class="nav-item">
+                                <a href="/" class="nav-link"><span class="material-icons me-3">logout</span> <span>Logout</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/user/login" class="nav-link"><span class="material-icons me-3">login</span> <span>Login</span></a>
+                            </li>
                            <li class="nav-item dropdown">
                               <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                               <span class="material-icons me-3">web</span> Pages
@@ -821,8 +812,11 @@
                            <li class="nav-item">
                               <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#languageModal"><span class="material-icons me-3">translate</span> <span>Language</span></a>
                            </li>
-                           <li class="nav-item">
-                              <a href="index.mustache" class="nav-link"><span class="material-icons me-3">logout</span> <span>Logout</span></a>
+                           <li class="nav-item" id="logout-button">
+                              <a href="/" class="nav-link"><span class="material-icons me-3">logout</span> <span>Logout</span></a>
+                           </li>
+                           <li class="nav-item" id="login-button">
+                              <a href="/user/login" class="nav-link"><span class="material-icons me-3">login</span> <span>Login</span></a>
                            </li>
                            <li class="nav-item dropdown">
                               <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -840,7 +834,7 @@
                            </li>
                         </ul>
                      </div>
-                        <a href="/user/signup" class="btn btn-primary w-100 text-decoration-none rounded-4 py-3 fw-bold text-uppercase m-0">Sign Up +</a>
+                        <a href="/user/signup" class="btn btn-primary w-100 text-decoration-none rounded-4 py-3 fw-bold text-uppercase m-0" id="signup-menu">Sign Up +</a>
 <!--                        <a href="/user/login" class="btn btn-primary w-100 text-decoration-none rounded-4 py-3 fw-bold text-uppercase m-0" data-bs-toggle="modal" data-bs-target="#signModal">Sign In +</a>-->
                   </div>
                </aside>
@@ -1416,7 +1410,7 @@
          </div>
       </div>
       <!-- Jquery Js -->
-      <script src="vendor/jquery/jquery.min.js"></script>
+<!--      <script src="vendor/jquery/jquery.min.js"></script>-->
       <!-- Bootstrap Bundle Js -->
       <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
       <!-- Custom Js -->
