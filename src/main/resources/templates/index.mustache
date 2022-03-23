@@ -21,6 +21,9 @@
       <link href="css/style.css" rel="stylesheet">
       <!-- Material Icons -->
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
    </head>
    <body class="bg-light">
       <div class="web-none d-flex align-items-center px-3 pt-3">
@@ -762,9 +765,12 @@
                            <li class="nav-item">
                               <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#languageModal"><span class="material-icons me-3">translate</span> <span>Language</span></a>
                            </li>
-                           <li class="nav-item">
-                              <a href="#" class="nav-link"><span class="material-icons me-3" id="logout-button">logout</span> <span>Logout</span></a>
-                           </li>
+                            <li class="nav-item">
+                                <a href="/" class="nav-link"><span class="material-icons me-3">logout</span> <span>Logout</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/user/login" class="nav-link"><span class="material-icons me-3">login</span> <span>Login</span></a>
+                            </li>
                            <li class="nav-item dropdown">
                               <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                               <span class="material-icons me-3">web</span> Pages
@@ -804,8 +810,11 @@
                            <li class="nav-item">
                               <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#languageModal"><span class="material-icons me-3">translate</span> <span>Language</span></a>
                            </li>
-                           <li class="nav-item">
-                              <a href="index.mustache" class="nav-link"><span class="material-icons me-3">logout</span> <span>Logout</span></a>
+                           <li class="nav-item" id="logout-button">
+                              <a href="/" class="nav-link"><span class="material-icons me-3">logout</span> <span>Logout</span></a>
+                           </li>
+                           <li class="nav-item" id="login-button">
+                              <a href="/user/login" class="nav-link"><span class="material-icons me-3">login</span> <span>Login</span></a>
                            </li>
                            <li class="nav-item dropdown">
                               <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -823,7 +832,7 @@
                            </li>
                         </ul>
                      </div>
-                        <a href="/user/signup" class="btn btn-primary w-100 text-decoration-none rounded-4 py-3 fw-bold text-uppercase m-0">Sign Up +</a>
+                        <a href="/user/signup" class="btn btn-primary w-100 text-decoration-none rounded-4 py-3 fw-bold text-uppercase m-0" id="signup-menu">Sign Up +</a>
 <!--                        <a href="/user/login" class="btn btn-primary w-100 text-decoration-none rounded-4 py-3 fw-bold text-uppercase m-0" data-bs-toggle="modal" data-bs-target="#signModal">Sign In +</a>-->
                   </div>
                </aside>
@@ -1391,7 +1400,7 @@
          </div>
       </div>
       <!-- Jquery Js -->
-      <script src="vendor/jquery/jquery.min.js"></script>
+<!--      <script src="vendor/jquery/jquery.min.js"></script>-->
       <!-- Bootstrap Bundle Js -->
       <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
       <!-- Custom Js -->

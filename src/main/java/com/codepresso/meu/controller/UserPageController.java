@@ -2,6 +2,7 @@ package com.codepresso.meu.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -16,5 +17,11 @@ public class UserPageController {
     @RequestMapping("/user/login")
     public String getLoginPage() {
         return "login";
+    }
+
+    @RequestMapping("/user/profile")
+    public String getProfilePage(Model model) {
+        //List<Post> myPost = postService.getMyPosts();
+        return "profile";
     }
 }
