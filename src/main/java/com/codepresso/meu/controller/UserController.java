@@ -35,6 +35,7 @@ public class UserController {
     @PostMapping("/user/login")
     public ResponseEntity loginUser(@RequestBody UserRequestDto userRequestDto, HttpServletResponse response) {
         Integer sessionId = userService.loginUser(userRequestDto.getUser());
+        System.out.println("sessionId = " + sessionId);
         Cookie cookie = new Cookie("id", String.valueOf(sessionId));
         cookie.setMaxAge(60*60*24);
         cookie.setPath("/");

@@ -21,6 +21,7 @@ public class UserSessionController {
         return new UserSessionResponseDto(userSession);
     }
 
+    // 로그아웃 - 세션 삭제
     @DeleteMapping("/user/session")
     public ResponseEntity deleteSession(@RequestParam Integer id) {
         userSessionService.deleteUserSession(id);

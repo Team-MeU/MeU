@@ -8,6 +8,21 @@ Version: 1.0
 (function ($) {
 	"use strict"; // Start of use strict
 
+	$(document).ready(function(){
+		var session_id = $.cookie('id');
+		if (session_id) {
+			console.log("login now!");
+			$("#logout-button").show();
+			$("#login-button").hide();
+			$("#signup-menu").hide();
+		} else {
+			console.log("No login now!");
+			$("#logout-button").hide();
+			$("#login-button").show();
+			$("#signup-menu").show();
+		}
+	});
+
 	$("#signup-submitButton").click(function(){
 		var email = $("#name").val();
 		var nickname = $("#nickname").val();
@@ -36,6 +51,22 @@ Version: 1.0
 		var email = $("#name").val();
 		var password = $("#password").val();
 
+		// $.ajax({
+		// 	method: "POST",
+		// 	url: "/user/login",
+		// 	data: JSON.stringify({
+		// 		"email": email,
+		// 		"password": password
+		// 	}),
+		// 	contentType: "application/json"
+		// })
+		// 	.done(function(response) {
+		// 		console.log("login success");
+		// 		window.location.href="/";
+		// 	})
+		// 	.fail(function(response) {
+		// 		alert("입력 정보를 확인해주세요.")
+		// 	});
 		$.ajax({
 			method: "POST",
 			url: "/user/login",
@@ -45,18 +76,16 @@ Version: 1.0
 			}),
 			contentType: "application/json"
 		})
-			.done(function(response) {
-				console.log("login success");
-				window.location.href="../../";
-			})
-			.fail(function(response) {
-				alert("입력 정보를 확인해주세요.")
-			});
+		.done(function(response) {
+			console.log("login success");
+			window.location.href = '../../';
+		});
 	});
+
 
 	$(document).on("click","#logout-button",function(){
 		var session_id = $.cookie('id');
-
+		console.log("로그아웃!");
 		$.ajax({
 			method: "DELETE",
 			url: "/user/session",
