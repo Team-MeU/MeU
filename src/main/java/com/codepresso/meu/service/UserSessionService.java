@@ -15,9 +15,17 @@ public class UserSessionService {
     }
 
     public Integer saveUserSession(Integer userId) {
-        //UserSession userSession = new UserSession(userId);
-        //System.out.println("userSession.getUserId() = " + userSession.getUserId());
-        Integer sessionId = userSessionMapper.save(userId);
+        //존재 확인
+        if(userSessionMapper.existUser(userId)) {
+            //기존 세션 updateAt만 변경
+            userSessionMapper.updateSession(userId);
+
+        } else {
+            UserSession userSession = new UserSession(userId);
+            userSessionMapper.save(userSession);
+        }
+
+        Integer sessionId = userSessionMapper.findIdByUser(userId);
         return sessionId;
     }
 

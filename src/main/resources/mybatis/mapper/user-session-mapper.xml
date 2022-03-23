@@ -9,13 +9,24 @@
         WHERE sessionId = #{sessionId};
     </select>
 
+    <select id="findIdByUser" resultType="Integer">
+        SELECT sessionId
+        FROM UserSession
+        WHERE userId = #{userId};
+    </select>
+
+    <select id="existUser" resultType="boolean">
+        SELECT EXISTS (SELECT sessionId FROM UserSession WHERE userId = #{userId});
+    </select>
+
     <insert id="save">
         INSERT INTO UserSession(userId)
-        VALUES (#{userId});
-        <selectKey keyProperty="sessionId" resultType="Integer">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
+        VALUES (#{userSession.userId});
     </insert>
+
+    <update id="updateSession">
+        UPDATE UserSession SET updatedAt=NOW() WHERE userId=(#{userId});
+    </update>
 
     <delete id="delete">
         DELETE FROM UserSession

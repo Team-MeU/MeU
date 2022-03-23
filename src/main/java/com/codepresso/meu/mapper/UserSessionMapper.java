@@ -6,7 +6,10 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UserSessionMapper {
-    Integer save(@Param("userId") Integer userId);
+    void save(@Param("userSession") UserSession userSession);
     UserSession findOneById(@Param("sessionId") Integer id);
+    Integer findIdByUser(@Param("userId") Integer id);
+    boolean existUser(@Param("userId") Integer userId);
+    void updateSession(@Param("userId") Integer userId);
     void delete(Integer id);
 }
