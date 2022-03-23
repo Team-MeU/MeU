@@ -21,9 +21,9 @@ public class CommentService {
         return commentList;
     }
 
-    //public List<Comment> getCommentListByPostInPostPage(Integer postId, Integer page, Integer size){
-      //  return commentMapper.findByCommentOfPostIdInPostPage(postId, page, size);
-    //}
+    public List<Comment> getCommentListByPostInPostPage(Integer postId, Integer page, Integer size){
+       return commentMapper.findByCommentOfPostIdInPostPage(postId, page, size);
+    }
 
     public boolean saveComment(Comment comment){
         Integer result = commentMapper.commentSave(comment);

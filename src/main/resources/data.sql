@@ -39,6 +39,10 @@ Insert into comment values (15, 2, 8, 'test comment2', '2022-03-15 18:09:42', '2
 Insert into comment values (16, 2, 8, 'test comment3', '2022-03-15 18:09:42', '2022-03-15 18:09:42');
 Insert into comment values (17, 2, 8, 'test comment4', '2022-03-15 18:09:42', '2022-03-15 18:09:42');
 Insert into comment values (18, 2, 8, 'test comment5', '2022-03-15 18:09:42', '2022-03-15 18:09:42');
+Insert into comment values (19, 2, 8, 'test comment6', '2022-03-15 18:09:42', '2022-03-15 18:09:42');
+Insert into comment values (20, 2, 8, 'test comment7', '2022-03-15 18:09:42', '2022-03-15 18:09:42');
+Insert into comment values (21, 2, 8, 'test comment9', '2022-03-15 18:09:42', '2022-03-15 18:09:42');
+Insert into comment values (22, 2, 8, 'test comment10', '2022-03-15 18:09:42', '2022-03-15 18:09:42');
 
 insert into Post(postId, userId, content)
 values (7, 4, 'First Internet Bancorp');

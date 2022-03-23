@@ -16,7 +16,7 @@ public class Post {
     Date updatedAt;
     String imgUrl;
     User user;
-    Integer displayCommentCnt = 1;
+
 
     public Post(Integer postId, Integer userId, String content) {
         this.postId = postId;
@@ -33,7 +33,4 @@ public class Post {
 
     }
 
-    public void MoreComment(){
-        this.displayCommentCnt++;
-    }
 }
