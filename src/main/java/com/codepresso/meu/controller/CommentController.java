@@ -1,5 +1,6 @@
 package com.codepresso.meu.controller;
 
+import com.codepresso.meu.controller.dto.CommentInfo;
 import com.codepresso.meu.controller.dto.CommentRequestDto;
 import com.codepresso.meu.controller.dto.CommentResponseDto;
 import com.codepresso.meu.service.CommentService;
@@ -24,13 +25,13 @@ public class CommentController {
 
 
     @GetMapping("/comment")
-    public List<CommentResponseDto> getCommentListByPage(@RequestParam("postId") Integer postId, @RequestParam("page") Integer page){
-        List<Comment> comments = commentService.getCommentListByPostInFeed(postId, page);
-        List<CommentResponseDto> commentResponseDtos = new ArrayList<>();
-        for(Comment comment : comments){
-            commentResponseDtos.add(new CommentResponseDto(comment));
+    public List<CommentInfo> getCommentListByPage(@RequestParam("postId") Integer postId, @RequestParam("page") Integer page){
+        List<Comment> comments = commentService.getCommentListByPostInPostPage(postId, page);
+        List<CommentInfo> pageCommentDtos = new ArrayList<>();
+        for(Comment comment : comments) {
+            pageCommentDtos.add(new CommentInfo(comment));
         }
-        return commentResponseDtos;
+        return pageCommentDtos;
     }
 
     @PostMapping("/comment")

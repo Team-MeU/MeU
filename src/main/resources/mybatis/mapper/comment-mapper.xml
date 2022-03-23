@@ -10,14 +10,18 @@
         JOIN user as u
         ON c.userId = u.userId
         WHERE c.postId=#{postId}
-        ORDER BY c.updatedAt
-        LIMIT #{limit} OFFSET #{offset};
+        ORDER BY c.updatedAt DESC
+        LIMIT 3 OFFSET #{offset};
     </select>
 
     <select id="findByCommentOfPostIdInPostPage" resultType="com.codepresso.meu.vo.Comment">
-        SELECT *
-        FROM comment
-        WHERE postId=#{postId}
+        SELECT c.commentId, c.userId, c.postId, c.content, c.createdAt, c.updatedAt,
+        u.nickname, u.profileImg
+        FROM comment as c
+        JOIN user as u
+        ON c.userId = u.userId
+        WHERE c.postId=#{postId}
+        ORDER BY c.updatedAt DESC
         LIMIT #{limit} OFFSET #{offset};
     </select>
 

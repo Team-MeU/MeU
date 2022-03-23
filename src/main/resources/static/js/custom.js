@@ -197,8 +197,8 @@ Version: 1.0
                  "</a> <div class=\"ms-2 small\">"+
                  "<a href=\"#\" class=\"text-dark text-decoration-none\" data-bs-toggle=\"modal\" data-bs-target=\"#commentModal\">"+
                  "<div class=\"bg-light px-3 py-2 rounded-4 mb-1 chat-text\">"+
-                 "<p class=\"fw-500"+comment.nickname+" mb-0\">{{nickname}}</p>"+
-                 "<span class=\"text-muted\">"+comment.content+"</span>"+
+                 "<p class=\"fw-500 mb-0\">"+comment.commentNickname+"</p>"+
+                 "<span class=\"text-muted\">"+comment.commentContent+"</span>"+
                  "</div></a>"+
                  "<div class=\"d-flex align-items-center ms-2\">"+
                  "<a href=\"#\" class=\"small text-muted text-decoration-none\">Like</a>"+
