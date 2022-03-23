@@ -13,7 +13,7 @@ public class PostResponseDto {
     Date createdAt;
     String email;
     String nickname;
-
+    Integer displayCommentCnt;
 
     public PostResponseDto(Post post) {
         this.postId = post.getPostId();
@@ -22,6 +22,6 @@ public class PostResponseDto {
         this.createdAt = post.getCreatedAt();
         this.email = post.getUser().getEmail();
         this.nickname = post.getUser().getNickname();
-
+        this.displayCommentCnt = post.getDisplayCommentCnt();
     }
 }

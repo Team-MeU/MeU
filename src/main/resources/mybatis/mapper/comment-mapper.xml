@@ -11,7 +11,7 @@
         ON c.userId = u.userId
         WHERE c.postId=#{postId}
         ORDER BY c.updatedAt
-        LIMIT #{limit} OFFSET #{offset}
+        LIMIT #{limit} OFFSET #{offset};
     </select>
 
     <select id="findByCommentOfPostIdInPostPage" resultType="com.codepresso.meu.vo.Comment">

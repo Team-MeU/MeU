@@ -269,7 +269,8 @@
                                                 <div class="d-flex align-items-center mb-3">
                                                     <span class="material-icons bg-white border-0 text-primary pe-2 md-36">account_circle</span>
                                                     <input type="hidden" id="post-id" value="{{postId}}">
-                                                    <input type="text" name="comment-content" id="comment-create" class="form-control form-control-sm rounded-3 fw-light" style="height: 30px;" placeholder="Write comment >>> {{postId}} now !!" />
+                                                    <input type="text" name="comment-content" id="comment-create"  post-id="{{postId}}"
+                                                           class="form-control form-control-sm rounded-3 fw-light" style="height: 30px;" placeholder="Write comment >>> {{postId}} now !!" />
                                                     <!--div class="comment_btn">
                                                         <button id="comment-save-button">등록</button>
                                                     </div -->
@@ -308,7 +309,8 @@
                                                 </div>
                                                 {{/commentListByPost}}
                                                  <div class ="more-comment" style=" text-align: center;">
-                                                     <a button id="more-comment-buttin" style="height: 150px;" > more </a>
+                                                     <a class="btn btn-primary text-uppercase button" id="more-comment-button" style="height: 40px;"
+                                                        post-id="{{postId}}" current-page="1" > more </a>
                                                  </div>
                                              </div>
                                           </div>

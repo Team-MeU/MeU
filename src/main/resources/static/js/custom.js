@@ -222,7 +222,27 @@ Version: 1.0
         }
     });
 
-
+    $("#more-comment-button").click(function(){
+        var next_page = parseInt($(this).attr("current-page")) + 1;
+        var post-id = $("postId").val();
+        $.ajax({
+                   //method: "POST",
+                   //url: "/comment",
+                   //data: JSON.stringify({
+                   // "postId":  id,
+                    //"content": content
+                    //}),
+                    //contentType: "application/json"
+        })
+        .done(function(response) {
+              alert("로그인이 필요한 서비스입니다 \n post Id :");
+              window.location.href = "/";
+                    })
+       .fail(function(response) {
+            alert("로그인이 필요한 서비스입니다 \n ");
+            window.location.href = "/";
+       });
+    });
 
 
 })(jQuery); // End of use strict
