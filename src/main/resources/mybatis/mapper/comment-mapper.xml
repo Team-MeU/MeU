@@ -31,15 +31,6 @@
         WHERE commentId=#{commentId};
     </select>
 
-    <select id="findDeletePermissionUser" resultType="com.codepresso.meu.vo.Comment">
-        select c.commentId, c.postId, c.userId as commentWriter, c.content, p.userId as postWriter
-        from comment as c
-        join post as p
-        on c.postId = p.postId;
-        WHERE commentId=#{commentId};
-    </select>
-
-
 
     <select id="count" resultType="Integer">
         SELECT count(*)

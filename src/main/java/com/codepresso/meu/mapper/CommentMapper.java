@@ -20,5 +20,4 @@ public interface CommentMapper {
     Integer commentUpdate(@Param("comment") Comment comment);
     Integer commentDelete(@Param("commentId") Integer commentId);
 
-    Comment findDeletePermissionUser(@Param("commentId") Integer commentId);
 }

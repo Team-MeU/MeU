@@ -26,12 +26,13 @@ public class Comment {
         this.content = content;
     }
 
-    public Comment(Integer commentId, Integer postId, Integer userId, Integer postUserId, String content) {
+    public Comment(Integer commentId, Integer postId, Integer userId, String content, Date createdAt, Date updatedAt) {
         this.commentId = commentId;
         this.postId = postId;
         this.userId = userId;
-        this.postUserId = postUserId;
         this.content = content;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
 
