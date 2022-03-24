@@ -39,7 +39,7 @@ public class UserPageController {
 
     @RequestMapping("/profile")
     public String getProfilePage(Model model, @CookieValue(name="id", required = false) Integer sessionId) {
-        if(sessionId==null){
+        if(sessionId == null){
             System.out.println("No Cookie!");
             return "login";
         }
@@ -58,7 +58,7 @@ public class UserPageController {
 
         for(Post post : myPost) {
             postResponseDtos.add(new PostResponseDto(post));
-            List<Comment> commentList = commentService.getCommentListByPostInFeed(post.getPostId());
+            List<Comment> commentList = commentService.getCommentListByPostInFeed(post.getPostId(), 1);
             FeedItem feeditem = new FeedItem(new PostResponseDto(post), commentList);
             feedItems.add(feeditem);
         }
