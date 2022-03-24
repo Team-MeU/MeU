@@ -200,7 +200,6 @@ Version: 1.0
 			}
 		})
 		.done(function(response) {
-		    alert("post id = "+id+"  page = "+next_page);
 		    for(var comment of response) {
 		        $("#commentInPost"+id).append(
 		        "<div class=\"comments\"><div class=\"d-flex mb-2\">"+
@@ -213,11 +212,16 @@ Version: 1.0
                  "<span class=\"text-muted\">"+comment.commentContent+"</span>"+
                  "</div></a>"+
                  "<div class=\"d-flex align-items-center ms-2\">"+
-                 "<a href=\"#\" class=\"small text-muted text-decoration-none\">Like</a>"+
+                 "<input type=\"hidden\" id=\"comment-id\" value="+comment.commentId+">"+
+                 "<input type=\"hidden\" id=\"user-id\" value="+comment.userId+">"+
+                 "<input type=\"hidden\" id=\"post-id\" value="+comment.postId+">"+
+                 "<input type=\"hidden\" id=\"content\" value="+comment.content+">"+
                  "<span class=\"fs-3 text-muted material-icons mx-1\">circle</span>"+
-                 "<a href=\"#\" class=\"small text-muted text-decoration-none\">Reply</a>"+
+                 "<a class=\"small text-muted text-decoration-none\" id=\"comment-modify-button\">수정</a>"+
                  "<span class=\"fs-3 text-muted material-icons mx-1\">circle</span>"+
-                 "<span class=\"small text-muted\">1h</span>"+
+                 "<a class=\"small text-muted text-decoration-none\" id=\"comment-delete-button\">삭제</a>"+
+                 "<span class=\"fs-3 text-muted material-icons mx-1\">circle</span>"+
+                 "<span class=\"small text-muted\">"+comment.updatedAt+"</span>"+
                  "</div> </div> </div> </div>");
 		    }
 		})
@@ -263,8 +267,34 @@ Version: 1.0
             window.location.reload();
 		})
 		.fail(function(response) {
-			alert("해당 댓글의 삭제 권한이 없습니다."+ id);
+			alert("해당 댓글의 삭제 권한이 없습니다.");
 		});
+	});
+
+    $(document).on("click","#comment-modify-button",function(){
+		var id = $(this).parent().children("#comment-id").val();
+        var userId = $(this).parent().children("#user-id").val();
+        var postId = $(this).parent().children("#comment-id").val();
+        var originContent = $(this).parent().children("#content").val();
+        var content = prompt("댓글을 수정합니다.", originContent);
+		$.ajax({
+			    method: "PUT",
+			    url: "/comment",
+			    data: JSON.stringify({
+				    "commentId": id,
+				    "userId": userId,
+				    "postId": postId,
+				    "content": content
+			    }),
+		    contentType: 'application/json',
+		})
+		.done(function(response) {
+        	console.log("Comment delete success!");
+            window.location.reload();
+        })
+        .fail(function(response) {
+        	alert("해당 댓글의 수정 권한이 없습니다.");
+		})
 	});
 
 

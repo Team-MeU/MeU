@@ -267,7 +267,7 @@
                                                 <div class="d-flex align-items-center mb-3">
                                                     <span class="material-icons bg-white border-0 text-primary pe-2 md-36">account_circle</span>
                                                     <input type="hidden" id="post-id" value="{{postId}}">
-                                                    <input type="text" name="comment-content" id="comment-create" class="form-control form-control-sm rounded-3 fw-light" style="height: 30px;" placeholder="Write comment >>> {{postId}} now !!" />
+                                                    <input type="text" name="comment-content" id="comment-create" class="form-control form-control-sm rounded-3 fw-light" style="height: 30px;" placeholder="Write your comment" />
                                                 </div>
 
                                                  {{#commentListByPost}}
@@ -287,12 +287,15 @@
                                                          </a>
                                                          <div class="d-flex align-items-center ms-2">
                                                              <input type="hidden" id="comment-id" value="{{commentId}}">
+                                                             <input type="hidden" id="user-id" value="{{userId}}">
+                                                             <input type="hidden" id="post-id" value="{{postId}}">
+                                                             <input type="hidden" id="content" value="{{content}}">
                                                              <span class="fs-3 text-muted material-icons mx-1">circle</span>
                                                              <a class="small text-muted text-decoration-none" id="comment-modify-button">수정</a>
                                                              <span class="fs-3 text-muted material-icons mx-1">circle</span>
                                                              <a class="small text-muted text-decoration-none" id="comment-delete-button">삭제</a>
                                                             <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                            <span class="small text-muted">1h</span>
+                                                            <span class="small text-muted">{{updatedAt}}</span>
                                                          </div>
                                                       </div>
                                                    </div>
