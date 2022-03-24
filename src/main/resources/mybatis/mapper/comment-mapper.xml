@@ -15,8 +15,7 @@
     </select>
 
     <select id="findByCommentOfPostIdInPostPage" resultType="com.codepresso.meu.vo.Comment">
-
-        SELECT c.commentId, c.userId, c.postId, c.content, c.createdAt, c.updatedAt,
+        SELECT c.commentId, c.userId , c.postId, c.content, c.createdAt, c.updatedAt,
         u.nickname, u.profileImg
         FROM comment as c
         JOIN user as u
@@ -27,19 +26,20 @@
     </select>
 
     <select id="commentFindOne" resultType="com.codepresso.meu.vo.Comment">
-        select
-        c.commentId,
-        c.postId,
-        c.userId,
-        c.content,
-        c.createdAt,
-        c.email,
-        c.nickname
-        FROM comment as c
-        JOIN user as u
-        ON p.userId = u.userId
-        WHERE p.postId=#{id};
+        select *
+        FROM comment
+        WHERE commentId=#{commentId};
     </select>
+
+    <select id="findDeletePermissionUser" resultType="com.codepresso.meu.vo.Comment">
+        select c.commentId, c.postId, c.userId as commentWriter, c.content, p.userId as postWriter
+        from comment as c
+        join post as p
+        on c.postId = p.postId;
+        WHERE commentId=#{commentId};
+    </select>
+
+
 
     <select id="count" resultType="Integer">
         SELECT count(*)
@@ -60,6 +60,6 @@
 
     <delete id="commentDelete">
         DELETE FROM Comment
-        WHERE commentId=#{comment.commentId};
+        WHERE commentId=#{commentId};
     </delete>
 </mapper>

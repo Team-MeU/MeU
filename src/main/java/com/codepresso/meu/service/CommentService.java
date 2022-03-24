@@ -42,7 +42,7 @@ public class CommentService {
     }
 
     public boolean deleteComment(Integer commentId, Integer logInUserId) {
-        Comment originalComment = commentMapper.commentFindOne(commentId);
+        Comment originalComment = commentMapper.findDeletePermissionUser(commentId);
         if(!originalComment.getUserId().equals(logInUserId)) {
             return false;
         }

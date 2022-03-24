@@ -202,7 +202,7 @@ Version: 1.0
 		.done(function(response) {
 		    alert("post id = "+id+"  page = "+next_page);
 		    for(var comment of response) {
-		        $("#comment"+id).append(
+		        $("#commentInPost"+id).append(
 		        "<div class=\"comments\"><div class=\"d-flex mb-2\">"+
 		         "<a href=\"#\" class=\"text-dark text-decoration-none\" data-bs-toggle=\"modal\" data-bs-target=\"#commentModal\">"+
                  "<img src=\"img/rmate1.jpg\" class=\"img-fluid rounded-circle\" alt=\"commenters-img\">"+
@@ -247,6 +247,29 @@ Version: 1.0
                 });
             }
     });
+
+    $(document).on("click","#comment-delete-button",function(){
+		var id = $(this).parent().children("#comment-id").val();
+
+		$.ajax({
+			method: "DELETE",
+			url: "/comment",
+			data: {
+				"commentId": id,
+			}
+		})
+		.done(function(response) {
+			console.log("Comment delete success!");
+            window.location.reload();
+		})
+		.fail(function(response) {
+			alert("해당 댓글의 삭제 권한이 없습니다."+ id);
+		});
+	});
+
+
+
+
 
 	$(document).on("click","#logout-button",function(){
 		var session_id = $.cookie('id');

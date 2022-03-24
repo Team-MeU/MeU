@@ -282,11 +282,15 @@
                                                                <p class="fw-500 mb-0">{{nickname}}</p>
                                                                <span class="text-muted">{{content}}</span>
                                                             </div>
+                                                             <!--a class="comment-modify" id="comment-modify-button" style="text-align: right;"> 수정 </a>
+                                                             <a class="comment-delete" id="comment-delete-button" style="text-align: right;"> 삭제 </a-->
                                                          </a>
                                                          <div class="d-flex align-items-center ms-2">
-                                                            <a href="#" class="small text-muted text-decoration-none">Like</a>
-                                                            <span class="fs-3 text-muted material-icons mx-1">circle</span>
-                                                            <a href="#" class="small text-muted text-decoration-none">Reply</a>
+                                                             <input type="hidden" id="comment-id" value="{{commentId}}">
+                                                             <span class="fs-3 text-muted material-icons mx-1">circle</span>
+                                                             <a class="small text-muted text-decoration-none" id="comment-modify-button">수정</a>
+                                                             <span class="fs-3 text-muted material-icons mx-1">circle</span>
+                                                             <a class="small text-muted text-decoration-none" id="comment-delete-button">삭제</a>
                                                             <span class="fs-3 text-muted material-icons mx-1">circle</span>
                                                             <span class="small text-muted">1h</span>
                                                          </div>
@@ -294,7 +298,7 @@
                                                    </div>
                                                 </div>
                                                 {{/commentListByPost}}
-                                                 <div id= "comment{{postId}}"></div>
+                                                 <div id= "commentInPost{{postId}}"></div>
                                                  <div class ="more-comment" style="text-align: center;">
                                                      <input type="hidden" id="post-id" value="{{postId}}">
                                                      <a class="" id="more-comment-button"
