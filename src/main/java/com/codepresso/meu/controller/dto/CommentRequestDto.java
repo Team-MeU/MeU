@@ -1,13 +1,15 @@
 package com.codepresso.meu.controller.dto;
 
 import com.codepresso.meu.vo.Comment;
+import lombok.Getter;
 import lombok.Setter;
 
+@Getter
 @Setter
 public class CommentRequestDto {
     Integer commentId;
-    Integer postId;
     Integer userId;
+    Integer postId;
     String content;
 
     public Comment getComment() {

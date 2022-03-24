@@ -17,6 +17,7 @@ public class Post {
     String imgUrl;
     User user;
 
+
     public Post(Integer postId, Integer userId, String content) {
         this.postId = postId;
         this.userId = userId;
@@ -31,4 +32,5 @@ public class Post {
         this.user = new User(email, nickname);
 
     }
+
 }

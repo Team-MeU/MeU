@@ -266,5 +266,82 @@ Version: 1.0
 			});
 	});
 
+	$(document).on("click","#more-comment-button",function(){
+		var id = $(this).parent().children("#post-id").val();
+        var next_page = parseInt($(this).attr("current-comment-page")) + 1;
+		$.ajax({
+			method: "GET",
+			url: "/comment",
+			data: {
+				"postId": id,
+				"page": next_page
+			}
+		})
+		.done(function(response) {
+		    alert("post id = "+id+"  page = "+next_page);
+		    for(var comment of response) {
+		        $("#more-comments").append(
+		        "<div class=\"comments\"><div class=\"d-flex mb-2\">"+
+		         "<a href=\"#\" class=\"text-dark text-decoration-none\" data-bs-toggle=\"modal\" data-bs-target=\"#commentModal\">"+
+                 "<img src=\"img/rmate1.jpg\" class=\"img-fluid rounded-circle\" alt=\"commenters-img\">"+
+                 "</a> <div class=\"ms-2 small\">"+
+                 "<a href=\"#\" class=\"text-dark text-decoration-none\" data-bs-toggle=\"modal\" data-bs-target=\"#commentModal\">"+
+                 "<div class=\"bg-light px-3 py-2 rounded-4 mb-1 chat-text\">"+
+                 "<p class=\"fw-500 mb-0\">"+comment.commentNickname+"</p>"+
+                 "<span class=\"text-muted\">"+comment.commentContent+"</span>"+
+                 "</div></a>"+
+                 "<div class=\"d-flex align-items-center ms-2\">"+
+                 "<a href=\"#\" class=\"small text-muted text-decoration-none\">Like</a>"+
+                 "<span class=\"fs-3 text-muted material-icons mx-1\">circle</span>"+
+                 "<a href=\"#\" class=\"small text-muted text-decoration-none\">Reply</a>"+
+                 "<span class=\"fs-3 text-muted material-icons mx-1\">circle</span>"+
+                 "<span class=\"small text-muted\">1h</span>"+
+                 "</div> </div> </div> </div>");
+		    }
+		})
+		$(this).attr("current-comment-page", next_page);
+	});
+
+
+
+    $(document).on("keypress","#comment-create",function(e){
+            if(e.which == 13){
+                var id = $(this).parent().children("#post-id").val();
+                var content = $(this).parent().children("#comment-create").val();
+                $.ajax({
+                		method: "POST",
+                		url: "/comment",
+                		data: JSON.stringify({
+                		    "postId":  id,
+                			"content": content
+                			}),
+                		contentType: "application/json"
+                })
+                .done(function(response) {
+                    console.log("Comment creation success!");
+                    window.location.reload();
+                })
+                .fail(function(response) {
+                    alert("로그인이 필요한 서비스입니다");
+                    window.location.href = "/user/login";
+                });
+            }
+    });
+
+	$(document).on("click","#logout-button",function(){
+		var session_id = $.cookie('id');
+
+		$.ajax({
+			method: "DELETE",
+			url: "/user/session",
+			data: {
+				"id": session_id,
+			}
+		})
+			.done(function(response) {
+				document.cookie = "id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+				window.location.href = "/";
+			});
+	});
 
 })(jQuery); // End of use strict

@@ -31,7 +31,6 @@ public class Comment {
         this.content = content;
         this.nickname = nickname;
         this.profileImg = profileImg;
-        //this.updatedAt
     }
 
 }

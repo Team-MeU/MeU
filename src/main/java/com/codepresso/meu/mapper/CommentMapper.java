@@ -9,9 +9,12 @@ import java.util.List;
 @Mapper
 public interface CommentMapper {
     List<Comment> findByCommentOfPostIdInPostPage(@Param("postId") Integer postId, @Param("limit") Integer limit, @Param("offset") Integer offset);
-    List<Comment> findByCommentOfPostId(@Param("postId") Integer postId);
-    Integer count(@Param("postId") Integer postId);
 
+    Comment commentFindOne(@Param("commentId") Integer commentId);
+
+    List<Comment> findByCommentOfPostId(@Param("postId") Integer postId,
+                                        @Param("limit") Integer limit, @Param("offset") Integer offset);
+    Integer count(@Param("postId") Integer postId);
 
     Integer commentSave(@Param("comment") Comment comment);
     Integer commentUpdate(@Param("comment") Comment comment);

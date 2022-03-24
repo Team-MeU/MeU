@@ -29,12 +29,11 @@ public class IndexController {
     public String index(Model model) {
         List<Post> postList = postService.getAllPost();
         List<PostResponseDto> postResponseDtos = new ArrayList<>();
-        //List<Comment> commentList = new ArrayList<>();
         List<FeedItem> feedItems = new ArrayList<>();
 
         for(Post post : postList) {
             postResponseDtos.add(new PostResponseDto(post));
-            List<Comment> commentList = commentService.getCommentListByPostInFeed(post.getPostId());
+            List<Comment> commentList = commentService.getCommentListByPostInFeed(post.getPostId(), 1);
             FeedItem feeditem = new FeedItem(new PostResponseDto(post), commentList);
             feedItems.add(feeditem);
         }

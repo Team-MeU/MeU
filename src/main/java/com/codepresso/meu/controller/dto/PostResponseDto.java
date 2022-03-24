@@ -14,7 +14,6 @@ public class PostResponseDto {
     String email;
     String nickname;
 
-
     public PostResponseDto(Post post) {
         this.postId = post.getPostId();
         this.userId = post.getUserId();
@@ -22,6 +21,5 @@ public class PostResponseDto {
         this.createdAt = post.getCreatedAt();
         this.email = post.getUser().getEmail();
         this.nickname = post.getUser().getNickname();
-
     }
 }

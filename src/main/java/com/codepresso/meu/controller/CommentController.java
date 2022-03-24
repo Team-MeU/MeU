@@ -1,52 +1,81 @@
 package com.codepresso.meu.controller;
 
+import com.codepresso.meu.controller.dto.CommentInfo;
 import com.codepresso.meu.controller.dto.CommentRequestDto;
 import com.codepresso.meu.controller.dto.CommentResponseDto;
 import com.codepresso.meu.service.CommentService;
+import com.codepresso.meu.service.UserSessionService;
 import com.codepresso.meu.vo.Comment;
+import com.codepresso.meu.vo.UserSession;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @AllArgsConstructor
 @RestController
 public class CommentController {
     private CommentService commentService;
+    private UserSessionService userSessionService;
+
 
     @GetMapping("/comment")
-    public List<CommentResponseDto> getCommentListByPost(@RequestParam("postId") Integer postId){
-        List<Comment> comments = commentService.getCommentListByPostInFeed(postId);
-        List<CommentResponseDto> commentResponseDtos = new ArrayList<>();
-
-        for(Comment comment : comments){
-            commentResponseDtos.add(new CommentResponseDto(comment));
+    public List<CommentInfo> getCommentListByPage(@RequestParam("postId") Integer postId, @RequestParam("page") Integer page){
+        List<Comment> comments = commentService.getCommentListByPostInPostPage(postId, page);
+        List<CommentInfo> pageCommentDtos = new ArrayList<>();
+        for(Comment comment : comments) {
+            pageCommentDtos.add(new CommentInfo(comment));
         }
-        return commentResponseDtos;
+        return pageCommentDtos;
     }
 
-    // postId는 포스트 게시물에서 받고, commentId는 comment테이블 조회헤서 마지막
     @PostMapping("/comment")
-    public String createComment(@RequestBody CommentRequestDto commentDto){
+    public ResponseEntity<String> createComment(@RequestBody CommentRequestDto commentDto, @CookieValue("id") Integer sessionId){
+        UserSession userSession = userSessionService.getUserSessionById(sessionId);
+        if(userSession == null ) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");
+        }
+        Integer logInUserId = userSession.getUserId();
         Comment comment = commentDto.getComment();
+        comment.setUserId(logInUserId);
         commentService.saveComment(comment);
 
-        return "created comment is success";
+        return ResponseEntity.status(HttpStatus.OK).body("success");
     }
 
     @PutMapping("/comment")
-    public String updateComment(@RequestBody CommentRequestDto commentDto){
-        Comment comment = commentDto.getComment();
-        commentService.updateComment(comment);
+    public ResponseEntity<String> updateComment(@RequestBody CommentRequestDto commentDto, @CookieValue("id") Integer sessionId) {
+        UserSession userSession = userSessionService.getUserSessionById(sessionId);
+        if(userSession == null ) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");
+        }
+        Integer logInUserId = userSession.getUserId();
 
-        return "update comment is success";
+        Comment comment = commentDto.getComment();
+        Boolean result = commentService.updateComment(comment, logInUserId);
+
+        if(result) {
+            return ResponseEntity.status(HttpStatus.OK).body("success");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");
+        }
     }
 
     @DeleteMapping("/comment")
-    public String deleteComment(@RequestParam Integer commentId) {
-        commentService.deleteComment(commentId);
+    public ResponseEntity deleteComment(@RequestParam Integer commentId, @CookieValue("id") Integer sessionId) {
+        UserSession userSession = userSessionService.getUserSessionById(sessionId);
+        Integer logInUserId = userSession.getUserId();
+        Boolean result = commentService.deleteComment(commentId, logInUserId);
 
-        return "delete comment success";
+        if (result) {
+            return ResponseEntity.status(HttpStatus.OK).body("success");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");
+        }
     }
 }

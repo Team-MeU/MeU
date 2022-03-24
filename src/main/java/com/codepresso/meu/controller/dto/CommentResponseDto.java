@@ -12,10 +12,12 @@ import java.util.List;
 @Setter
 public class CommentResponseDto {
     Integer postId;
+    Integer page;
     List<CommentInfo> commentInfoList = new ArrayList<>();
 
-    public CommentResponseDto(Integer post_id){
+    public CommentResponseDto(Integer post_id, Integer page){
         this.postId = post_id;
+        this.page = page;
     }
 
     public CommentResponseDto(Comment comment) {
