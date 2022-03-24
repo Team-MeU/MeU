@@ -351,6 +351,7 @@ body {
 }
 .feeds .feed-item img.user-img {
     height: 50px;
+    width: 50px;
 }
 .account-follow .account-item img {
     height: 50px;
@@ -390,6 +391,7 @@ body {
 /* Profile */
 .profile img {
     height: 65px;
+    width: 65px;
 }
 .followers img {
     height: 25px;
