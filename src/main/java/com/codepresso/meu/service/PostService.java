@@ -2,6 +2,7 @@ package com.codepresso.meu.service;
 
 import com.codepresso.meu.mapper.PostMapper;
 import com.codepresso.meu.vo.Post;
+import com.codepresso.meu.vo.UserSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -48,5 +49,9 @@ public class PostService {
 
         Integer result = postMapper.delete(id);
         return result == 1;
+    }
+
+    public List<Post> getMyPosts(Integer userId) {
+        return postMapper.getMyPosts(userId);
     }
 }

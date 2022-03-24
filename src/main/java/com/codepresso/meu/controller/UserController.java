@@ -32,6 +32,7 @@ public class UserController {
     }
 
     //login
+    @ResponseBody
     @PostMapping("/user/login")
     public ResponseEntity loginUser(@RequestBody UserRequestDto userRequestDto, HttpServletResponse response) {
         Integer sessionId = userService.loginUser(userRequestDto.getUser());

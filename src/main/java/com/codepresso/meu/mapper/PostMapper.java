@@ -11,10 +11,10 @@ public interface PostMapper {
 
     // test
     List<Post> findAll();
-
     List<Post> findByFeed(@Param("id") Integer id);
     Post findOne(@Param("id") Integer id);
     Integer save(@Param("post") Post post);
     Integer update(@Param("post") Post post);
     Integer delete(@Param("id") Integer id);
+    List<Post> getMyPosts(@Param("userId") Integer userId);
 }
