@@ -189,7 +189,7 @@ Version: 1.0
 	});
 
 	$(document).on("click","#more-comment-button",function(){
-		var id = $(this).parent().children("#post-id").val();
+		var id   = $(this).parent().children("#post-id").val();
         var next_page = parseInt($(this).attr("current-comment-page")) + 1;
 		$.ajax({
 			method: "GET",
@@ -202,7 +202,7 @@ Version: 1.0
 		.done(function(response) {
 		    alert("post id = "+id+"  page = "+next_page);
 		    for(var comment of response) {
-		        $("#more-comments").append(
+		        $("#comment"+id).append(
 		        "<div class=\"comments\"><div class=\"d-flex mb-2\">"+
 		         "<a href=\"#\" class=\"text-dark text-decoration-none\" data-bs-toggle=\"modal\" data-bs-target=\"#commentModal\">"+
                  "<img src=\"img/rmate1.jpg\" class=\"img-fluid rounded-circle\" alt=\"commenters-img\">"+
@@ -223,8 +223,6 @@ Version: 1.0
 		})
 		$(this).attr("current-comment-page", next_page);
 	});
-
-
 
     $(document).on("keypress","#comment-create",function(e){
             if(e.which == 13){
@@ -265,6 +263,8 @@ Version: 1.0
 				window.location.href = "/";
 			});
 	});
+
+
 
 
 })(jQuery); // End of use strict
