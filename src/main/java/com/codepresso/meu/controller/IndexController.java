@@ -25,6 +25,7 @@ public class IndexController {
         this.postService = postService;
         this.commentService = commentService;
     }
+
     @RequestMapping(value="/")
     public String index(Model model) {
         List<Post> postList = postService.getAllPost();
@@ -37,9 +38,37 @@ public class IndexController {
             FeedItem feeditem = new FeedItem(new PostResponseDto(post), commentList);
             feedItems.add(feeditem);
         }
+
         model.addAttribute("feedItems", feedItems);
         return "index";
     }
+
+    // Trending Page
+    @RequestMapping(value = "/trending")
+    public String getTrendingPage() {
+        return "tags";
+    }
+
+    // Explore Page
+    @RequestMapping(value = "/explore")
+    public String getExplorePage() {
+        return "explore";
+    }
+
+    // Fag Page
+    @RequestMapping(value = "/faq")
+    public String getFaqPage() {
+        return "faq";
+    }
+
+    // Contact Page
+    @RequestMapping(value = "/contact")
+    public String getContactPage() {
+        return "contact";
+    }
+
+
+
 }
 //if(postByComment.isEmpty()) continue;
 //System.out.println("///////////"+postByComment+"/////////////");

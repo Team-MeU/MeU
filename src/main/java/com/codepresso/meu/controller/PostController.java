@@ -13,7 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +25,7 @@ import java.util.List;
 public class PostController {
     private PostService postService;
     private UserSessionService userSessionService;
+
 
     // test
     @GetMapping("/post")
@@ -37,19 +40,25 @@ public class PostController {
     }
 
     @PostMapping("/post")
-    public ResponseEntity<String> createPost(@RequestBody @Validated PostRequestDto postDto, @CookieValue("id") Integer sessionId) {
-        UserSession userSession = userSessionService.getUserSessionById(sessionId);
-        System.out.println("save userSession : " + userSession);
-        if(userSession == null ) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");
-        }
-        Integer logInUserId = userSession.getUserId();
+    public ResponseEntity<String> createPost(@Validated PostRequestDto postDto, @RequestPart(value = "file", required = false) MultipartFile multipartFile, @CookieValue("id") Integer sessionId) throws IOException {
+            UserSession userSession = userSessionService.getUserSessionById(sessionId);
 
-        Post post = postDto.getPost();
-        post.setUserId(logInUserId);
-        postService.savePost(post);
+            System.out.println("save userSession : " + userSession);
+            if(userSession == null ) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");
+            }
+            Integer logInUserId = userSession.getUserId();
 
-        return ResponseEntity.status(HttpStatus.OK).body("success");
+            Post post = postDto.getPost();
+            post.setUserId(logInUserId);
+
+            if (multipartFile != null) {
+                log.info("upload file name : {}", multipartFile.getOriginalFilename());
+            }
+
+            postService.savePost(post, multipartFile);
+
+            return ResponseEntity.status(HttpStatus.OK).body("success");
     }
 
     @PutMapping("/post")

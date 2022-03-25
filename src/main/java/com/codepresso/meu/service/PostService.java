@@ -5,14 +5,16 @@ import com.codepresso.meu.vo.Post;
 import com.codepresso.meu.vo.UserSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class PostService {
     private PostMapper postMapper;
-
+    private S3Service s3Service;
 
     public List<Post> getAllPost() {
         return postMapper.findAll();
@@ -26,7 +28,11 @@ public class PostService {
         return postMapper.findOne(id);
     }
 
-    public Boolean savePost(Post post) {
+    public Boolean savePost(Post post, MultipartFile multipartFile) throws IOException {
+        if (multipartFile != null) {
+            String imgUrl = s3Service.uploadObject(multipartFile);
+            post.setImgUrl(imgUrl);
+        }
         Integer result = postMapper.save(post);
         return result == 1;
     }
@@ -43,9 +49,15 @@ public class PostService {
 
     public Boolean deletePost(Integer id, Integer logInUserId) {
         Post originalPost = postMapper.findOne(id);
+
         if(!originalPost.getUserId().equals(logInUserId)) {
+            System.out.println("Fail!! ---> Post userId : " + originalPost.getUserId());
+            System.out.println("Fail!! ---> Login userId : " + logInUserId);
             return false;
         }
+
+        System.out.println("Success!! ---> Post userId : " + originalPost.getUserId());
+        System.out.println("Success!! ---> Login userId : " + logInUserId);
 
         Integer result = postMapper.delete(id);
         return result == 1;

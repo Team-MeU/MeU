@@ -4,8 +4,8 @@
 
 <mapper namespace="com.codepresso.meu.mapper.PostMapper">
     <insert id="save">
-        INSERT INTO Post(userId, content)
-        VALUES (#{post.userId}, #{post.content});
+        INSERT INTO Post(userId, content, imgUrl)
+        VALUES (#{post.userId}, #{post.content}, #{post.imgUrl});
     </insert>
 
     <update id="update">
@@ -25,6 +25,7 @@
             p.userId,
             p.content,
             p.createdAt,
+            p.imgUrl,
             u.email,
             u.nickname
         FROM Post as p
@@ -39,6 +40,7 @@
             p.userId,
             p.content,
             p.createdAt,
+            p.imgUrl,
             u.email,
             u.nickname
         FROM Post as p

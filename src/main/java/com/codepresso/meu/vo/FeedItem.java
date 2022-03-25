@@ -20,6 +20,7 @@ public class FeedItem {
     String content;
     Date createdAt;
     Date updatedAt;
+    String imgUrl;
     String email;
     String nickname;
     List<Comment> commentListByPost = new ArrayList<>();
@@ -29,6 +30,7 @@ public class FeedItem {
         this.userId = post.getUserId();
         this.content = post.getContent();
         this.createdAt = post.getCreatedAt();
+        this.imgUrl = post.getImgUrl();
         this.email = post.getEmail();
         this.nickname = post.getNickname();
         this.commentListByPost = commentList;

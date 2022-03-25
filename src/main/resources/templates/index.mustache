@@ -248,7 +248,7 @@
                                              <div class="my-2">
                                                 <p class="text-dark">{{content}}</p>
                                                 <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                                <img src="img/post1.png" class="img-fluid rounded mb-3" alt="post-img">
+                                                <img src="{{imgUrl}}" class="img-fluid rounded mb-3">
                                                 </a>
                                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                                    <div>
@@ -763,13 +763,13 @@
                         </div>
                         <ul class="navbar-nav justify-content-end flex-grow-1">
                            <li class="nav-item">
-                              <a href="index.mustache" class="nav-link active"><span class="material-icons me-3">house</span> <span>Feed</span></a>
+                              <a href="/" class="nav-link active"><span class="material-icons me-3">house</span> <span>Feed</span></a>
                            </li>
                            <li class="nav-item">
                               <a href="profile.mustache" class="nav-link"><span class="material-icons me-3">account_circle</span> <span>Profile</span></a>
                            </li>
                            <li class="nav-item">
-                              <a href="explore.html" class="nav-link"><span class="material-icons me-3">explore</span> <span>Explore</span></a>
+                              <a href="/explore" class="nav-link"><span class="material-icons me-3">explore</span> <span>Explore</span></a>
                            </li>
                            <li class="nav-item">
                               <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#languageModal"><span class="material-icons me-3">translate</span> <span>Language</span></a>
@@ -785,14 +785,14 @@
                               <span class="material-icons me-3">web</span> Pages
                               </a>
                               <ul class="dropdown-menu px-2 py-1 mb-2" aria-labelledby="offcanvasNavbarDropdown">
-                                 <li><a class="dropdown-item rounded-3 px-2 py-1 my-1" href="contact.html">Contact</a></li>
-                                 <li><a class="dropdown-item rounded-3 px-2 py-1 my-1" href="faq.html">FAQ</a></li>
+                                 <li><a class="dropdown-item rounded-3 px-2 py-1 my-1" href="/contact">Contact</a></li>
+                                 <li><a class="dropdown-item rounded-3 px-2 py-1 my-1" href="/faq">FAQ</a></li>
                                  <li><a class="dropdown-item rounded-3 px-2 py-1 my-1" href="404.html">404 Error</a></li>
                                  <li><a class="dropdown-item rounded-3 px-2 py-1 my-1" href="/edit-profile">Edit Profile</a></li>
                               </ul>
                            </li>
                            <li class="nav-item">
-                              <a href="tags.html" class="nav-link"><span class="material-icons me-3">local_fire_department</span> <span>Trending</span></a>
+                              <a href="/trending" class="nav-link"><span class="material-icons me-3">local_fire_department</span> <span>Trending</span></a>
                            </li>
                         </ul>
                      </div>
@@ -802,19 +802,19 @@
                   <div class="ps-0 m-none fix-sidebar">
                      <div class="sidebar-nav mb-3">
                         <div class="pb-4 mb-4">
-                           <a href="index.mustache" class="text-decoration-none">
+                           <a href="/" class="text-decoration-none">
                            <img src="img/logo.png" class="img-fluid logo" alt="brand-logo">
                            </a>
                         </div>
                         <ul class="navbar-nav justify-content-end flex-grow-1">
                            <li class="nav-item">
-                              <a href="index.mustache" class="nav-link active"><span class="material-icons me-3">house</span> <span>Feed</span></a>
+                              <a href="/" class="nav-link active"><span class="material-icons me-3">house</span> <span>Feed</span></a>
                            </li>
                            <li class="nav-item">
                               <a href="/profile" class="nav-link"><span class="material-icons me-3">account_circle</span> <span>Profile</span></a>
                            </li>
                            <li class="nav-item">
-                              <a href="explore.html" class="nav-link"><span class="material-icons me-3">explore</span> <span>Explore</span></a>
+                              <a href="/explore" class="nav-link"><span class="material-icons me-3">explore</span> <span>Explore</span></a>
                            </li>
                            <li class="nav-item">
                               <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#languageModal"><span class="material-icons me-3">translate</span> <span>Language</span></a>
@@ -830,14 +830,14 @@
                               <span class="material-icons me-3">web</span> Pages
                               </a>
                               <ul class="dropdown-menu px-2 py-1 mb-2" aria-labelledby="offcanvasNavbarDropdown">
-                                 <li><a class="dropdown-item rounded-3 px-2 py-1 my-1" href="contact.html">Contact</a></li>
-                                 <li><a class="dropdown-item rounded-3 px-2 py-1 my-1" href="faq.html">FAQ</a></li>
+                                 <li><a href="/contact" class="dropdown-item rounded-3 px-2 py-1 my-1">Contact</a></li>
+                                 <li><a href="/faq" class="dropdown-item rounded-3 px-2 py-1 my-1">FAQ</a></li>
                                  <li><a class="dropdown-item rounded-3 px-2 py-1 my-1" href="404.html">404 Error</a></li>
                                  <li><a class="dropdown-item rounded-3 px-2 py-1 my-1" href="edit-profile.html">Edit Profile</a></li>
                               </ul>
                            </li>
                            <li class="nav-item">
-                              <a href="tags.html" class="nav-link"><span class="material-icons me-3">local_fire_department</span> <span>Trending</span></a>
+                              <a href="/trending" class="nav-link"><span class="material-icons me-3">local_fire_department</span> <span>Trending</span></a>
                            </li>
                         </ul>
                      </div>
@@ -869,7 +869,7 @@
                                  <img src="img/rmate4.jpg" class="img-fluid rounded-4 ms-auto" alt="profile-img">
                               </a>
                               <!-- Trending Item -->
-                              <a href="tags.html" class="p-3 border-bottom d-flex align-items-center text-dark text-decoration-none">
+                              <a href="/trending" class="p-3 border-bottom d-flex align-items-center text-dark text-decoration-none">
                                  <div>
                                     <div class="text-muted fw-light d-flex align-items-center">
                                     </div>
@@ -1021,10 +1021,11 @@
                </div>
                <div class="modal-footer justify-content-start px-1 py-1 bg-white shadow-sm rounded-5">
                   <div class="rounded-4 m-0 px-3 py-2 d-flex align-items-center justify-content-between w-75">
-                     <a href="#" class="text-muted text-decoration-none material-icons">insert_link</a>
-                     <a href="#" class="text-muted text-decoration-none material-icons">image</a>
-                     <a href="#" class="text-muted text-decoration-none material-icons">smart_display</a>
-                     <span class="text-muted">0/500</span>
+<!--                     <a href="#" class="text-muted text-decoration-none material-icons">insert_link</a>-->
+<!--                     <a href="#" class="text-muted text-decoration-none material-icons">image</a>-->
+                     <input class="col-md-8 form-control form-control-sm" id="uploadFile" type="file">
+<!--                     <a href="#" class="text-muted text-decoration-none material-icons">smart_display</a>-->
+<!--                     <span class="text-muted">0/500</span>-->
                   </div>
                   <div class="ms-auto m-0">
                      <a data-bs-dismiss="modal" href="#" id="post-create" class="btn btn-primary rounded-5 fw-bold px-3 py-2 fs-6 mb-0 d-flex align-items-center"><span class="material-icons me-2 md-16">send</span>Post</a>

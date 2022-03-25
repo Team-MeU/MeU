@@ -1,25 +1,22 @@
 insert into User(userId, email, userName, password, profileImg, birthDate, gender, videoSet, notificationSet, nickname, introduce)
-values (1, 'jinwoo@codepresso.com', 'Cho jinwoo', 'asdf1', 'http://dummyimage.com/246x100.png/cc0000/ffffff', '2021-11-22', false, true, false, 'jinwoo', 'Hi, My name is jinwoo');
+values (1, 'jaemin@codepresso.com', 'Choi jaemin', 'asdf1', 'http://dummyimage.com/163x100.png/ff4444/ffffff', '2022-10-21', false, true, false, 'jaemin', 'Hi, My name is jaemin');
 insert into User(userId, email, userName, password, profileImg, birthDate, gender, videoSet, notificationSet, nickname, introduce)
-values (2, 'jaemin@codepresso.com', 'Choi jaemin', 'asdf2', 'http://dummyimage.com/163x100.png/ff4444/ffffff', '2022-10-21', false, true, false, 'jaemin', 'Hi, My name is jaemin');
+values (2, 'jiwon@codepresso.com', 'Yum jiwon', 'asdf2', 'http://dummyimage.com/216x100.png/cc0000/ffffff', '2022-03-11', true, true, true, 'jiwon', 'Hi, My name is jiwon');
 insert into User(userId, email, userName, password, profileImg, birthDate, gender, videoSet, notificationSet, nickname, introduce)
-values (3, 'jiwon@codepresso.com', 'Yum jiwon', 'asdf3', 'http://dummyimage.com/216x100.png/cc0000/ffffff', '2022-03-11', true, true, true, 'jiwon', 'Hi, My name is jiwon');
-insert into User(userId, email, userName, password, profileImg, birthDate, gender, videoSet, notificationSet, nickname, introduce)
-values (4, 'jinsol@codepresso.com', 'Jeong jinsol', 'asdf4', 'http://dummyimage.com/206x100.png/dd0000/ffffff', '2022-03-30', true, true, true, 'jinsol', 'Hi, My name is jinsol');
+values (3, 'jinsol@codepresso.com', 'Jeong jinsol', 'asdf3', 'http://dummyimage.com/206x100.png/dd0000/ffffff', '2022-03-30', true, true, true, 'jinsol', 'Hi, My name is jinsol');
 
-insert into Post(postId, userId, content)
-values (1, 1, 'BB&T Corporation');
-insert into Post(postId, userId, content)
-values (2, 1, 'Deutsche Bank AG');
-insert into Post(postId, userId, content)
-values (3, 2, 'FlexShopper, Inc.');
-insert into Post(postId, userId, content)
-values (4, 2, 'Innovative Industrial Properties, Inc.');
-insert into Post(postId, userId, content)
-values (5, 3, 'Rite Aid Corporation');
-insert into Post(postId, userId, content)
-values (6, 3, 'Summer Infant, Inc.');
-
+insert into Post(postId, userId, content, imgUrl)
+values (1, 1, 'post content 1', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post1.jpeg');
+insert into Post(postId, userId, content, imgUrl)
+values (2, 2, 'post content 2', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post2.jpeg');
+insert into Post(postId, userId, content, imgUrl)
+values (3, 3, 'post content 3', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post3.jpeg');
+insert into Post(postId, userId, content, imgUrl)
+values (4, 1, 'post content 4', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post4.jpeg');
+insert into Post(postId, userId, content, imgUrl)
+values (5, 2, 'post content 5', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post5.jpeg');
+insert into Post(postId, userId, content, imgUrl)
+values (6, 3, 'post content 6', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post6.jpeg');
 
 Insert into Comment values (2, 2, 1, 'hi two', '2022-03-15 18:09:42', '2022-03-15 18:09:42');
 Insert into Comment values (1, 2, 1, 'hi one', '2022-03-15 18:09:42', '2022-03-15 18:09:42');
@@ -46,8 +43,5 @@ Insert into comment values (22, 2, 8, 'test comment10', '2022-03-15 18:09:33', '
 Insert into comment values (23, 2, 7, 'test comment11', '2022-03-15 18:09:31', '2022-03-15 18:09:42');
 Insert into comment values (24, 3, 7, 'test comment12', '2022-03-15 18:09:32', '2022-03-15 18:09:42');
 Insert into comment values (25, 1, 7, 'test comment13', '2022-03-15 18:09:33', '2022-03-15 18:09:42');
-insert into Post(postId, userId, content)
-values (7, 4, 'First Internet Bancorp');
-insert into Post(postId, userId, content)
-values (8, 4, 'U.S. Energy Corp.');
+
 

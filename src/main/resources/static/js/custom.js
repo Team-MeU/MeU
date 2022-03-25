@@ -40,7 +40,7 @@ Version: 1.0
 		})
 			.done(function(response) {
 				console.log("signup success");
-				window.location.href="../../";
+				window.location.href="/";
 			})
 			.fail(function(response) {
 				alert("입력 정보를 확인해주세요.")
@@ -64,6 +64,7 @@ Version: 1.0
 			console.log("로그인!");
 			window.location.href = '/';
 		});
+
 	});
 
 	$(document).on("click","#logout-button",function(){
@@ -146,23 +147,34 @@ Version: 1.0
 
 	$("#post-create").click(function(){
 		var content = $("#post-content").val();
+		var formData = new FormData();
+		var file = $("input[id=uploadFile]")[0].files[0];
+
+		if (file == null){
+			alert("파일을 선택해 주세요");
+			return false;
+		}
+
+		formData.append("content", content);
+		formData.append("file", file);
 
 		$.ajax({
 			method: "POST",
 			url: "/post",
-			data: JSON.stringify({
-				"content": content
-			}),
-			contentType: "application/json"
+			data: formData,
+			processData: false,
+			contentType: false,
+			// dataType: 'json',
+			success: function(data){
+				alert("업로드 성공");
+				console.log("Post create success!");
+				location.href = "/";
+			},
+			err: function (err){
+				alert("업로드 실패");
+				return false;
+			}
 		})
-			.done(function(response) {
-				console.log("Post creation success!");
-				window.location.href = "/";
-			})
-			.fail(function(response) {
-				alert("로그인 후 이용할 수 있습니다.");
-				window.location.href = "/user/login";
-			});
 	});
 
 	$("#post-edit").click(function(){
@@ -171,21 +183,23 @@ Version: 1.0
 
 	$("#post-delete").click(function(){
 		var id = $("#post-id").val();
-
+		console.log("delete post id : " + id);
 		$.ajax({
 			method: "DELETE",
 			url: "/post",
 			data: {
 				"id": id,
+			},
+			success: function(data){
+				alert("게시물 삭제 성공");
+				console.log("Post delete success!");
+				location.href = "/";
+			},
+			err: function (err){
+				alert("게시물 삭제 실패");
+				return false;
 			}
 		})
-			.done(function(response) {
-				console.log("Post delete success!");
-				window.location.href = "/";
-			})
-			.fail(function(response) {
-				alert("게시물 삭제 권한이 없습니다.");
-			});
 	});
 
 
@@ -286,6 +300,7 @@ Version: 1.0
 		.fail(function(response) {
 			alert("해당 댓글의 삭제 권한이 없습니다.");
 		});
+
 	});
 
     $(document).on("click","#comment-modify-button",function(){

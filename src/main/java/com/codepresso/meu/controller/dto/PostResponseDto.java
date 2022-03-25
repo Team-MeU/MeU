@@ -11,6 +11,7 @@ public class PostResponseDto {
     Integer userId;
     String content;
     Date createdAt;
+    String imgUrl;
     String email;
     String nickname;
 
@@ -19,6 +20,7 @@ public class PostResponseDto {
         this.userId = post.getUserId();
         this.content = post.getContent();
         this.createdAt = post.getCreatedAt();
+        this.imgUrl = post.getImgUrl();
         this.email = post.getUser().getEmail();
         this.nickname = post.getUser().getNickname();
     }
