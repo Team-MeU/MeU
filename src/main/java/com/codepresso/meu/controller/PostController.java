@@ -5,6 +5,7 @@ import com.codepresso.meu.controller.dto.PostRequestDto;
 import com.codepresso.meu.controller.dto.PostResponseDto;
 import com.codepresso.meu.service.PostService;
 import com.codepresso.meu.service.UserSessionService;
+import com.codepresso.meu.vo.Likes;
 import com.codepresso.meu.vo.Post;
 import com.codepresso.meu.vo.UserSession;
 import lombok.AllArgsConstructor;
@@ -93,6 +94,30 @@ public class PostController {
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");
         }
+    }
+
+    @PostMapping("/post/like")
+    public ResponseEntity<String> createLike(@RequestParam Integer postId, @CookieValue("id") Integer sessionId) throws IOException {
+        UserSession userSession = userSessionService.getUserSessionById(sessionId);
+        if(userSession == null ) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");
+        }
+        Boolean result = postService.likePost(postId, userSession.getUserId());
+
+        if(result) { return ResponseEntity.status(HttpStatus.OK).body("success");}
+        else { return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");}
+    }
+
+    @GetMapping("/post/likes")
+    public List<Likes> findLikesOfUser(@RequestParam Integer userId){
+        List<Likes> likesOfUser = postService.getLikesOfUser(userId);
+        return likesOfUser;
+    }
+
+    @GetMapping("/post/like")
+    public List<Likes> findLikesOfPost(@RequestParam Integer postId){
+        List<Likes> likesOfPost = postService.getLikesOfPost(postId);
+        return likesOfPost;
     }
 
 }

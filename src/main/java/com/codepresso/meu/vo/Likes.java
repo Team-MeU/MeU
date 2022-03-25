@@ -14,6 +14,11 @@ public class Likes {
     Integer userId;
     Date createdAt;
 
+
+    public Likes(Integer postId, Integer userId){
+        this.userId = userId;
+        this.postId = postId;
+    }
 }
 
 

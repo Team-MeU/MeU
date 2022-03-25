@@ -1,6 +1,7 @@
 package com.codepresso.meu.service;
 
 import com.codepresso.meu.mapper.PostMapper;
+import com.codepresso.meu.vo.Likes;
 import com.codepresso.meu.vo.Post;
 import com.codepresso.meu.vo.UserSession;
 import lombok.AllArgsConstructor;
@@ -66,4 +67,20 @@ public class PostService {
     public List<Post> getMyPosts(Integer userId) {
         return postMapper.getMyPosts(userId);
     }
+
+
+
+
+
+
+
+    public Boolean likePost(Integer postId, Integer userId) {
+        Integer result = postMapper.insertLike(postId, userId);
+        return result == 1;
+    }
+
+    public List<Likes> getLikesOfPost(Integer postId){
+        return postMapper.likesOfPost(postId);
+    }
+    public List<Likes> getLikesOfUser(Integer userId){ return postMapper.likesOfUser(userId); }
 }
