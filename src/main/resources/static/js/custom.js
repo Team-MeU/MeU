@@ -181,25 +181,24 @@ Version: 1.0
 
 	});
 
-	$("#post-delete").click(function(){
-		var id = $("#post-id").val();
-		console.log("delete post id : " + id);
+
+    $(document).on("click","#post-delete",function(){
+		var id   = $(this).parent().parent().children("#dropdown-postId").val();
 		$.ajax({
 			method: "DELETE",
 			url: "/post",
 			data: {
 				"id": id,
-			},
-			success: function(data){
-				alert("게시물 삭제 성공");
-				console.log("Post delete success!");
-				location.href = "/";
-			},
-			err: function (err){
-				alert("게시물 삭제 실패");
-				return false;
 			}
 		})
+        .done(function(response) {
+            console.log("post remove success!");
+            window.location.reload();
+            })
+        .fail(function(response) {
+            alert("해당 권한이 없습니다. (현재 post-id : "+id);
+            window.location.href = "/";
+        });
 	});
 
 
@@ -235,7 +234,7 @@ Version: 1.0
 		        $("#commentInPost"+id).append(
 		        "<div class=\"comments\"><div class=\"d-flex mb-2\">"+
 		         "<a href=\"#\" class=\"text-dark text-decoration-none\" data-bs-toggle=\"modal\" data-bs-target=\"#commentModal\">"+
-                 "<img src=\"img/rmate1.jpg\" class=\"img-fluid rounded-circle\" alt=\"commenters-img\">"+
+                 "<img src="+comment.profileImg+" class=\"img-fluid rounded-circle\" alt=\"commenters-img\">"+
                  "</a> <div class=\"ms-2 small\">"+
                  "<a href=\"#\" class=\"text-dark text-decoration-none\" data-bs-toggle=\"modal\" data-bs-target=\"#commentModal\">"+
                  "<div class=\"bg-light px-3 py-2 rounded-4 mb-1 chat-text\">"+

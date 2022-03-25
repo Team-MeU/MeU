@@ -13,4 +13,8 @@ public class Likes {
     Integer postId;
     Integer userId;
     Date createdAt;
+
 }
+
+
+

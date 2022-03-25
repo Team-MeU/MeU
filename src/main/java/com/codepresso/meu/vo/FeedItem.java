@@ -17,6 +17,7 @@ import java.util.List;
 public class FeedItem {
     Integer postId;
     Integer userId;
+    String postUserProfileImg;
     String content;
     Date createdAt;
     Date updatedAt;
@@ -29,6 +30,7 @@ public class FeedItem {
         this.postId = post.getPostId();
         this.userId = post.getUserId();
         this.content = post.getContent();
+        this.postUserProfileImg = post.getPostUserProfileImg();
         this.createdAt = post.getCreatedAt();
         this.imgUrl = post.getImgUrl();
         this.email = post.getEmail();

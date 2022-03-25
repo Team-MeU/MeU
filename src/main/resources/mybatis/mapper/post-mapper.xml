@@ -23,6 +23,7 @@
         select
             p.postId,
             p.userId,
+            u.profileImg,
             p.content,
             p.createdAt,
             p.imgUrl,
@@ -38,6 +39,7 @@
         select
             p.postId,
             p.userId,
+            u.profileImg,
             p.content,
             p.createdAt,
             p.imgUrl,

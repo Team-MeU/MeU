@@ -1,9 +1,9 @@
 insert into User(userId, email, userName, password, profileImg, birthDate, gender, videoSet, notificationSet, nickname, introduce)
-values (1, 'jaemin@codepresso.com', 'Choi jaemin', 'asdf1', 'http://dummyimage.com/163x100.png/ff4444/ffffff', '2022-10-21', false, true, false, 'jaemin', 'Hi, My name is jaemin');
+values (1, 'jaemin@codepresso.com', 'Choi jaemin', 'asdf1', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/user3.jpeg', '2022-10-21', false, true, false, 'jaemin', 'Hi, My name is jaemin');
 insert into User(userId, email, userName, password, profileImg, birthDate, gender, videoSet, notificationSet, nickname, introduce)
-values (2, 'jiwon@codepresso.com', 'Yum jiwon', 'asdf2', 'http://dummyimage.com/216x100.png/cc0000/ffffff', '2022-03-11', true, true, true, 'jiwon', 'Hi, My name is jiwon');
+values (2, 'jiwon@codepresso.com', 'Yum jiwon', 'asdf2', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/user2.jpeg', '2022-03-11', true, true, true, 'jiwon', 'Hi, My name is jiwon');
 insert into User(userId, email, userName, password, profileImg, birthDate, gender, videoSet, notificationSet, nickname, introduce)
-values (3, 'jinsol@codepresso.com', 'Jeong jinsol', 'asdf3', 'http://dummyimage.com/206x100.png/dd0000/ffffff', '2022-03-30', true, true, true, 'jinsol', 'Hi, My name is jinsol');
+values (3, 'jinsol@codepresso.com', 'Jeong jinsol', 'asdf3', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/user1.jpeg', '2022-03-30', true, true, true, 'jinsol', 'Hi, My name is jinsol');
 
 insert into Post(postId, userId, content, imgUrl)
 values (1, 1, 'post content 1', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post1.jpeg');

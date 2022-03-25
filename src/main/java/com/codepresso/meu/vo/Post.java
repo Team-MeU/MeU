@@ -11,6 +11,7 @@ import java.util.Date;
 public class Post {
     Integer postId;
     Integer userId;
+    String postUserProfileImg;
     String content;
     Date createdAt;
     Date updatedAt;
@@ -18,7 +19,6 @@ public class Post {
     User user;
 
     public Post(Integer postId, Integer userId, String content, String imgUrl) {
-
         this.postId = postId;
         this.userId = userId;
         this.content = content;
@@ -33,9 +33,10 @@ public class Post {
         this.user = new User(email, nickname);
     }
 
-    public Post(Integer postId, Integer userId, String content, Date createdAt, String imgUrl, String email, String nickname) {
+    public Post(Integer postId, Integer userId, String postUserProfileImg, String content, Date createdAt, String imgUrl, String email, String nickname) {
         this.postId = postId;
         this.userId = userId;
+        this.postUserProfileImg = postUserProfileImg;
         this.content = content;
         this.createdAt = createdAt;
         this.imgUrl = imgUrl;
