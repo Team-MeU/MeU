@@ -284,7 +284,6 @@ Version: 1.0
 
     $(document).on("click","#comment-delete-button",function(){
 		var id = $(this).parent().children("#comment-id").val();
-
 		$.ajax({
 			method: "DELETE",
 			url: "/comment",
@@ -301,22 +300,24 @@ Version: 1.0
 		});
 	});
 
-    $(document).on("click","#like-button",function(){
-		var likeCnt = $(this).parent().children("#likeCnt").val();
+    $(document).on("click","#postLike-button",function(){
+        var postId = $(this).parent().parent().children("#post-id").val();
 
 		$.ajax({
-			method: "post",
-			url: "/comment",
-			data: {
-				"commentId": id,
-			}
+			method: "POST",
+			url: "/post/like",
+			data: JSON.stringify({
+                "postId": postId
+            }),
+            contentType: 'application/json',
 		})
+
 		.done(function(response) {
-			console.log("Comment delete success!");
+			console.log("좋아요 success! postId=>"+postId);
             window.location.reload();
 		})
 		.fail(function(response) {
-			alert("해당 댓글의 삭제 권한이 없습니다.");
+			alert("로그인이 필요한 서비스입니다.");
 		});
 	});
 

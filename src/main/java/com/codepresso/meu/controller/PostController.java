@@ -1,6 +1,7 @@
 package com.codepresso.meu.controller;
 
 
+import com.codepresso.meu.controller.dto.LikesRequestDto;
 import com.codepresso.meu.controller.dto.PostRequestDto;
 import com.codepresso.meu.controller.dto.PostResponseDto;
 import com.codepresso.meu.service.PostService;
@@ -97,12 +98,16 @@ public class PostController {
     }
 
     @PostMapping("/post/like")
-    public ResponseEntity<String> createLike(@RequestBody Integer postId, @CookieValue("id") Integer sessionId) throws IOException {
+    public ResponseEntity<String> createLike(@RequestBody LikesRequestDto likeDto, @CookieValue("id") Integer sessionId) throws IOException {
         UserSession userSession = userSessionService.getUserSessionById(sessionId);
         if(userSession == null ) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");
         }
-        Boolean result = postService.likePost(postId, userSession.getUserId());
+        Boolean result = false;
+
+        if(!(postService.checkExistLike(likeDto.getPostId(),userSession.getUserId()))) result = postService.likePost(likeDto.getPostId(), userSession.getUserId());
+        else result = postService.deleteLike(likeDto.getPostId(), userSession.getUserId());
+
 
         if(result) { return ResponseEntity.status(HttpStatus.OK).body("success");}
         else { return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");}

@@ -71,15 +71,24 @@ public class PostService {
 
 
 
-
-
-
     public Boolean likePost(Integer postId, Integer userId) {
         Integer result = postMapper.insertLike(postId, userId);
         return result == 1;
     }
+
+    public Boolean deleteLike(Integer postId, Integer userId) {
+        Integer result = postMapper.deleteLike(postId, userId);
+        return result == 1;
+    }
+
     public Integer getPostLikesCount(Integer postId) { return postMapper.countPostLiker(postId); }
 
+
+    public Boolean checkExistLike(Integer postId, Integer userId) {
+        Integer check = postMapper.checkLike(postId, userId);
+        if(check > 0) return true;
+        else return false;
+    }
     public List<Likes> getLikesOfPost(Integer postId){
         return postMapper.likesOfPost(postId);
     }

@@ -86,13 +86,13 @@
 
     <delete id="deleteLike">
         DELETE FROM Likes
-        WHERE likesId = {#likesId}
+        WHERE postId=#{postId} AND userId=#{userId}
     </delete>
 
-   <select id="searchForLike" resultType="com.codepresso.meu.vo.Likes">
-        SELECT *
+   <select id="checkLike" resultType="Integer">
+        SELECT COUNT(*)
         FROM Likes
-        WHERE postID = #{postId} AND userID = #{userId}
+        WHERE postId=#{postId} AND userId=#{userId}
    </select>
 
     <select id="countForLike" resultType="Integer">
@@ -100,5 +100,6 @@
         FROM Likes
         WHERE postID = #{postId}
     </select>
+
 
 </mapper>
