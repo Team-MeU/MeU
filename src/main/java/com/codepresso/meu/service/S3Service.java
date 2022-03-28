@@ -21,7 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class S3Service {
 
-    private static final String BUCKET_NAME = "webproject-meu";
+    private static final String BUCKET_NAME = "";
     private final AWSConfig awsConfig;
 
     public String uploadObject(MultipartFile data) throws IOException {
