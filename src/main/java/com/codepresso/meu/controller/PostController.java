@@ -97,7 +97,7 @@ public class PostController {
     }
 
     @PostMapping("/post/like")
-    public ResponseEntity<String> createLike(@RequestParam Integer postId, @CookieValue("id") Integer sessionId) throws IOException {
+    public ResponseEntity<String> createLike(@RequestBody Integer postId, @CookieValue("id") Integer sessionId) throws IOException {
         UserSession userSession = userSessionService.getUserSessionById(sessionId);
         if(userSession == null ) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");

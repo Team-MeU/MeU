@@ -44,4 +44,11 @@ Insert into comment values (23, 2, 6, 'test comment11', '2022-03-15 18:09:31', '
 Insert into comment values (24, 3, 6, 'test comment12', '2022-03-15 18:09:32', '2022-03-15 18:09:42');
 Insert into comment values (25, 1, 6, 'test comment13', '2022-03-15 18:09:33', '2022-03-15 18:09:42');
 
-Insert into likes(postId, userId, createdAt) values (1, 2, '2022-03-15 18:09:42');
+Insert into likes(postId, userId, createdAt) values (6, 1, '2022-03-15 18:09:42');
+Insert into likes(postId, userId, createdAt) values (6, 2, '2022-03-15 18:09:42');
+Insert into likes(postId, userId, createdAt) values (6, 3, '2022-03-15 18:09:42');
+Insert into likes(postId, userId, createdAt) values (5, 1, '2022-03-15 18:09:42');
+Insert into likes(postId, userId, createdAt) values (5, 2, '2022-03-15 18:09:42');
+Insert into likes(postId, userId, createdAt) values (4, 3, '2022-03-15 18:09:42');
+Insert into likes(postId, userId, createdAt) values (3, 2, '2022-03-15 18:09:42');
+

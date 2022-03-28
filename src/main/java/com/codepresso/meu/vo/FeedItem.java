@@ -24,6 +24,8 @@ public class FeedItem {
     String imgUrl;
     String email;
     String nickname;
+    Integer likeCnt;
+    Integer commentCnt;
     List<Comment> commentListByPost = new ArrayList<>();
 
     public FeedItem(PostResponseDto post, List<Comment> commentList){

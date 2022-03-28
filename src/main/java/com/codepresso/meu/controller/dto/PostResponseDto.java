@@ -15,6 +15,7 @@ public class PostResponseDto {
     String imgUrl;
     String email;
     String nickname;
+    Integer like;
 
     public PostResponseDto(Post post) {
         this.postId = post.getPostId();

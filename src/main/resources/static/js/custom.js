@@ -299,7 +299,25 @@ Version: 1.0
 		.fail(function(response) {
 			alert("해당 댓글의 삭제 권한이 없습니다.");
 		});
+	});
 
+    $(document).on("click","#like-button",function(){
+		var likeCnt = $(this).parent().children("#likeCnt").val();
+
+		$.ajax({
+			method: "post",
+			url: "/comment",
+			data: {
+				"commentId": id,
+			}
+		})
+		.done(function(response) {
+			console.log("Comment delete success!");
+            window.location.reload();
+		})
+		.fail(function(response) {
+			alert("해당 댓글의 삭제 권한이 없습니다.");
+		});
 	});
 
     $(document).on("click","#comment-modify-button",function(){

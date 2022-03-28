@@ -78,6 +78,7 @@ public class PostService {
         Integer result = postMapper.insertLike(postId, userId);
         return result == 1;
     }
+    public Integer getPostLikesCount(Integer postId) { return postMapper.countPostLiker(postId); }
 
     public List<Likes> getLikesOfPost(Integer postId){
         return postMapper.likesOfPost(postId);

@@ -36,6 +36,8 @@ public class IndexController {
             postResponseDtos.add(new PostResponseDto(post));
             List<Comment> commentList = commentService.getCommentListByPostInFeed(post.getPostId(), 1);
             FeedItem feeditem = new FeedItem(new PostResponseDto(post), commentList);
+            feeditem.setLikeCnt(postService.getLikesOfPost(post.getPostId()).size());
+            feeditem.setCommentCnt(postService.getLikesOfPost(post.getPostId()).size());
             feedItems.add(feeditem);
         }
 

@@ -21,5 +21,8 @@ public interface PostMapper {
 
     List<Likes> likesOfPost(@Param("postId") Integer postId);
     List<Likes> likesOfUser(@Param("userId") Integer userId);
+    Likes searchForLike(@Param("postId") Integer postId, @Param("userId") Integer userId);
     Integer insertLike(@Param("postId") Integer postId, @Param("userId") Integer userId);
+    Integer deleteLike(@Param("likesId") Integer likesId);
+    Integer countPostLiker(@Param("postId") Integer postId);
 }
