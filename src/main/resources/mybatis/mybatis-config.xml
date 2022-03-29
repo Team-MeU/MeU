@@ -7,5 +7,7 @@
         <mapper resource="mybatis/mapper/user-session-mapper.xml"/>
         <mapper resource="mybatis/mapper/post-mapper.xml"/>
         <mapper resource="mybatis/mapper/comment-mapper.xml"/>
+        <mapper resource="mybatis/mapper/tag-mapper.xml"/>
+        <mapper resource="mybatis/mapper/tagpost-mapper.xml"/>
     </mappers>
 </configuration>
