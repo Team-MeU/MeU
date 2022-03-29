@@ -16,6 +16,7 @@ import java.util.List;
 public class PostService {
     private PostMapper postMapper;
     private S3Service s3Service;
+    private TagService tagService;
 
     public List<Post> getAllPost() {
         return postMapper.findAll();
@@ -35,6 +36,9 @@ public class PostService {
             post.setImgUrl(imgUrl);
         }
         Integer result = postMapper.save(post);
+
+        List<String> tagList = tagService.createTagList(post.getContent());
+
         return result == 1;
     }
 

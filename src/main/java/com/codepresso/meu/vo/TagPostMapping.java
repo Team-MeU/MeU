@@ -10,4 +10,5 @@ public class TagPostMapping {
     Integer mapId;
     Integer tagId;
     Integer postId;
+
 }
