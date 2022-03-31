@@ -64,16 +64,19 @@ public class PostController {
     }
 
     @PutMapping("/post")
-    public ResponseEntity<String> updatePost(@RequestBody PostRequestDto postDto, @CookieValue("id") Integer sessionId) {
+    public ResponseEntity<String> updatePost(@Validated PostRequestDto postDto, @RequestPart(value = "file", required = false) MultipartFile multipartFile, @CookieValue("id") Integer sessionId) throws IOException {
         UserSession userSession = userSessionService.getUserSessionById(sessionId);
         System.out.println("update userSession : " + userSession);
         if(userSession == null ) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");
         }
         Integer logInUserId = userSession.getUserId();
-
         Post post = postDto.getPost();
-        Boolean result = postService.updatePost(post, logInUserId);
+        System.out.println("postid : " + post.getPostId());
+        System.out.println("userid : " + post.getUserId());
+        System.out.println("content : " + post.getContent());
+//        System.out.println("file ===> " + multipartFile.getOriginalFilename());
+        Boolean result = postService.updatePost(post, multipartFile, logInUserId);
 
         if(result) {
             return ResponseEntity.status(HttpStatus.OK).body("success");

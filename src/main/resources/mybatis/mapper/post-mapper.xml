@@ -10,7 +10,7 @@
 
     <update id="update">
         UPDATE Post
-        SET content=#{post.content}
+        SET content=#{post.content}, imgUrl=#{post.imgUrl}
         WHERE postId=#{post.postId};
     </update>
 
