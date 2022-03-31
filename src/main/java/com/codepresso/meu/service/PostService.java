@@ -1,6 +1,7 @@
 package com.codepresso.meu.service;
 
 import com.codepresso.meu.mapper.PostMapper;
+import com.codepresso.meu.mapper.TagMapper;
 import com.codepresso.meu.vo.Likes;
 import com.codepresso.meu.vo.Post;
 import com.codepresso.meu.vo.UserSession;
@@ -17,6 +18,7 @@ public class PostService {
     private PostMapper postMapper;
     private S3Service s3Service;
     private TagService tagService;
+    private TagMapper tagMapper;
 
     public List<Post> getAllPost() {
         return postMapper.findAll();
@@ -38,7 +40,11 @@ public class PostService {
         Integer result = postMapper.save(post);
 
         List<String> tagList = tagService.createTagList(post.getContent());
-
+//        for (String tag : tagList) {
+//            if (tagService.findTag(tag) == null) {
+//
+//            }
+//        }
         return result == 1;
     }
 
