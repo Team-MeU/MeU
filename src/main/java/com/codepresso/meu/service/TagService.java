@@ -1,5 +1,6 @@
 package com.codepresso.meu.service;
 
+import com.codepresso.meu.controller.dto.TagRequestDto;
 import com.codepresso.meu.mapper.TagMapper;
 import com.codepresso.meu.vo.Tag;
 import lombok.AllArgsConstructor;
@@ -30,5 +31,9 @@ public class TagService {
         }
 
         return tagList;
+    }
+
+    public Tag findTag(String tag) {
+        return tagMapper.findTag(tag);
     }
 }
