@@ -14,9 +14,11 @@ public interface CommentMapper {
 
     List<Comment> findByCommentOfPostId(@Param("postId") Integer postId,
                                         @Param("limit") Integer limit, @Param("offset") Integer offset);
-    Integer count(@Param("postId") Integer postId);
 
     Integer commentSave(@Param("comment") Comment comment);
     Integer commentUpdate(@Param("comment") Comment comment);
-    Integer commentDelete(@Param("id") Integer id);
+    Integer commentDelete(@Param("commentId") Integer commentId);
+
+    Integer count(@Param("commentId") Integer commentId);
+
 }

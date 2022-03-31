@@ -9,9 +9,10 @@ public class PostRequestDto {
     Integer postId;
     Integer userId;
     String content;
+    String imgUrl;
 
     public Post getPost() {
-        return new Post(this.postId, this.userId, this.content);
+        return new Post(this.postId, this.userId, this.content, this.imgUrl);
     }
 }
 

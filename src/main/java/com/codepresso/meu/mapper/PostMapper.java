@@ -1,5 +1,6 @@
 package com.codepresso.meu.mapper;
 
+import com.codepresso.meu.vo.Likes;
 import com.codepresso.meu.vo.Post;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -17,4 +18,12 @@ public interface PostMapper {
     Integer update(@Param("post") Post post);
     Integer delete(@Param("id") Integer id);
     List<Post> getMyPosts(@Param("userId") Integer userId);
+
+    List<Likes> likesOfPost(@Param("postId") Integer postId);
+    List<Likes> likesOfUser(@Param("userId") Integer userId);
+
+    Integer insertLike(@Param("postId") Integer postId, @Param("userId") Integer userId);
+    Integer deleteLike(@Param("postId") Integer postId, @Param("userId") Integer userId);
+    Integer countPostLiker(@Param("postId") Integer postId);
+    Integer checkLike(@Param("postId") Integer postId, @Param("userId") Integer userId);
 }

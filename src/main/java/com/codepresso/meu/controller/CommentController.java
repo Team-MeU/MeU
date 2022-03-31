@@ -67,7 +67,7 @@ public class CommentController {
     }
 
     @DeleteMapping("/comment")
-    public ResponseEntity deleteComment(@RequestParam Integer commentId, @CookieValue("id") Integer sessionId) {
+    public ResponseEntity<String> deleteComment(@RequestParam Integer commentId, @CookieValue("id") Integer sessionId) {
         UserSession userSession = userSessionService.getUserSessionById(sessionId);
         Integer logInUserId = userSession.getUserId();
         Boolean result = commentService.deleteComment(commentId, logInUserId);

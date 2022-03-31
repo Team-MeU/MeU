@@ -4,6 +4,8 @@ import com.codepresso.meu.vo.Comment;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 public class CommentInfo {
@@ -12,6 +14,7 @@ public class CommentInfo {
     String commentContent;
     String commentNickname;
     String profileImg;
+    Date updatedAt;
 
     public CommentInfo(Comment comment) {
         this.commentId = comment.getCommentId();
@@ -19,5 +22,6 @@ public class CommentInfo {
         this.userId = comment.getUserId();
         this.commentNickname = comment.getNickname();
         this.profileImg = comment.getProfileImg();
+        this.updatedAt = comment.getUpdatedAt();
     }
 }

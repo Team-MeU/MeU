@@ -1,10 +1,12 @@
 package com.codepresso.meu.controller;
 
 
+import com.codepresso.meu.controller.dto.LikesRequestDto;
 import com.codepresso.meu.controller.dto.PostRequestDto;
 import com.codepresso.meu.controller.dto.PostResponseDto;
 import com.codepresso.meu.service.PostService;
 import com.codepresso.meu.service.UserSessionService;
+import com.codepresso.meu.vo.Likes;
 import com.codepresso.meu.vo.Post;
 import com.codepresso.meu.vo.UserSession;
 import lombok.AllArgsConstructor;
@@ -13,7 +15,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +27,7 @@ import java.util.List;
 public class PostController {
     private PostService postService;
     private UserSessionService userSessionService;
+
 
     // test
     @GetMapping("/post")
@@ -37,19 +42,25 @@ public class PostController {
     }
 
     @PostMapping("/post")
-    public ResponseEntity<String> createPost(@RequestBody @Validated PostRequestDto postDto, @CookieValue("id") Integer sessionId) {
-        UserSession userSession = userSessionService.getUserSessionById(sessionId);
-        System.out.println("save userSession : " + userSession);
-        if(userSession == null ) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");
-        }
-        Integer logInUserId = userSession.getUserId();
+    public ResponseEntity<String> createPost(@Validated PostRequestDto postDto, @RequestPart(value = "file", required = false) MultipartFile multipartFile, @CookieValue("id") Integer sessionId) throws IOException {
+            UserSession userSession = userSessionService.getUserSessionById(sessionId);
 
-        Post post = postDto.getPost();
-        post.setUserId(logInUserId);
-        postService.savePost(post);
+            System.out.println("save userSession : " + userSession);
+            if(userSession == null ) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");
+            }
+            Integer logInUserId = userSession.getUserId();
 
-        return ResponseEntity.status(HttpStatus.OK).body("success");
+            Post post = postDto.getPost();
+            post.setUserId(logInUserId);
+
+            if (multipartFile != null) {
+                log.info("upload file name : {}", multipartFile.getOriginalFilename());
+            }
+
+            postService.savePost(post, multipartFile);
+
+            return ResponseEntity.status(HttpStatus.OK).body("success");
     }
 
     @PutMapping("/post")
@@ -84,6 +95,34 @@ public class PostController {
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");
         }
+    }
+
+    @PostMapping("/post/like")
+    public ResponseEntity<String> createLike(@RequestBody LikesRequestDto likeDto, @CookieValue("id") Integer sessionId) throws IOException {
+        UserSession userSession = userSessionService.getUserSessionById(sessionId);
+        if(userSession == null ) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");
+        }
+        Boolean result = false;
+
+        if(!(postService.checkExistLike(likeDto.getPostId(),userSession.getUserId()))) result = postService.likePost(likeDto.getPostId(), userSession.getUserId());
+        else result = postService.deleteLike(likeDto.getPostId(), userSession.getUserId());
+
+
+        if(result) { return ResponseEntity.status(HttpStatus.OK).body("success");}
+        else { return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");}
+    }
+
+    @GetMapping("/post/likes")
+    public List<Likes> findLikesOfUser(@RequestParam Integer userId){
+        List<Likes> likesOfUser = postService.getLikesOfUser(userId);
+        return likesOfUser;
+    }
+
+    @GetMapping("/post/like")
+    public List<Likes> findLikesOfPost(@RequestParam Integer postId){
+        List<Likes> likesOfPost = postService.getLikesOfPost(postId);
+        return likesOfPost;
     }
 
 }

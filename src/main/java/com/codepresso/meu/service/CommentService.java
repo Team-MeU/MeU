@@ -2,7 +2,9 @@ package com.codepresso.meu.service;
 
 import com.codepresso.meu.controller.dto.PostResponseDto;
 import com.codepresso.meu.mapper.CommentMapper;
+import com.codepresso.meu.mapper.PostMapper;
 import com.codepresso.meu.vo.Comment;
+import com.codepresso.meu.vo.Post;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CommentService {
     private CommentMapper commentMapper;
+    private PostMapper postMapper;
 
     public List<Comment> getCommentListByPostInFeed(Integer postId, Integer page){
         int size = 3;
@@ -43,9 +46,13 @@ public class CommentService {
 
     public boolean deleteComment(Integer commentId, Integer logInUserId) {
         Comment originalComment = commentMapper.commentFindOne(commentId);
-        if(!originalComment.getUserId().equals(logInUserId)) {
-            return false;
-        }
+        Post postofOriginalComment = postMapper.findOne(originalComment.getPostId());
+
+        if(!originalComment.getUserId().equals(logInUserId))
+            if(!postofOriginalComment.getUserId().equals(logInUserId))
+                return false;
+
+
         Integer result = commentMapper.commentDelete(commentId);
         return result == 1;
     }
