@@ -19,4 +19,13 @@
         FROM User
         WHERE email = #{email} AND password = #{password};
     </select>
+
+    <update id="modify">
+        UPDATE User
+        SET nickname = #{user.nickname}
+        ,email = #{user.email}
+        ,password = #{user.password}
+        WHERE userId = #{user.userId};
+    </update>
+
 </mapper>

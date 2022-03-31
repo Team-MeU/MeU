@@ -73,13 +73,75 @@ Version: 1.0
 			method: "DELETE",
 			url: "/user/session",
 			data: {
-				"id": session_id,
+				"id": session_id
 			}
 		})
-			.done(function(response) {
-				document.cookie = "id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-				window.location.href = "/";
-			});
+		.done(function(response) {
+			document.cookie = "id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+			window.location.href = "/";
+		});
+	});
+
+	$("#checkpwd_btn").click(function(){
+		var password = $("#floatingPass").val();
+		var session_id = $.cookie('id');
+		console.log(password);
+		console.log(session_id);
+
+		$.ajax({
+			method: "POST",
+			url: "/checkpwd/post",
+			data: JSON.stringify({
+				"password": password,
+				"sessionId": session_id
+			}),
+			contentType: "application/json",
+			success: function (result) {
+				if(result==true) {
+					console.log("right password");
+					window.location.href = '/edit-profile';
+				} else {
+					alert("비밀번호가 틀렸습니다!");
+					location.reload();
+				}
+			},
+			error: function () {
+				alert("비밀번호가 틀렸습니다!");
+				location.reload();
+			}
+		})
+	});
+
+	$("#saveProfile-button").click(function(){
+		var nickname = $("#floatingName").val();
+		var birth = $("#floatingBirth").val();
+		var email = $("#floatingEmail").val();
+		var password = $("#floatingPass").val();
+
+		console.log(nickname);
+		console.log(birth);
+		console.log(email);
+		console.log(password);
+
+		$.ajax({
+			method: "PUT",
+			url: "/user/edit-profile",
+			data: JSON.stringify({
+				"email": email,
+				"nickname": nickname,
+				"password": password
+			}),
+			contentType: "application/json",
+			success: function (result) {
+				alert("수정 완료!");
+				location.reload();
+			},
+			error: function () {
+				alert("수정 실패!");
+				location.reload();
+			}
+		})
+
 	});
 
 	var Popular = {
