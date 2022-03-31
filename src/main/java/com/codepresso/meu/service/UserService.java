@@ -35,5 +35,7 @@ public class UserService {
         return user;
     }
 
-
+    public void modifyUser(User user) {
+        userMapper.modify(user);
+    }
 }

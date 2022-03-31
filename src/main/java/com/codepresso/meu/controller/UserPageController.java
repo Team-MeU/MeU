@@ -7,15 +7,11 @@ import com.codepresso.meu.service.UserService;
 import com.codepresso.meu.service.UserSessionService;
 import com.codepresso.meu.vo.*;
 import lombok.AllArgsConstructor;
-import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,8 +77,25 @@ public class UserPageController {
         }
 
         User user = userService.getUserbyId(userSession.getUserId());
-
+        model.addAttribute("user", user);
 
         return "edit-profile";
     }
+
+    @RequestMapping("/checkpwd")
+    public String checkPwd(@CookieValue(name="id", required = false) Integer sessionId) {
+        if(sessionId==null){
+            System.out.println("No Cookie!");
+            return "login";
+        }
+        UserSession userSession = userSessionService.getUserSessionById(sessionId);
+        if(userSession==null) {
+            System.out.println("login first!!");
+            return "login";
+        }
+
+        return "check-password";
+    }
+
+
 }
