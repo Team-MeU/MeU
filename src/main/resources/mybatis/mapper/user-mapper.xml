@@ -10,8 +10,8 @@
     </select>
 
     <insert id="save">
-        INSERT INTO User(email, nickname, password)
-        VALUES (#{user.email}, #{user.nickname}, #{user.password});
+        INSERT INTO User(email, nickname, password, profileImg)
+        VALUES (#{user.email}, #{user.nickname}, #{user.password}, #{user.profileImg});
     </insert>
 
     <select id="findOneByEmailAndPassword" resultType="com.codepresso.meu.vo.User">
