@@ -228,18 +228,61 @@ Version: 1.0
 			contentType: false,
 			// dataType: 'json',
 			success: function(data){
-				alert("업로드 성공");
+				alert("게시글 생성 성공");
 				console.log("Post create success!");
 				location.href = "/";
 			},
 			err: function (err){
-				alert("업로드 실패");
+				alert("게시글 생성 실패");
 				return false;
 			}
 		})
 	});
 
-	$("#post-edit").click(function(){
+	// $("#post-edit-modal").click(function(){
+	// 	document.getElementById("post-edit-content").value = $(this).parent().parent().children("#original-content").val();
+	// 	document.getElementById("uploadEditFile").value = $("input[id=uploadFile]")[0].files[0];
+	// });
+
+	$(document).on("click","#post-edit",function(){
+		var userId = $(this).parent().children("#edit-userId").val();
+		var postId = $(this).parent().children("#edit-postId").val();
+		var content = $("#post-edit-content").val();
+
+		console.log(userId);
+		console.log(postId);
+		console.log(content);
+
+		var formData = new FormData();
+		var file = $("input[id=uploadEditFile]")[0].files[0];
+		console.log(file);
+		if (file == null){
+			alert("파일을 선택해 주세요");
+			return false;
+		}
+
+		formData.append("userId", userId);
+		formData.append("postId", postId);
+		formData.append("content", content);
+		formData.append("file", file);
+
+		$.ajax({
+			method: "PUT",
+			url: "/post",
+			data: formData,
+			processData: false,
+			contentType: false,
+			// dataType: 'json',
+			success: function(data){
+				alert("게시글 수정 성공");
+				console.log("Post edit success!");
+				location.href = "/";
+			},
+			err: function (err){
+				alert("게시글 수정 실패");
+				return false;
+			}
+		})
 
 	});
 

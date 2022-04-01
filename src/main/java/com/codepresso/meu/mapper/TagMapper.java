@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface TagMapper {
-
+    Tag findTag(@Param("content") String content);
     Integer saveTag(@Param("tag") Tag tag);
 
 }

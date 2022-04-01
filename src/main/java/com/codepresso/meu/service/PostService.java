@@ -1,6 +1,7 @@
 package com.codepresso.meu.service;
 
 import com.codepresso.meu.mapper.PostMapper;
+import com.codepresso.meu.mapper.TagMapper;
 import com.codepresso.meu.vo.Likes;
 import com.codepresso.meu.vo.Post;
 import com.codepresso.meu.vo.UserSession;
@@ -17,6 +18,7 @@ public class PostService {
     private PostMapper postMapper;
     private S3Service s3Service;
     private TagService tagService;
+    private TagMapper tagMapper;
 
     public List<Post> getAllPost() {
         return postMapper.findAll();
@@ -38,14 +40,25 @@ public class PostService {
         Integer result = postMapper.save(post);
 
         List<String> tagList = tagService.createTagList(post.getContent());
-
+//        for (String tag : tagList) {
+//            if (tagService.findTag(tag) == null) {
+//
+//            }
+//        }
         return result == 1;
     }
 
-    public Boolean updatePost(Post post, Integer logInUserId) {
+    public Boolean updatePost(Post post, MultipartFile multipartFile, Integer logInUserId) throws IOException {
+        System.out.println("postId ===> " + post.getPostId());
         Post originalPost = postMapper.findOne(post.getPostId());
+
         if(!originalPost.getUserId().equals(logInUserId)) {
             return false;
+        }
+
+        if (multipartFile != null) {
+            String imgUrl = s3Service.uploadObject(multipartFile);
+            post.setImgUrl(imgUrl);
         }
 
         Integer result = postMapper.update(post);
@@ -56,13 +69,8 @@ public class PostService {
         Post originalPost = postMapper.findOne(id);
 
         if(!originalPost.getUserId().equals(logInUserId)) {
-            System.out.println("Fail!! ---> Post userId : " + originalPost.getUserId());
-            System.out.println("Fail!! ---> Login userId : " + logInUserId);
             return false;
         }
-
-        System.out.println("Success!! ---> Post userId : " + originalPost.getUserId());
-        System.out.println("Success!! ---> Login userId : " + logInUserId);
 
         Integer result = postMapper.delete(id);
         return result == 1;
