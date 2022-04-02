@@ -34,8 +34,11 @@ public class UserController {
     // sign-up
     @PostMapping("/user")
     public String saveUser(@RequestBody UserRequestDto userRequestDto) {
-        userService.saveUser(userRequestDto.getUser());
+        User newMember = userRequestDto.getUser();
+        newMember.setProfileImg("https://webproject-meu.s3.ap-northeast-2.amazonaws.com/default.png");
+        userService.saveUser(newMember);
         return "success";
+
     }
 
     //login
