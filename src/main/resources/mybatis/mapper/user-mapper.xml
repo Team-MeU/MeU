@@ -28,4 +28,20 @@
         WHERE userId = #{user.userId};
     </update>
 
+    <select id="getAllUsers" resultType="com.codepresso.meu.vo.User">
+        SELECT * FROM User;
+    </select>
+
+    <insert id="followUser">
+        INSERT INTO Follow(followId, userId)
+        VALUES (#{followId}, #{userId});
+    </insert>
+
+    <select id="getUserIdByNickname" resultType="Integer">
+        SELECT userId FROM User WHERE nickname = #{nickname};
+    </select>
+
+    <delete id="unfollowUser">
+        DELETE FROM Follow WHERE followId=#{followId} AND userId=#{userId};
+    </delete>
 </mapper>
