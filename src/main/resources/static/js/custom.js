@@ -113,6 +113,12 @@ Version: 1.0
 		})
 	});
 
+	$(".follow-button").click(function(){
+		var nickname = $("#follow-nickname").val();
+		console.log("nickname :", nickname);
+
+	});
+
 	$("#saveProfile-button").click(function(){
 		var nickname = $("#floatingName").val();
 		var birth = $("#floatingBirth").val();
