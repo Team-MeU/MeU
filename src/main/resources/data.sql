@@ -17,6 +17,40 @@ insert into Post(postId, userId, content, imgUrl)
 values (5, 2, 'post content 5', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post5.jpeg');
 insert into Post(postId, userId, content, imgUrl)
 values (6, 3, 'post content 6', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post6.jpeg');
+insert into Post(postId, userId, content, imgUrl)
+values (7, 1, 'post content 7', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post1.jpeg');
+insert into Post(postId, userId, content, imgUrl)
+values (8, 2, 'post content 8', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post2.jpeg');
+insert into Post(postId, userId, content, imgUrl)
+values (9, 3, 'post content 9', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post3.jpeg');
+insert into Post(postId, userId, content, imgUrl)
+values (10, 1, 'post content 10', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post4.jpeg');
+insert into Post(postId, userId, content, imgUrl)
+values (11, 2, 'post content 11', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post5.jpeg');
+insert into Post(postId, userId, content, imgUrl)
+values (12, 3, 'post content 12', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post6.jpeg');
+
+insert into Post(postId, userId, content, imgUrl)
+values (13, 2, 'post content 13', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post2.jpeg');
+insert into Post(postId, userId, content, imgUrl)
+values (14, 3, 'post content 14', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post3.jpeg');
+insert into Post(postId, userId, content, imgUrl)
+values (15, 1, 'post content 15', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post4.jpeg');
+insert into Post(postId, userId, content, imgUrl)
+values (16, 1, 'post content 16', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post1.jpeg');
+insert into Post(postId, userId, content, imgUrl)
+values (17, 2, 'post content 17', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post2.jpeg');
+insert into Post(postId, userId, content, imgUrl)
+values (18, 3, 'post content 18', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post3.jpeg');
+insert into Post(postId, userId, content, imgUrl)
+values (19, 1, 'post content 19', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post4.jpeg');
+insert into Post(postId, userId, content, imgUrl)
+values (20, 2, 'post content 20', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post5.jpeg');
+insert into Post(postId, userId, content, imgUrl)
+values (21, 3, 'post content 21', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post6.jpeg');
+
+
+
 
 Insert into Comment values (2, 2, 1, 'hi two', '2022-03-15 18:09:42', '2022-03-15 18:09:42');
 Insert into Comment values (1, 1, 1, 'hi one', '2022-03-15 18:09:42', '2022-03-15 18:09:42');

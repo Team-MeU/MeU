@@ -29,6 +29,10 @@ public class CommentService {
         return commentMapper.findByCommentOfPostIdInPostPage(postId, size,(page) * size);
     }
 
+    public Integer getCommentsOfPost(Integer postId){
+        return commentMapper.count(postId);
+    }
+
     public boolean saveComment(Comment comment){
         Integer result = commentMapper.commentSave(comment);
         return result == 1;

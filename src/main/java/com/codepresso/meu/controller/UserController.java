@@ -53,7 +53,6 @@ public class UserController {
         response.addCookie(cookie);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
-
     // sign-up
     @ResponseBody
     @PostMapping("/checkpwd/post")
