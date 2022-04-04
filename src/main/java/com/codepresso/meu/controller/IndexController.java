@@ -5,9 +5,11 @@ import com.codepresso.meu.controller.dto.FeedRequestDto;
 import com.codepresso.meu.controller.dto.PostResponseDto;
 import com.codepresso.meu.service.CommentService;
 import com.codepresso.meu.service.PostService;
+import com.codepresso.meu.service.UserService;
 import com.codepresso.meu.vo.Comment;
 import com.codepresso.meu.vo.FeedItem;
 import com.codepresso.meu.vo.Post;
+import com.codepresso.meu.vo.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -24,10 +26,12 @@ public class IndexController {
 
     private PostService postService;
     private CommentService commentService;
+    private UserService userService;
 
-    public IndexController(PostService postService, CommentService commentService) {
+    public IndexController(PostService postService, CommentService commentService, UserService userService) {
         this.postService = postService;
         this.commentService = commentService;
+        this.userService = userService;
     }
 
     //public String index(Model model, @RequestParam(value = "page", defaultValue = "1") Integer page) {
@@ -59,6 +63,10 @@ public class IndexController {
             feedItems.add(feeditem);
         }
         model.addAttribute("feedItems", feedItems);
+
+        //전체 사용자 조회 및 팔로우 추천
+        List<User> userList = userService.getAllUsers();
+        model.addAttribute("userList", userList);
         return "index";
     }
 

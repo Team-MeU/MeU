@@ -5,6 +5,7 @@ import com.codepresso.meu.vo.User;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -37,5 +38,21 @@ public class UserService {
 
     public void modifyUser(User user) {
         userMapper.modify(user);
+    }
+
+    public List<User> getAllUsers() {
+        return userMapper.getAllUsers();
+    }
+
+    public Integer getUserIdByNickname(String nickname) {
+        return userMapper.getUserIdByNickname(nickname);
+    }
+
+    public void followUser(Integer userId, Integer followId) {
+        userMapper.followUser(userId, followId);
+    }
+
+    public void unfollowUser(Integer userId, Integer followId) {
+        userMapper.unfollowUser(userId, followId);
     }
 }

@@ -32,4 +32,5 @@
         DELETE FROM UserSession
         WHERE sessionId=#{id};
     </delete>
+
 </mapper>

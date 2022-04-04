@@ -76,7 +76,6 @@ public class UserController {
     @PutMapping("/user/edit-profile")
     public ResponseEntity<String> modifyUser(@RequestBody @Validated UserRequestDto userRequestDto, @CookieValue("id") Integer sessionId) {
         UserSession userSession = userSessionService.getUserSessionById(sessionId);
-        System.out.println("save userSession : " + userSession);
         if(userSession == null ) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");
         }
@@ -85,6 +84,42 @@ public class UserController {
         user.setUserId(logInUserId);
         userService.modifyUser(user);
 
+        return ResponseEntity.status(HttpStatus.OK).body("success");
+    }
+
+    @PostMapping("/follow")
+    public ResponseEntity<String> follow(@RequestBody String followNickname, @CookieValue(name="id", required = false) Integer sessionId) {
+        if(sessionId == null){
+            System.out.println("No Cookie!");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");
+        }
+        UserSession userSession = userSessionService.getUserSessionById(sessionId);
+        if(userSession == null ) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");
+        }
+
+        Integer userId = userSession.getUserId(); //팔로우를 누른 사용자 아이디
+        Integer followId = userService.getUserIdByNickname(followNickname); //팔로우 당한 사용자 아이디
+        userService.followUser(userId, followId);
+
+        return ResponseEntity.status(HttpStatus.OK).body("success");
+    }
+
+    @DeleteMapping("/unfollow")
+    public ResponseEntity<String> unfollow(@RequestBody String followNickname, @CookieValue(name="id", required = false) Integer sessionId) {
+        if (sessionId == null) {
+            System.out.println("No Cookie!");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");
+        }
+        UserSession userSession = userSessionService.getUserSessionById(sessionId);
+        if (userSession == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");
+        }
+
+        Integer userId = userSession.getUserId(); //팔로우를 누른 사용자 아이디
+        Integer followId = userService.getUserIdByNickname(followNickname); //팔로우 당한 사용자 아이디
+
+        userService.unfollowUser(userId, followId);
         return ResponseEntity.status(HttpStatus.OK).body("success");
     }
 }
