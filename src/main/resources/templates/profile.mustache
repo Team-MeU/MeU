@@ -65,8 +65,9 @@
                                 <span class="material-icons me-2 text-muted md-16 ms-4">calendar_today</span><span>Joined on {{user.createdAt}}</span>
                             </p>
                             <div class="d-flex followers">
+<!--                                팔로우팔로잉위치-->
                                 <div>
-                                    <p class="mb-0">391k <span class="text-muted">Followers</span></p>
+                                    <p class="mb-0">{{followersCount}} <span class="text-muted">Followers</span></p>
                                     <div class="d-flex">
                                         <img src="img/rmate1.jpg" class="img-fluid rounded-circle" alt="follower-img">
                                         <img src="img/rmate2.jpg" class="img-fluid rounded-circle" alt="follower-img">
@@ -76,7 +77,7 @@
                                     </div>
                                 </div>
                                 <div class="ms-5 ps-5">
-                                    <p class="mb-0">3 <span class="text-muted">Following</span></p>
+                                    <p class="mb-0">{{followingsCount}} <span class="text-muted">Following</span></p>
                                     <div class="d-flex">
                                         <img src="img/rmate1.jpg" class="img-fluid rounded-circle" alt="follower-img">
                                         <img src="img/rmate2.jpg" class="img-fluid rounded-circle" alt="follower-img">
@@ -866,7 +867,6 @@
                             </li>
                         </ul>
                     </div>
-                    <a href="#" class="btn btn-primary w-100 text-decoration-none rounded-4 py-3 fw-bold text-uppercase m-0" data-bs-toggle="modal" data-bs-target="#signModal">Sign In +</a>
                 </div>
                 <!-- Sidebar -->
                 <div class="ps-0 m-none fix-sidebar">
@@ -908,7 +908,6 @@
                             </li>
                         </ul>
                     </div>
-                    <a href="#" class="btn btn-primary w-100 text-decoration-none rounded-4 py-3 fw-bold text-uppercase m-0" data-bs-toggle="modal" data-bs-target="#signModal">Sign In +</a>
                 </div>
             </aside>
             <aside class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-6 col-12">

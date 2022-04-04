@@ -88,7 +88,7 @@ public class UserController {
     }
 
     @PostMapping("/follow")
-    public ResponseEntity<String> follow(@RequestBody String followNickname, @CookieValue(name="id", required = false) Integer sessionId) {
+    public ResponseEntity<String> follow(@RequestParam("nickname") String followNickname, @CookieValue(name="id", required = false) Integer sessionId) {
         if(sessionId == null){
             System.out.println("No Cookie!");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");
@@ -100,8 +100,12 @@ public class UserController {
 
         Integer userId = userSession.getUserId(); //팔로우를 누른 사용자 아이디
         Integer followId = userService.getUserIdByNickname(followNickname); //팔로우 당한 사용자 아이디
-        userService.followUser(userId, followId);
-
+        if(!userService.checkFollow(userId, followId)) {
+            userService.followUser(userId, followId);
+        }
+        else {
+            System.out.println("already follow!");
+        }
         return ResponseEntity.status(HttpStatus.OK).body("success");
     }
 

@@ -1,5 +1,6 @@
 package com.codepresso.meu.service;
 
+import com.codepresso.meu.controller.dto.FollowDto;
 import com.codepresso.meu.mapper.UserMapper;
 import com.codepresso.meu.vo.User;
 import lombok.AllArgsConstructor;
@@ -54,5 +55,17 @@ public class UserService {
 
     public void unfollowUser(Integer userId, Integer followId) {
         userMapper.unfollowUser(userId, followId);
+    }
+
+    public boolean checkFollow(Integer userId, Integer followId) {
+        return userMapper.checkFollow(userId, followId);
+    }
+
+    public Integer getFollowingsCount(Integer userId) {
+        return userMapper.getFollowings(userId);
+    }
+
+    public Integer getFollowersCount(Integer userId) {
+        return userMapper.getFollowers(userId);
     }
 }
