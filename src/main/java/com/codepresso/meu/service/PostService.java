@@ -21,12 +21,13 @@ public class PostService {
     private TagService tagService;
     private TagMapper tagMapper;
 
+    private static Integer viewPostSize = 6;
+
     public List<Post> getAllPost() {
         return postMapper.findAll();
     }
     public List<Post> getPostByPage(Integer page) {
-        int size = 6;
-        int limit = page * size;
+        int limit = page * viewPostSize;
         return postMapper.findByPage(limit);
     }
 
@@ -108,4 +109,9 @@ public class PostService {
         return postMapper.likesOfPost(postId);
     }
     public List<Likes> getLikesOfUser(Integer userId){ return postMapper.likesOfUser(userId); }
+
+
+    public Integer getViewPostSize(){
+        return viewPostSize;
+    }
 }

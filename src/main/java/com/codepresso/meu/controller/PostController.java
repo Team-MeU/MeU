@@ -124,10 +124,8 @@ public class PostController {
         return likesOfUser;
     }
 
-    @GetMapping("/post/like")
-    public List<Likes> findLikesOfPost(@RequestParam Integer postId){
-        List<Likes> likesOfPost = postService.getLikesOfPost(postId);
-        return likesOfPost;
+    @GetMapping("post/count")
+    public Integer getPostMaxCount(){ return postService.getAllPost().size();
     }
 
 }

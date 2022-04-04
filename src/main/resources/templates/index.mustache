@@ -1491,12 +1491,18 @@
         }
       </script>
 
+      <script type="text/javascript">
+        function deleteCookie(name) {
+        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        }
+      </script>
+
+
       <!-- Infinity scroll -->
       <script type="text/javascript">
         let isRequestPost = false;
         let current_page = parseInt(getCookie("page"));
-        console.log("index페이지가 호출됨 =>" + current_page);
-
+        var is_final_page = {{isFinalPage}};
 
         window.addEventListener('scroll',() => {
             const domPositionY = $("#mainPost").height() + $("#mainPost").offset().top;
@@ -1504,20 +1510,18 @@
             console.log("domPositionY <= windowPositionY : ("+domPositionY+ " <= "+windowPositionY );
 
             if(domPositionY <= windowPositionY && !this.isRequestPost) {
-                console.log("삐삐삐삐삐삐 이벤트 발생");
                 this.isRequestPost = true;
-                $.ajax({
-
-		        })
-
+                $.ajax({})
 			    .done(function(response) {
-			        next_page = current_page+1;
-			        setCookie("page",next_page);
-			        console.log("page 쿠키 값 설정",next_page);
-			        alert("성공 "+ getCookie("page"));
-			        setTimeout(() => this.isRequestPost = false, 1000);
-			        window.location.reload();
+			        if(is_final_page == true) { alert("더 이상 표시할 게시물이 없습니다."); }
+                    else {
+			            next_page = current_page+1;
+			            setCookie("page",next_page);
+			            window.location.reload();
+			            setTimeout(() => this.isRequestPost = false, 1000);
+			        }
 			    })
+
 			    .fail(function(response) {
 			        setTimeout(() => this.isRequestPost = false, 1000);
 			        alert("불러오기 오류");
