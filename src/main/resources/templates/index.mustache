@@ -297,7 +297,7 @@
                                                       <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light" id="postLike-button"><span class="material-icons md-20 me-2">thumb_up_off_alt</span><span>{{likeCnt}}</span></a>
                                                    </div>
                                                    <div>
-                                                      <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">chat_bubble_outline</span><span>4.0k</span></a>
+                                                      <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">chat_bubble_outline</span><span>{{commentCnt}}</span></a>
                                                    </div>
                                                    <div>
                                                       <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">repeat</span><span>617</span></a>
@@ -356,6 +356,7 @@
                                  </div>
                                 {{/feedItems}}
                               </div>
+                           <a href="#end">박스</a>
                            </div>
                         </div>
                         <div class="tab-pane fade" id="pills-people" role="tabpanel" aria-labelledby="pills-people-tab">
@@ -466,7 +467,7 @@
                                  </div>
                               </a>
                               <!-- Account Item -->
-                              <a href="/profile"" class="p-3 border-bottom d-flex text-dark text-decoration-none account-item pf-item">
+                              <a href="/profile" class="p-3 border-bottom d-flex text-dark text-decoration-none account-item pf-item">
                                  <img src="img/rmate4.jpg" class="img-fluid rounded-circle me-3" alt="profile-img">
                                  <div>
                                     <p class="fw-bold mb-0 pe-3 d-flex align-items-center">John Smith <span class="ms-2 material-icons bg-primary p-0 md-16 fw-bold text-white rounded-circle ov-icon">done</span></p>
@@ -1462,6 +1463,7 @@
             </div>
          </div>
       </div>
+
       <!-- Jquery Js -->
 <!--      <script src="vendor/jquery/jquery.min.js"></script>-->
       <!-- Bootstrap Bundle Js -->
@@ -1471,30 +1473,78 @@
       <!-- Slick Js -->
       <script src="vendor/slick/slick/slick.min.js"></script>
 
+      <script type="text/javascript">
+        function getCookie(cName) {
+            cName = cName + '=';
+            var cookieData = document.cookie;
+            var start = cookieData.indexOf(cName);
+            var cValue = '';
+            if(start != -1){
+                start += cName.length;
+                var end = cookieData.indexOf(';', start);
+                if(end == -1) end = cookieData.length;
+                cValue = cookieData.substring(start, end);
+            }
+            return unescape(cValue);
+        }
+        </script>
+
+
+      <script type="text/javascript">
+        function getCookie(cName) {
+            cName = cName + '=';
+            var cookieData = document.cookie;
+            var start = cookieData.indexOf(cName);
+            var cValue = '';
+            if(start != -1){
+                start += cName.length;
+                var end = cookieData.indexOf(';', start);
+                if(end == -1) end = cookieData.length;
+                cValue = cookieData.substring(start, end);
+            }
+            return unescape(cValue);
+        }
+        </script>
+
+      <script type="text/javascript">
+        function setCookie(id, value){
+            document.cookie = id+'='+value;
+        }
+      </script>
+
       <!-- Infinity scroll -->
       <script type="text/javascript">
-         //$("#mainPost").height() : DOM의 길이
-         //$("#mainPost").offset().top : DOM의 최상단 위치
-         //window.pageYOffset : 현제 스크롤 최상단 위치
-         //window.innerHeight : 창 길이
-
         let isRequestPost = false;
+        let current_page = parseInt(getCookie("page"));
+        console.log("index페이지가 호출됨 =>" + current_page);
+
 
         window.addEventListener('scroll',() => {
-            console.log("mainPost: "+$("#mainPost").height()+"   "+$("#mainPost").offset().top+
-                    "  window : " + window.pageYOffset+ "   " + window.innerHeight);
-            
-            if($("#mainPost").length){
-                const domPositionY = $("#mainPost").height() + $("#mainPost").offset();
-                const windowPositionY = window.pageYOffset + window.innerHeight;
-                if(domPositionY <= windowPositionY && !this.isRequestPost) {
-                    this.isRequestPost = true;
-                    setTimeout(() => this.isRequestPost = false, 1000);
-                    console.log("domPositionY: "+domPositionY+"  windowPositionY : " + windowPositionY);
-                }
+            const domPositionY = $("#mainPost").height() + $("#mainPost").offset().top;
+            const windowPositionY = window.pageYOffset + window.innerHeight;
+            console.log("domPositionY <= windowPositionY : ("+domPositionY+ " <= "+windowPositionY );
+
+            if(domPositionY <= windowPositionY && !this.isRequestPost) {
+                console.log("삐삐삐삐삐삐 이벤트 발생");
+                this.isRequestPost = true;
+                $.ajax({
+
+		        })
+
+			    .done(function(response) {
+			        next_page = current_page+1;
+			        setCookie("page",next_page);
+			        console.log("page 쿠키 값 설정",next_page);
+			        alert("성공 "+ getCookie("page"));
+			        setTimeout(() => this.isRequestPost = false, 1000);
+			        window.location.reload();
+			    })
+			    .fail(function(response) {
+			        setTimeout(() => this.isRequestPost = false, 1000);
+			        alert("불러오기 오류");
+		        });
             }
         });
         </script>
-
    </body>
 </html>

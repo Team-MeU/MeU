@@ -29,10 +29,10 @@ public class PostController {
     private UserSessionService userSessionService;
 
 
-    // test
+
     @GetMapping("/post")
-    public List<PostResponseDto> getPostList() {
-        List<Post> postList = postService.getAllPost();
+    public List<PostResponseDto> getPostList(@RequestParam Integer page) {
+        List<Post> postList = postService.getPostByPage(page);
 
         List<PostResponseDto> postResponseDtos = new ArrayList<>();
         for(Post post : postList) {
@@ -40,6 +40,8 @@ public class PostController {
         }
         return postResponseDtos;
     }
+
+
 
     @PostMapping("/post")
     public ResponseEntity<String> createPost(@Validated PostRequestDto postDto, @RequestPart(value = "file", required = false) MultipartFile multipartFile, @CookieValue("id") Integer sessionId) throws IOException {

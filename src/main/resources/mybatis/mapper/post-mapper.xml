@@ -51,6 +51,26 @@
         ORDER BY p.postId DESC
     </select>
 
+    <select id="findByPage" resultType="com.codepresso.meu.vo.Post">
+        select
+        p.postId,
+        p.userId,
+        u.profileImg,
+        p.content,
+        p.createdAt,
+        p.imgUrl,
+        u.email,
+        u.nickname
+        FROM Post as p
+        JOIN User as u
+        ON p.userId = u.userId
+        ORDER BY p.postId DESC
+        LIMIT #{limit}
+    </select>
+
+
+
+
     <select id="getMyPosts" resultType="com.codepresso.meu.vo.Post">
         SELECT
             p.postId,

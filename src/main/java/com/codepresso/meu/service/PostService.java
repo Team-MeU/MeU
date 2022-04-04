@@ -1,5 +1,6 @@
 package com.codepresso.meu.service;
 
+import com.codepresso.meu.controller.dto.PostResponseDto;
 import com.codepresso.meu.mapper.PostMapper;
 import com.codepresso.meu.mapper.TagMapper;
 import com.codepresso.meu.vo.Likes;
@@ -23,11 +24,16 @@ public class PostService {
     public List<Post> getAllPost() {
         return postMapper.findAll();
     }
+    public List<Post> getPostByPage(Integer page) {
+        int size = 6;
+        int limit = page * size;
+        return postMapper.findByPage(limit);
+    }
+
 
     public List<Post> getPostByFeed(Integer id) {
         return postMapper.findByFeed(id);
     }
-
     public Post getPostById(Integer id) {
         return postMapper.findOne(id);
     }
@@ -92,9 +98,6 @@ public class PostService {
         Integer result = postMapper.deleteLike(postId, userId);
         return result == 1;
     }
-
-    public Integer getPostLikesCount(Integer postId) { return postMapper.countPostLiker(postId); }
-
 
     public Boolean checkExistLike(Integer postId, Integer userId) {
         Integer check = postMapper.checkLike(postId, userId);

@@ -19,6 +19,6 @@ public interface CommentMapper {
     Integer commentUpdate(@Param("comment") Comment comment);
     Integer commentDelete(@Param("commentId") Integer commentId);
 
-    Integer count(@Param("commentId") Integer commentId);
+    Integer count(@Param("postId") Integer postId);
 
 }
