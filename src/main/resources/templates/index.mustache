@@ -72,7 +72,7 @@
                                     <div class="me-2 bg-white shadow-sm rounded-4 p-3 user-list-item d-flex justify-content-center my-2">
                                        <div class="text-center">
                                           <div class="position-relative d-flex justify-content-center">
-                                             <a href="/profile" class="text-decoration-none">
+                                             <a href="/myprofile" class="text-decoration-none">
                                                 <img src="img/rmate1.jpg" class="img-fluid rounded-circle mb-3" alt="profile-img">
                                                 <div class="position-absolute">
                                                    <span class="material-icons bg-primary small p-1 fw-bold text-white rounded-circle">done</span>
@@ -93,7 +93,7 @@
                                     <div class="me-2 bg-white shadow-sm rounded-4 p-3 user-list-item d-flex justify-content-center my-2">
                                        <div class="text-center">
                                           <div class="position-relative d-flex justify-content-center">
-                                             <a href="/profile" class="text-decoration-none">
+                                             <a href="/myprofile" class="text-decoration-none">
                                                 <img src="img/rmate2.jpg" class="img-fluid rounded-circle mb-3" alt="profile-img">
                                                 <div class="position-absolute">
                                                    <span class="material-icons bg-primary small p-1 fw-bold text-white rounded-circle">done</span>
@@ -198,7 +198,7 @@
                                     <div class="me-2 bg-white shadow-sm rounded-4 p-3 user-list-item d-flex justify-content-center my-2">
                                        <div class="text-center">
                                           <div class="position-relative d-flex justify-content-center">
-                                             <a href="/profile" class="text-decoration-none">
+                                             <a href="/myprofile" class="text-decoration-none">
                                                 <img src="img/rmate3.jpg" class="img-fluid rounded-circle mb-3" alt="profile-img">
                                                 <div class="position-absolute">
                                                    <span class="material-icons bg-primary small p-1 fw-bold text-white rounded-circle">done</span>
@@ -226,7 +226,7 @@
                                        <div class="d-flex ms-3 align-items-start w-100">
                                           <div class="w-100">
                                              <div class="d-flex align-items-center justify-content-between">
-                                                <a href="/profile" class="text-decoration-none d-flex align-items-center">
+                                                <a href="/profile/{{nickname}}" class="text-decoration-none d-flex align-items-center">
                                                    <h6 class="fw-bold mb-0 text-body">{{nickname}}</h6>
                                                    <span class="ms-2 material-icons bg-primary p-0 md-16 fw-bold text-white rounded-circle ov-icon">done</span>
                                                    <small class="text-muted ms-2">{{email}}</small>
@@ -365,7 +365,7 @@
                               <!-- Account Item -->
                               {{#userList}}
                               <div class="p-3 border-bottom d-flex text-dark text-decoration-none account-item pf-item">
-                                <a href="/profile" class="d-flex text-decoration-none">
+                                <a href="/profile/{{nickname}}" class="d-flex text-decoration-none">
                                     <img src={{profileImg}} class="img-fluid rounded-circle me-3" alt="profile-img">
                                     <div>
                                         <p class="fw-bold mb-0 pe-3 d-flex align-items-center">{{userName}} <span class="ms-2 material-icons bg-primary p-0 md-16 fw-bold text-white rounded-circle ov-icon">done</span></p>
@@ -787,7 +787,7 @@
                               <a href="/" class="nav-link active"><span class="material-icons me-3">house</span> <span>Feed</span></a>
                            </li>
                            <li class="nav-item">
-                              <a href="/profile" class="nav-link"><span class="material-icons me-3">account_circle</span> <span>Profile</span></a>
+                              <a href="/myprofile" class="nav-link"><span class="material-icons me-3">account_circle</span> <span>Profile</span></a>
                            </li>
                            <li class="nav-item">
                               <a href="/explore" class="nav-link"><span class="material-icons me-3">explore</span> <span>Explore</span></a>
@@ -832,7 +832,7 @@
                               <a href="/" class="nav-link active"><span class="material-icons me-3">house</span> <span>Feed</span></a>
                            </li>
                            <li class="nav-item">
-                              <a href="/profile" class="nav-link"><span class="material-icons me-3">account_circle</span> <span>Profile</span></a>
+                              <a href="/myprofile" class="nav-link"><span class="material-icons me-3">account_circle</span> <span>Profile</span></a>
                            </li>
                            <li class="nav-item">
                               <a href="/explore" class="nav-link"><span class="material-icons me-3">explore</span> <span>Explore</span></a>

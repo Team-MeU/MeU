@@ -114,8 +114,26 @@ Version: 1.0
 	});
 
 	$(".follow-button").click(function(){
-		var nickname = $("#follow-nickname").val();
+		var nickname = $(this).parent().children("#follow-nickname").val();
 		console.log("nickname :", nickname);
+
+		$.ajax({
+			method: "POST",
+			url: "/follow",
+			data: {"nickname":nickname},
+			// data: JSON.stringify({
+			// 	"nickname": nickname
+			// }),
+			// contentType: "application/json",
+			success: function (result) {
+				alert("팔로우 성공!");
+				location.reload();
+			},
+			error: function () {
+				alert("팔로우 실패!");
+				location.reload();
+			}
+		})
 
 	});
 

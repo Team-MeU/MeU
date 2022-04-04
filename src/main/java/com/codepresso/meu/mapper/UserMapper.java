@@ -1,5 +1,6 @@
 package com.codepresso.meu.mapper;
 
+import com.codepresso.meu.controller.dto.FollowDto;
 import com.codepresso.meu.vo.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -16,4 +17,7 @@ public interface UserMapper {
     Integer getUserIdByNickname(@Param("nickname") String nickname);
     Integer followUser(@Param("userId") Integer userId, @Param("followId") Integer followId);
     Integer unfollowUser(@Param("userId") Integer userId, @Param("followId") Integer followId);
+    boolean checkFollow(@Param("userId") Integer userId, @Param("followId") Integer followId);
+    Integer getFollowings(@Param("userId") Integer userId);
+    Integer getFollowers(@Param("userId") Integer userId);
 }

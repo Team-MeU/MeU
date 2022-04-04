@@ -1,5 +1,6 @@
 package com.codepresso.meu.controller;
 
+import com.codepresso.meu.controller.dto.FollowDto;
 import com.codepresso.meu.controller.dto.PostResponseDto;
 import com.codepresso.meu.service.CommentService;
 import com.codepresso.meu.service.PostService;
@@ -10,7 +11,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +36,8 @@ public class UserPageController {
         return "login";
     }
 
-    @RequestMapping("/profile")
+    // 로그인한 사용자 프로필
+    @RequestMapping("/myprofile")
     public String getProfilePage(Model model, @CookieValue(name="id", required = false) Integer sessionId) {
         if(sessionId == null){
             System.out.println("No Cookie!");
@@ -59,6 +63,35 @@ public class UserPageController {
             feedItems.add(feeditem);
         }
         model.addAttribute("user",user);
+        model.addAttribute("feedItems", feedItems);
+
+        // 팔로우 정보
+        Integer followingsCount = userService.getFollowingsCount(userSession.getUserId());
+        System.out.println("followingsCount = " + followingsCount);
+        Integer followersCount = userService.getFollowersCount(userSession.getUserId());
+        System.out.println("followersCount = " + followersCount);
+        model.addAttribute("followingsCount", followingsCount);
+        model.addAttribute("followersCount", followersCount);
+        return "profile";
+    }
+
+    // 다른 사용자 프로필
+    @RequestMapping("/profile/{nickname}")
+    public String getProfilePage(@PathVariable("nickname") String nickname, Model model) {
+        Integer userId = userService.getUserIdByNickname(nickname);
+        User user = userService.getUserbyId(userId);
+        List<Post> myPost = postService.getMyPosts(userId);
+        List<PostResponseDto> postResponseDtos = new ArrayList<>();
+        //List<Comment> commentList = new ArrayList<>();
+        List<FeedItem> feedItems = new ArrayList<>();
+
+        for(Post post : myPost) {
+            postResponseDtos.add(new PostResponseDto(post));
+            List<Comment> commentList = commentService.getCommentListByPostInFeed(post.getPostId(), 1);
+            FeedItem feeditem = new FeedItem(new PostResponseDto(post), commentList);
+            feedItems.add(feeditem);
+        }
+        model.addAttribute("user", user);
         model.addAttribute("feedItems", feedItems);
         return "profile";
     }

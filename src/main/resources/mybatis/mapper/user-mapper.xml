@@ -44,4 +44,17 @@
     <delete id="unfollowUser">
         DELETE FROM Follow WHERE followId=#{followId} AND userId=#{userId};
     </delete>
+
+    <select id="checkFollow" resultType="boolean">
+        select exists(select * from Follow where followId=#{followId} and userId=#{userId});
+    </select>
+
+    <select id="getFollowings" resultType="Integer">
+        select count(followId) from Follow where userId=#{userId};
+    </select>
+
+    <select id="getFollowers" resultType="Integer">
+        select count(userId) from Follow where followId=#{userId};
+    </select>
+
 </mapper>
