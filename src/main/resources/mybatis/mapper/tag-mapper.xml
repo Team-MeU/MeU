@@ -14,4 +14,12 @@
         VALUES (#{content});
     </insert>
 
+    <select id="countTag" resultType="Integer">
+        SELECT count(*)
+        FROM Tag as t
+        JOIN TagPostMapping as tp
+        ON t.tagId = tp.tagId
+        WHERE t.tagId=#{tagId};
+    </select>
+
 </mapper>

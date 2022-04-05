@@ -18,6 +18,7 @@ public class Post {
     String imgUrl;
     User user;
 
+
     public Post(Integer postId, Integer userId, String content, String imgUrl) {
         this.postId = postId;
         this.userId = userId;

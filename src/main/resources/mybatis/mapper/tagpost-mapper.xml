@@ -4,12 +4,12 @@
 
 <mapper namespace="com.codepresso.meu.mapper.TagPostMapper">
     <insert id="saveTagPost">
-        INSERT INTO tagPostMapping(tagId, postId)
+        INSERT INTO TagPostMapping(tagId, postId)
         VALUES (#{tagId}, #{postId});
     </insert>
 
     <delete id="deleteTagPost">
-        DELETE FROM tagPostMapping
+        DELETE FROM TagPostMapping
         WHERE postId=#{postId};
     </delete>
 

@@ -29,7 +29,6 @@ public class TagService {
 
         System.out.println("Create HashTags Success! -----> " + tagList);
         saveTag(tagList, post.getPostId());
-
     }
 
     public Boolean saveTag(List<String> tagList, Integer postId) {
@@ -37,7 +36,6 @@ public class TagService {
 
         for (String tag : tagList) {
             Tag findResult = tagMapper.findTagByContent(tag);
-            System.out.println("find tag ---> " + findResult);
 
             // 등록된 태그가 아니라면 태그부터 추가
             if (findResult == null) {
@@ -47,15 +45,19 @@ public class TagService {
             // 태그-포스트 매핑 테이블에 데이터 추가
             Tag findTag = tagMapper.findTagByContent(tag);
             result = tagPostMapper.saveTagPost(findTag.getTagId(), postId);
+
         }
 
-        System.out.println(result);
         return result == 1;
     }
 
     public boolean deleteTagPost(Integer postId) {
         Integer result = tagPostMapper.deleteTagPost(postId);
         return result == 1;
+    }
+
+    public Integer countTag(Integer tagId){
+        return tagMapper.countTag(tagId);
     }
 
 }

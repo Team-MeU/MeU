@@ -14,6 +14,7 @@ public interface PostMapper {
     List<Post> findAll();
     List<Post> findByFeed(@Param("id") Integer id);
     List<Post> findByPage(@Param("limit") Integer limit);
+    List<Post> findByExplore();
 
     Post findOne(@Param("id") Integer id);
     Integer save(@Param("post") Post post);

@@ -11,4 +11,5 @@ import java.util.List;
 public interface TagMapper {
     Tag findTagByContent(@Param("content") String content);
     Integer saveTag(@Param("content") String content);
+    Integer countTag(@Param("tagId") Integer tagId);
 }
