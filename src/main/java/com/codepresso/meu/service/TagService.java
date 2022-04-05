@@ -1,7 +1,8 @@
 package com.codepresso.meu.service;
 
-import com.codepresso.meu.controller.dto.TagRequestDto;
 import com.codepresso.meu.mapper.TagMapper;
+import com.codepresso.meu.mapper.TagPostMapper;
+import com.codepresso.meu.vo.Post;
 import com.codepresso.meu.vo.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,25 +16,40 @@ import java.util.regex.Pattern;
 @AllArgsConstructor
 public class TagService {
     private TagMapper tagMapper;
+    private TagPostMapper tagPostMapper;
 
-    public List<String> createTagList(String content) {
+    public Boolean createTagList(Post post) {
         Pattern MY_PATTERN = Pattern.compile("#(\\S+)");
-        Matcher mat = MY_PATTERN.matcher(content);
-        List<String> tagList = new ArrayList<String>();
+        Matcher mat = MY_PATTERN.matcher(post.getContent());
+        List<String> tagList = new ArrayList<>();
 
         while(mat.find()) {
-            tagList.add(mat.group(1));
+            tagList.add((mat.group(1)));
         }
+
         System.out.println("Create HashTags Success! -----> " + tagList);
+        Integer result = saveTag(tagList, post.getPostId());
 
-        for(String tag : tagList) {
-            System.out.println("tag : " + tag);
-        }
-
-        return tagList;
+        return result == 1;
     }
 
-    public Tag findTag(String tag) {
-        return tagMapper.findTag(tag);
+    public Integer saveTag(List<String> tagList, Integer postId) {
+        Integer result = 1;
+
+        for (String tag : tagList) {
+            Tag findResult = tagMapper.findTagByContent(tag);
+            System.out.println("find tag ---> " + findResult);
+
+            // 등록된 태그가 아니라면 태그부터 추가
+            if (findResult == null) {
+                tagMapper.saveTag(tag);
+            }
+
+            // 태그-포스트 매핑 테이블에 데이터 추가
+            Tag findTag = tagMapper.findTagByContent(tag);
+            result = tagPostMapper.saveTagPost(findTag.getTagId(), postId);
+        }
+
+        return result;
     }
 }

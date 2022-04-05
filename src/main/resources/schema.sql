@@ -39,7 +39,6 @@ CREATE TABLE `Regram` (
 CREATE TABLE `Tag` (
     `tagId`	        int	PRIMARY KEY AUTO_INCREMENT,
     `content`       varchar(100) NOT NULL,
-    `mapId`	        int	NOT NULL,
     `tagCount`	    int	NOT NULL DEFAULT 1,
     `weekCount`	    int	NOT NULL DEFAULT 0
 );
@@ -89,7 +88,6 @@ CREATE TABLE `Follow` (
 );
 
 CREATE TABLE `tagPostMapping` (
-    `mapId`	        int	PRIMARY KEY AUTO_INCREMENT,
     `tagId`	        int	NOT NULL,
     `postId`	    int	NOT NULL
 );

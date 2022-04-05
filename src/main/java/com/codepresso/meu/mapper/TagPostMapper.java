@@ -8,5 +8,5 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface TagPostMapper {
 
-    Integer saveTagPost(@Param("tagPost") TagPostMapping tagPostMapping);
+    Integer saveTagPost(@Param("tagId") Integer tagId, @Param("postId") Integer postId);
 }

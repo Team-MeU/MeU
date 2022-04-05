@@ -5,9 +5,11 @@ import com.codepresso.meu.controller.dto.LikesRequestDto;
 import com.codepresso.meu.controller.dto.PostRequestDto;
 import com.codepresso.meu.controller.dto.PostResponseDto;
 import com.codepresso.meu.service.PostService;
+import com.codepresso.meu.service.TagService;
 import com.codepresso.meu.service.UserSessionService;
 import com.codepresso.meu.vo.Likes;
 import com.codepresso.meu.vo.Post;
+import com.codepresso.meu.vo.TagPostMapping;
 import com.codepresso.meu.vo.UserSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +29,7 @@ import java.util.List;
 public class PostController {
     private PostService postService;
     private UserSessionService userSessionService;
+    private TagService tagService;
 
 
 
@@ -47,7 +50,6 @@ public class PostController {
     public ResponseEntity<String> createPost(@Validated PostRequestDto postDto, @RequestPart(value = "file", required = false) MultipartFile multipartFile, @CookieValue("id") Integer sessionId) throws IOException {
             UserSession userSession = userSessionService.getUserSessionById(sessionId);
 
-            System.out.println("save userSession : " + userSession);
             if(userSession == null ) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");
             }
@@ -61,6 +63,7 @@ public class PostController {
             }
 
             postService.savePost(post, multipartFile);
+            tagService.createTagList(post);
 
             return ResponseEntity.status(HttpStatus.OK).body("success");
     }
@@ -74,10 +77,6 @@ public class PostController {
         }
         Integer logInUserId = userSession.getUserId();
         Post post = postDto.getPost();
-        System.out.println("postid : " + post.getPostId());
-        System.out.println("userid : " + post.getUserId());
-        System.out.println("content : " + post.getContent());
-//        System.out.println("file ===> " + multipartFile.getOriginalFilename());
         Boolean result = postService.updatePost(post, multipartFile, logInUserId);
 
         if(result) {
@@ -90,7 +89,7 @@ public class PostController {
     @DeleteMapping("/post")
     public ResponseEntity<String> deletePost(@RequestParam Integer id, @CookieValue("id") Integer sessionId){
         UserSession userSession = userSessionService.getUserSessionById(sessionId);
-        System.out.println("delete userSession : " + userSession);
+
         Integer logInUserId = userSession.getUserId();
 
         Boolean result = postService.deletePost(id, logInUserId);

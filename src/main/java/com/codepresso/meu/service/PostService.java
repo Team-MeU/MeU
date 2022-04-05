@@ -2,10 +2,8 @@ package com.codepresso.meu.service;
 
 import com.codepresso.meu.controller.dto.PostResponseDto;
 import com.codepresso.meu.mapper.PostMapper;
-import com.codepresso.meu.mapper.TagMapper;
 import com.codepresso.meu.vo.Likes;
 import com.codepresso.meu.vo.Post;
-import com.codepresso.meu.vo.UserSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,7 +17,6 @@ public class PostService {
     private PostMapper postMapper;
     private S3Service s3Service;
     private TagService tagService;
-    private TagMapper tagMapper;
 
     private static Integer viewPostSize = 6;
 
@@ -45,18 +42,12 @@ public class PostService {
             post.setImgUrl(imgUrl);
         }
         Integer result = postMapper.save(post);
-
-        List<String> tagList = tagService.createTagList(post.getContent());
-//        for (String tag : tagList) {
-//            if (tagService.findTag(tag) == null) {
-//
-//            }
-//        }
+        System.out.println(post.getPostId());
+        tagService.createTagList(post);
         return result == 1;
     }
 
     public Boolean updatePost(Post post, MultipartFile multipartFile, Integer logInUserId) throws IOException {
-        System.out.println("postId ===> " + post.getPostId());
         Post originalPost = postMapper.findOne(post.getPostId());
 
         if(!originalPost.getUserId().equals(logInUserId)) {

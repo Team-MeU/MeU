@@ -237,17 +237,14 @@
                                                       <a href="#" class="text-muted text-decoration-none material-icons ms-2 md-20 rounded-circle bg-light p-1" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">more_vert</a>
                                                       <ul class="dropdown-menu fs-13 dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
                                                          <input type="hidden" id="dropdown-postId" value="{{postId}}">
-<!--                                                         <input type="hidden" id="original-content" value="{{content}}">-->
-<!--                                                         <input type="hidden" id="original-imgUrl" value="{{imgUrl}}">-->
-                                                         <li><a class="dropdown-item text-muted" id="post-edit-modal" data-bs-toggle="modal" data-bs-target="#postEditModal"><span class="material-icons md-13 me-1">edit</span>Edit</a></li>
+                                                         <li><a class="dropdown-item text-muted" id="post-edit-modal" data-bs-toggle="modal" data-bs-target="#postEditModal{{postId}}" original-postId="{{postId}}" original-content="{{content}}"><span class="material-icons md-13 me-1">edit</span>Edit</a></li>
                                                          <li><a class="dropdown-item text-muted" id="post-delete" href="#"><span class="material-icons md-13 me-1">delete</span>Delete</a></li>
                                                          <li><a class="dropdown-item text-muted" href="#"><span class="material-icons md-13 me-1 ltsp-n5">arrow_back_ios arrow_forward_ios</span>Embed Vogel</a></li>
                                                          <li><a class="dropdown-item text-muted d-flex align-items-center" href="#"><span class="material-icons md-13 me-1">share</span>Share via another apps</a></li>
                                                       </ul>
 
-
                                                       <!-- Post Edit Modal -->
-                                                      <div class="modal fade" id="postEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                      <div class="modal fade" id="postEditModal{{postId}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                          <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content rounded-4 p-4 border-0 bg-light">
                                                                <div class="modal-header d-flex align-items-center justify-content-start border-0 p-0 mb-3">
@@ -256,7 +253,7 @@
                                                                </div>
                                                                <div class="modal-body p-0 mb-3">
                                                                   <div class="form-floating">
-                                                                     <textarea class="form-control rounded-5 border-0 shadow-sm" id="post-edit-content" id="floatingTextarea3" style="height: 200px"></textarea>
+                                                                     <textarea class="form-control rounded-5 border-0 shadow-sm" id="post-edit-content{{postId}}" id="floatingTextarea3" style="height: 200px"></textarea>
                                                                      <label for="floatingTextarea2" class="h6 text-muted mb-0">What's on your mind...</label>
                                                                   </div>
                                                                </div>
@@ -265,14 +262,14 @@
                                                                      <!--                     <a href="#" class="text-muted text-decoration-none material-icons">insert_link</a>-->
                                                                      <!--                     <a href="#" class="text-muted text-decoration-none material-icons">image</a>-->
 
-                                                                     <input class="col-md-8 form-control form-control-sm" id="uploadEditFile" type="file">
+                                                                     <input class="col-md-8 form-control form-control-sm" id="uploadEditFile{{postId}}" type="file">
                                                                      <!--                     <a href="#" class="text-muted text-decoration-none material-icons">smart_display</a>-->
                                                                      <!--                     <span class="text-muted">0/500</span>-->
                                                                   </div>
                                                                   <div class="ms-auto m-0">
-                                                                     <input type="hidden" id="edit-userId" value="{{userId}}">
-                                                                     <input type="hidden" id="edit-postId" value="{{postId}}">
-                                                                     <a data-bs-dismiss="modal" href="#" id="post-edit" class="btn btn-primary rounded-5 fw-bold px-3 py-2 fs-6 mb-0 d-flex align-items-center"><span class="material-icons me-2 md-16">send</span>Edit</a>
+                                                                     <input type="hidden" id="edit-userId{{postId}}" value="{{userId}}">
+<!--                                                                     <input type="hidden" id="edit-postId" vaky="{{postId}}">-->
+                                                                     <a data-bs-dismiss="modal" href="#" id="post-edit" post-id="{{postId}}" class="btn btn-primary rounded-5 fw-bold px-3 py-2 fs-6 mb-0 d-flex align-items-center"><span class="material-icons me-2 md-16">send</span>Edit</a>
                                                                   </div>
                                                                </div>
                                                             </div>
@@ -280,11 +277,9 @@
                                                       </div>
                                                       <!-- Post Edit Modal -->
 
-
                                                    </div>
                                                 </div>
                                              </div>
-
 
                                              <div class="my-2">
                                                 <p class="text-dark">{{content}}</p>

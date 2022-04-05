@@ -9,7 +9,11 @@ import lombok.Setter;
 public class Tag {
     Integer tagId;
     String content;
-    Integer mapId;
     Integer tagCount;
     Integer weekCount;
+
+    public Tag(Integer tagId, String content) {
+        this.tagId = tagId;
+        this.content = content;
+    }
 }

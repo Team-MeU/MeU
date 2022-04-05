@@ -263,23 +263,20 @@ Version: 1.0
 		})
 	});
 
-	// $("#post-edit-modal").click(function(){
-	// 	document.getElementById("post-edit-content").value = $(this).parent().parent().children("#original-content").val();
-	// 	document.getElementById("uploadEditFile").value = $("input[id=uploadFile]")[0].files[0];
-	// });
+	$("#post-edit-modal").click(function(){
+		var postId = $(this).attr("original-postId");
+		document.getElementById("post-edit-content" + postId).value = $(this).attr("original-content");
+		// document.getElementById("uploadEditFile").value = $("input[id=uploadFile]")[0].files[0];
+	})
 
 	$(document).on("click","#post-edit",function(){
-		var userId = $(this).parent().children("#edit-userId").val();
-		var postId = $(this).parent().children("#edit-postId").val();
-		var content = $("#post-edit-content").val();
-
-		console.log(userId);
-		console.log(postId);
-		console.log(content);
+		var postId = $(this).attr("post-id")
+		var userId = $(this).parent().children("#edit-userId" + postId).val();
+		var content = $("#post-edit-content" + postId).val();
 
 		var formData = new FormData();
-		var file = $("input[id=uploadEditFile]")[0].files[0];
-		console.log(file);
+		var file = $("input[id=uploadEditFile"+postId+"]")[0].files[0];
+		// console.log(file);
 		if (file == null){
 			alert("파일을 선택해 주세요");
 			return false;

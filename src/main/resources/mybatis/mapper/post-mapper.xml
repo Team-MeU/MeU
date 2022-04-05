@@ -3,7 +3,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.codepresso.meu.mapper.PostMapper">
-    <insert id="save">
+    <insert id="save" useGeneratedKeys="true"
+            keyProperty="postId" keyColumn="postId">
         INSERT INTO Post(userId, content, imgUrl)
         VALUES (#{post.userId}, #{post.content}, #{post.imgUrl});
     </insert>

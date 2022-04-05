@@ -1,26 +1,31 @@
 insert into User(userId, email, userName, password, profileImg, birthDate, gender, videoSet, notificationSet, nickname, introduce)
-values (1, 'jaemin@codepresso.com', 'Choi jaemin', 'asdf1', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/user3.jpeg', '2022-10-21', false, true, false, 'jaemin', 'Hi, My name is jaemin');
+values (1, 'jaemin@codepresso.com', 'Choi jaemin', 'asdf1', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/user1.jpeg', '2022-10-21', false, true, false, 'jaemin', 'Hi, My name is jaemin');
 insert into User(userId, email, userName, password, profileImg, birthDate, gender, videoSet, notificationSet, nickname, introduce)
 values (2, 'jiwon@codepresso.com', 'Yum jiwon', 'asdf2', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/user2.jpeg', '2022-03-11', true, true, true, 'jiwon', 'Hi, My name is jiwon');
 insert into User(userId, email, userName, password, profileImg, birthDate, gender, videoSet, notificationSet, nickname, introduce)
-values (3, 'jinsol@codepresso.com', 'Jeong jinsol', 'asdf3', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/user1.jpeg', '2022-03-30', true, true, true, 'jinsol', 'Hi, My name is jinsol');
+values (3, 'jinsol@codepresso.com', 'Jeong jinsol', 'asdf3', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/user3.jpeg', '1998-03-30', true, true, true, 'jinsol', 'Hi, My name is jinsol');
+insert into User(userId, email, userName, password, profileImg, birthDate, gender, videoSet, notificationSet, nickname, introduce)
+values (4, 'chapssal@codepresso.com', 'Jeong Chapssal', 'asdf4', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/user4.jpeg', '2020-11-26', false, true, false, 'chapssarry', 'Hi, My name is chapssal');
+insert into User(userId, email, userName, password, profileImg, birthDate, gender, videoSet, notificationSet, nickname, introduce)
+values (5, 'jingoo@codepresso.com', 'Choi Jingoo', 'asdf5', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/jingoo.png', '2020-11-26', false, true, false, 'jingoo', 'Hi, My name is jingoo');
+
 
 insert into Post(postId, userId, content, imgUrl)
 values (1, 1, 'post content 1', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post1.jpeg');
 insert into Post(postId, userId, content, imgUrl)
 values (2, 2, 'post content 2', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post2.jpeg');
 insert into Post(postId, userId, content, imgUrl)
-values (3, 3, 'post content 3', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post3.jpeg');
+values (3, 3, 'ㅋ기아가 야구를 또 졌다. 6이닝 0자책 하고도 패전투수가 된 우리 대투수 1패는 누가 책임질 건지... 기아는 병살 치는 특훈을 받는 것이 틀림 없다. 오늘의 #패전타자 는 #김00 당신입니다.', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post3.jpeg');
 insert into Post(postId, userId, content, imgUrl)
-values (4, 1, 'post content 4', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post4.jpeg');
+values (4, 4, '엄마 사과 빨리 깎아줘... 배고프단 말이야.... #배고파 #간식줘', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post4.jpeg');
 insert into Post(postId, userId, content, imgUrl)
-values (5, 2, 'post content 5', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post5.jpeg');
+values (5, 1, 'post content 5', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post5.jpeg');
 insert into Post(postId, userId, content, imgUrl)
-values (6, 3, 'post content 6', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post6.jpeg');
+values (6, 2, 'post content 6', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post6.jpeg');
 insert into Post(postId, userId, content, imgUrl)
-values (7, 1, 'post content 7', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post1.jpeg');
+values (7, 3, '친구와 생일파티를 했다. 민증 검사를 해서 기분이 좀 좋았는데 민증과 내 얼굴을 번갈아가며 보더니 주민번호를 확인하길래 다시 기분이 나빠졌다. #너 #몇살이야', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post7.jpeg');
 insert into Post(postId, userId, content, imgUrl)
-values (8, 2, 'post content 8', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post2.jpeg');
+values (8, 4, '이웃집 몽실이 누나는 내 마음을 알까....? 오늘도 같은 시간에 산책을 나갔는데 누나가 안 보여서 슬펐ㄷr... #몽실이누나 #미워', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post8.jpeg');
 insert into Post(postId, userId, content, imgUrl)
 values (9, 3, 'post content 9', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post3.jpeg');
 insert into Post(postId, userId, content, imgUrl)
@@ -29,27 +34,8 @@ insert into Post(postId, userId, content, imgUrl)
 values (11, 2, 'post content 11', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post5.jpeg');
 insert into Post(postId, userId, content, imgUrl)
 values (12, 3, 'post content 12', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post6.jpeg');
-
 insert into Post(postId, userId, content, imgUrl)
 values (13, 2, 'post content 13', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post2.jpeg');
-insert into Post(postId, userId, content, imgUrl)
-values (14, 3, 'post content 14', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post3.jpeg');
-insert into Post(postId, userId, content, imgUrl)
-values (15, 1, 'post content 15', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post4.jpeg');
-insert into Post(postId, userId, content, imgUrl)
-values (16, 1, 'post content 16', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post1.jpeg');
-insert into Post(postId, userId, content, imgUrl)
-values (17, 2, 'post content 17', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post2.jpeg');
-insert into Post(postId, userId, content, imgUrl)
-values (18, 3, 'post content 18', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post3.jpeg');
-insert into Post(postId, userId, content, imgUrl)
-values (19, 1, 'post content 19', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post4.jpeg');
-insert into Post(postId, userId, content, imgUrl)
-values (20, 2, 'post content 20', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post5.jpeg');
-insert into Post(postId, userId, content, imgUrl)
-values (21, 3, 'post content 21', 'https://webproject-meu.s3.ap-northeast-2.amazonaws.com/post6.jpeg');
-
-
 
 
 Insert into Comment values (2, 2, 1, 'hi two', '2022-03-15 18:09:42', '2022-03-15 18:09:42');
@@ -78,6 +64,7 @@ Insert into comment values (23, 2, 6, 'test comment11', '2022-03-15 18:09:31', '
 Insert into comment values (24, 3, 6, 'test comment12', '2022-03-15 18:09:32', '2022-03-15 18:09:42');
 Insert into comment values (25, 1, 6, 'test comment13', '2022-03-15 18:09:33', '2022-03-15 18:09:42');
 
+
 Insert into likes(postId, userId, createdAt) values (6, 1, '2022-03-15 18:09:42');
 Insert into likes(postId, userId, createdAt) values (6, 2, '2022-03-15 18:09:42');
 Insert into likes(postId, userId, createdAt) values (6, 3, '2022-03-15 18:09:42');
@@ -85,4 +72,25 @@ Insert into likes(postId, userId, createdAt) values (5, 1, '2022-03-15 18:09:42'
 Insert into likes(postId, userId, createdAt) values (5, 2, '2022-03-15 18:09:42');
 Insert into likes(postId, userId, createdAt) values (4, 3, '2022-03-15 18:09:42');
 Insert into likes(postId, userId, createdAt) values (3, 2, '2022-03-15 18:09:42');
+
+
+Insert into tag(tagId, content) values (1, '패전타자');
+Insert into tag(tagId, content) values (2, '김00');
+Insert into tag(tagId, content) values (3, '배고파');
+Insert into tag(tagId, content) values (4, '간식줘');
+Insert into tag(tagId, content) values (5, '너');
+Insert into tag(tagId, content) values (6, '몇살이야');
+Insert into tag(tagId, content) values (7, '몽실이누나');
+Insert into tag(tagId, content) values (8, '미워');
+
+
+Insert into tagpostmapping(tagId, postId) values (1, 3);
+Insert into tagpostmapping(tagId, postId) values (2, 3);
+Insert into tagpostmapping(tagId, postId) values (3, 4);
+Insert into tagpostmapping(tagId, postId) values (4, 4);
+Insert into tagpostmapping(tagId, postId) values (5, 7);
+Insert into tagpostmapping(tagId, postId) values (6, 7);
+Insert into tagpostmapping(tagId, postId) values (7, 8);
+Insert into tagpostmapping(tagId, postId) values (8, 8);
+
 

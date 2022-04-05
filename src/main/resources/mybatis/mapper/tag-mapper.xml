@@ -3,18 +3,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.codepresso.meu.mapper.TagMapper">
-    <select id="findTag" resultType="com.codepresso.meu.vo.Tag">
+    <select id="findTagByContent" resultType="com.codepresso.meu.vo.Tag">
         SELECT *
         FROM Tag
-        WHERE EXISTS (
-            SELECT content
-            FROM Tag
-            WHERE content = #{content}
-        );
+        where content=#{content};
     </select>
+
     <insert id="saveTag">
-        INSERT INTO Tag(content, mapId)
-        VALUES (#{tag.content}, #{tag.mapId});
+        INSERT INTO Tag(content)
+        VALUES (#{content});
     </insert>
 
 </mapper>

@@ -5,7 +5,7 @@
 <mapper namespace="com.codepresso.meu.mapper.TagPostMapper">
     <insert id="saveTagPost">
         INSERT INTO tagPostMapping(tagId, postId)
-        VALUES (#{tagPost.tagId}, #{tagPost.postId});
+        VALUES (#{tagId}, #{postId});
     </insert>
 
 </mapper>
