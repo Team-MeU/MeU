@@ -18,7 +18,7 @@ public class TagService {
     private TagMapper tagMapper;
     private TagPostMapper tagPostMapper;
 
-    public Boolean createTagList(Post post) {
+    public void createTagList(Post post) {
         Pattern MY_PATTERN = Pattern.compile("#(\\S+)");
         Matcher mat = MY_PATTERN.matcher(post.getContent());
         List<String> tagList = new ArrayList<>();
@@ -28,12 +28,11 @@ public class TagService {
         }
 
         System.out.println("Create HashTags Success! -----> " + tagList);
-        Integer result = saveTag(tagList, post.getPostId());
+        saveTag(tagList, post.getPostId());
 
-        return result == 1;
     }
 
-    public Integer saveTag(List<String> tagList, Integer postId) {
+    public Boolean saveTag(List<String> tagList, Integer postId) {
         Integer result = 1;
 
         for (String tag : tagList) {
@@ -50,6 +49,13 @@ public class TagService {
             result = tagPostMapper.saveTagPost(findTag.getTagId(), postId);
         }
 
-        return result;
+        System.out.println(result);
+        return result == 1;
     }
+
+    public boolean deleteTagPost(Integer postId) {
+        Integer result = tagPostMapper.deleteTagPost(postId);
+        return result == 1;
+    }
+
 }

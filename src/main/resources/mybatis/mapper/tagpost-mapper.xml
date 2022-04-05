@@ -8,4 +8,9 @@
         VALUES (#{tagId}, #{postId});
     </insert>
 
+    <delete id="deleteTagPost">
+        DELETE FROM tagPostMapping
+        WHERE postId=#{postId};
+    </delete>
+
 </mapper>

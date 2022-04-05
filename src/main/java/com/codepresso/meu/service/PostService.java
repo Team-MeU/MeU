@@ -36,18 +36,17 @@ public class PostService {
         return postMapper.findOne(id);
     }
 
-    public Boolean savePost(Post post, MultipartFile multipartFile) throws IOException {
+    public boolean savePost(Post post, MultipartFile multipartFile) throws IOException {
         if (multipartFile != null) {
             String imgUrl = s3Service.uploadObject(multipartFile);
             post.setImgUrl(imgUrl);
         }
         Integer result = postMapper.save(post);
-        System.out.println(post.getPostId());
         tagService.createTagList(post);
         return result == 1;
     }
 
-    public Boolean updatePost(Post post, MultipartFile multipartFile, Integer logInUserId) throws IOException {
+    public boolean updatePost(Post post, MultipartFile multipartFile, Integer logInUserId) throws IOException {
         Post originalPost = postMapper.findOne(post.getPostId());
 
         if(!originalPost.getUserId().equals(logInUserId)) {
@@ -63,7 +62,7 @@ public class PostService {
         return result == 1;
     }
 
-    public Boolean deletePost(Integer id, Integer logInUserId) {
+    public boolean deletePost(Integer id, Integer logInUserId) {
         Post originalPost = postMapper.findOne(id);
 
         if(!originalPost.getUserId().equals(logInUserId)) {
@@ -71,15 +70,13 @@ public class PostService {
         }
 
         Integer result = postMapper.delete(id);
+        tagService.deleteTagPost(id);
         return result == 1;
     }
 
     public List<Post> getMyPosts(Integer userId) {
         return postMapper.getMyPosts(userId);
     }
-
-
-
 
     public Boolean likePost(Integer postId, Integer userId) {
         Integer result = postMapper.insertLike(postId, userId);
