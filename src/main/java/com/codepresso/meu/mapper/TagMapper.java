@@ -13,4 +13,5 @@ public interface TagMapper {
     Integer saveTag(@Param("content") String content);
     Integer countTag(@Param("tagId") Integer tagId);
     Integer addTagCount(@Param("tagId") Integer tagId);
+    List<Tag> findByTagCount();
 }

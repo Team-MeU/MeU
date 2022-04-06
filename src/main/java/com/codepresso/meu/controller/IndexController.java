@@ -1,18 +1,14 @@
 package com.codepresso.meu.controller;
 
-import com.codepresso.meu.controller.dto.CommentResponseDto;
 import com.codepresso.meu.controller.dto.FeedRequestDto;
 import com.codepresso.meu.controller.dto.PostResponseDto;
 import com.codepresso.meu.service.CommentService;
 import com.codepresso.meu.service.PostService;
+import com.codepresso.meu.service.TagService;
 import com.codepresso.meu.service.UserService;
-import com.codepresso.meu.vo.Comment;
-import com.codepresso.meu.vo.FeedItem;
-import com.codepresso.meu.vo.Post;
-import com.codepresso.meu.vo.User;
+import com.codepresso.meu.vo.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
@@ -27,12 +23,14 @@ public class IndexController {
     private PostService postService;
     private CommentService commentService;
     private UserService userService;
+    private TagService tagService;
 
 
-    public IndexController(PostService postService, CommentService commentService, UserService userService) {
+    public IndexController(PostService postService, CommentService commentService, UserService userService, TagService tagService) {
         this.postService = postService;
         this.commentService = commentService;
         this.userService = userService;
+        this.tagService = tagService;
     }
 
     @RequestMapping(value= "/")
@@ -81,7 +79,9 @@ public class IndexController {
 
     // Explore Page
     @RequestMapping(value = "/explore")
-    public String getExplorePage() {
+    public String getExplorePage(Model model) {
+        List<Tag> tagList = tagService.findByTagCount();
+        model.addAttribute("tagList", tagList);
         return "explore";
     }
 
@@ -97,5 +97,10 @@ public class IndexController {
         return "contact";
     }
 
+    // 404 Page
+    @RequestMapping(value = "/404")
+    public String get404Page() {
+        return "404";
+    }
 
 }

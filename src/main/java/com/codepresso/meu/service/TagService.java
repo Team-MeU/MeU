@@ -60,4 +60,8 @@ public class TagService {
         return tagMapper.countTag(tagId);
     }
 
+    public List<Tag> findByTagCount() {
+        return tagMapper.findByTagCount();
+    }
+
 }
