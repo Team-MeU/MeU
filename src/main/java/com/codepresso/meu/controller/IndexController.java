@@ -5,6 +5,7 @@ import com.codepresso.meu.controller.dto.FeedRequestDto;
 import com.codepresso.meu.controller.dto.PostResponseDto;
 import com.codepresso.meu.service.CommentService;
 import com.codepresso.meu.service.PostService;
+import com.codepresso.meu.service.TrendingService;
 import com.codepresso.meu.service.UserService;
 import com.codepresso.meu.vo.Comment;
 import com.codepresso.meu.vo.FeedItem;
@@ -27,11 +28,12 @@ public class IndexController {
     private PostService postService;
     private CommentService commentService;
     private UserService userService;
+    private TrendingService trendingService;
 
-
-    public IndexController(PostService postService, CommentService commentService, UserService userService) {
+    public IndexController(PostService postService, CommentService commentService, UserService userService, TrendingService trendingService) {
         this.postService = postService;
         this.commentService = commentService;
+        this.trendingService = trendingService;
         this.userService = userService;
     }
 
@@ -39,11 +41,16 @@ public class IndexController {
     public String index(Model model, @RequestBody(required = false) FeedRequestDto feedDto,
                         @CookieValue(value = "page",required = false) String currentPage, HttpServletResponse response, HttpServletRequest request) {
         List<FeedItem> feedItems = new ArrayList<>();
+        List<FeedItem> trendingItems = new ArrayList<>();
         List<PostResponseDto> postResponseDtos = new ArrayList<>();
+        List<PostResponseDto> trendingResponseDtos = new ArrayList<>();
         List<Post> postList = new ArrayList<>();
+        List<Post> trendingList = new ArrayList<>();
+
         boolean isFinalPage = false;
 
         if (feedDto == null) feedDto = new FeedRequestDto(1,0);
+
         if(currentPage == null) {
             currentPage = "1";
             Cookie cookie = new Cookie("page", currentPage);
@@ -64,6 +71,7 @@ public class IndexController {
             feeditem.setCommentCnt(commentService.getCommentsOfPost(post.getPostId()));
             feedItems.add(feeditem);
         }
+
         model.addAttribute("isFinalPage", isFinalPage);
         model.addAttribute("feedItems", feedItems);
 
@@ -75,8 +83,23 @@ public class IndexController {
 
     // Trending Page
     @RequestMapping(value = "/trending")
-    public String getTrendingPage() {
-        return "tags";
+    public String getTrendingPage(Model model) {
+
+        List<FeedItem> trendingItems = new ArrayList<>();
+        List<PostResponseDto> trendingResponseDtos = new ArrayList<>();
+        List<Post> trendingList = new ArrayList<>();
+
+        trendingList = trendingService.getTrendingPage();
+        for(Post trend : trendingList) {
+            trendingResponseDtos.add(new PostResponseDto(trend));
+            List<Comment> commentList = commentService.getCommentListByPostInFeed(trend.getPostId(), 1);
+            FeedItem trenditem = new FeedItem(new PostResponseDto(trend), commentList);
+            trenditem.setLikeCnt(postService.getLikesOfPost(trend.getPostId()).size());
+            trenditem.setCommentCnt(commentService.getCommentsOfPost(trend.getPostId()));
+            trendingItems.add(trenditem);
+        }
+        model.addAttribute("trendingItems",trendingItems);
+        return "trending";
     }
 
     // Explore Page

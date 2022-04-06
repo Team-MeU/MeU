@@ -29,4 +29,7 @@ public interface PostMapper {
     Integer deleteLike(@Param("postId") Integer postId, @Param("userId") Integer userId);
     Integer countPostLiker(@Param("postId") Integer postId);
     Integer checkLike(@Param("postId") Integer postId, @Param("userId") Integer userId);
+
+    List<Post> findTrending();
+
 }

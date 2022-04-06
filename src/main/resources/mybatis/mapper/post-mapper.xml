@@ -124,4 +124,30 @@
     </select>
 
 
+    <select id="findTrending" resultType="com.codepresso.meu.vo.Post">
+        SELECT
+            TrendPost.postId,
+            TrendPost.userId,
+            u.profileImg,
+            TrendPost.content,
+            TrendPost.createdAt,
+            TrendPost.imgUrl,
+            u.email,
+            u.nickname
+        FROM
+            (SELECT
+                P.*,
+                cnt from
+                (SELECT
+                    LikeCnt.postId,
+                    COUNT(*) as cnt
+                from meu.Likes as LikeCnt
+                group by postId) as Trend
+                INNER JOIN meu.Post as P
+                ON Trend.postId = P.postId)
+            as TrendPost JOIN User as u
+            ON TrendPost.userId = u.userId
+        Order By cnt DESC;
+    </select>
+
 </mapper>
