@@ -44,8 +44,8 @@ public class TagService {
 
             // 태그-포스트 매핑 테이블에 데이터 추가
             Tag findTag = tagMapper.findTagByContent(tag);
+            tagMapper.addTagCount(findTag.getTagId());
             result = tagPostMapper.saveTagPost(findTag.getTagId(), postId);
-
         }
 
         return result == 1;

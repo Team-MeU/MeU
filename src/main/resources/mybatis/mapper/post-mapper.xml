@@ -9,7 +9,8 @@
         VALUES (#{post.userId}, #{post.content}, #{post.imgUrl});
     </insert>
 
-    <update id="update">
+    <update id="update" useGeneratedKeys="true"
+            keyProperty="postId" keyColumn="postId">
         UPDATE Post
         SET content=#{post.content}, imgUrl=#{post.imgUrl}
         WHERE postId=#{post.postId};
