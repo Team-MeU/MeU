@@ -28,4 +28,11 @@
         WHERE tagId=#{tagId};
     </update>
 
+    <select id="findByTagCount" resultType="com.codepresso.meu.vo.Tag">
+        select *
+        FROM Tag
+        ORDER BY tagCount DESC
+        LIMIT 10;
+    </select>
+
 </mapper>
