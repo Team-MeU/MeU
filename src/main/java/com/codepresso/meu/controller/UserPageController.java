@@ -80,13 +80,14 @@ public class UserPageController {
         User user = userService.getUserbyId(userId);
         List<Post> myPost = postService.getMyPosts(userId);
         List<PostResponseDto> postResponseDtos = new ArrayList<>();
-        //List<Comment> commentList = new ArrayList<>();
         List<FeedItem> feedItems = new ArrayList<>();
 
         for(Post post : myPost) {
             postResponseDtos.add(new PostResponseDto(post));
             List<Comment> commentList = commentService.getCommentListByPostInFeed(post.getPostId(), 1);
             FeedItem feeditem = new FeedItem(new PostResponseDto(post), commentList);
+            feeditem.setLikeCnt(postService.getLikesOfPost(post.getPostId()).size());
+            feeditem.setCommentCnt(commentService.getCommentsOfPost(post.getPostId()));
             feedItems.add(feeditem);
         }
         model.addAttribute("user", user);

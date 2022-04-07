@@ -70,13 +70,14 @@
         LIMIT #{limit}
     </select>
 
-
     <select id="getMyPosts" resultType="com.codepresso.meu.vo.Post">
         SELECT
             p.postId,
             p.userId,
+            u.profileImg,
             p.content,
             p.createdAt,
+            p.imgUrl,
             u.email,
             u.nickname
         FROM Post as p
@@ -85,7 +86,6 @@
         WHERE p.userId = #{userId}
         ORDER BY p.postId DESC
     </select>
-
 
     <select id="likesOfUser" resultType="com.codepresso.meu.vo.Likes">
         SELECT *

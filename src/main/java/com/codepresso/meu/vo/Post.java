@@ -7,7 +7,8 @@ import lombok.Setter;
 import java.util.Date;
 
 @AllArgsConstructor
-@Getter @Setter
+@Getter
+@Setter
 public class Post {
     Integer postId;
     Integer userId;
