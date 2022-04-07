@@ -68,4 +68,8 @@ public class UserService {
     public Integer getFollowersCount(Integer userId) {
         return userMapper.getFollowers(userId);
     }
+
+    public List<Integer> getFollowersUserId(Integer userId) {
+        return userMapper.getFollowersUserId(userId);
+    }
 }

@@ -29,4 +29,8 @@ public interface PostMapper {
     Integer deleteLike(@Param("postId") Integer postId, @Param("userId") Integer userId);
     Integer countPostLiker(@Param("postId") Integer postId);
     Integer checkLike(@Param("postId") Integer postId, @Param("userId") Integer userId);
+
+    Integer saveFeed(@Param("userId") Integer userId, @Param("postId") Integer postId);
+    List<Post> getFeed(@Param("userId") Integer userId);
+    List<Post> findFeedByPage(@Param("userId") Integer userId, @Param("limit") Integer limit);
 }

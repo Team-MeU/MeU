@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -17,12 +18,14 @@ public class PostService {
     private PostMapper postMapper;
     private S3Service s3Service;
     private TagService tagService;
+    private UserService userService;
 
     private static Integer viewPostSize = 6;
 
     public List<Post> getAllPost() {
         return postMapper.findAll();
     }
+
     public List<Post> getPostByPage(Integer page) {
         int limit = page * viewPostSize;
         return postMapper.findByPage(limit);
@@ -32,6 +35,7 @@ public class PostService {
     public List<Post> getPostByFeed(Integer id) {
         return postMapper.findByFeed(id);
     }
+
     public Post getPostById(Integer id) {
         return postMapper.findOne(id);
     }
@@ -101,5 +105,23 @@ public class PostService {
 
     public Integer getViewPostSize(){
         return viewPostSize;
+    }
+
+    public boolean saveFeed(Integer userId, Integer postId) {
+        Integer result = postMapper.saveFeed(userId, postId);
+        List<Integer> followersId = userService.getFollowersUserId(userId);
+        for(Integer follower : followersId) {
+            postMapper.saveFeed(follower, postId);
+        }
+        return result == 1;
+    }
+
+    public List<Post> getFeed(Integer userId) {
+        return postMapper.getFeed(userId);
+    }
+
+    public List<Post> getFeedByPage(Integer userId, Integer page) {
+        int limit = page * viewPostSize;
+        return postMapper.findFeedByPage(userId, limit);
     }
 }

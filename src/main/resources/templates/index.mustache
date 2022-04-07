@@ -351,7 +351,6 @@
                                  </div>
                                 {{/feedItems}}
                               </div>
-                           <a href="#end">박스</a>
                            </div>
                         </div>
                         <div class="tab-pane fade" id="pills-people" role="tabpanel" aria-labelledby="pills-people-tab">
@@ -359,7 +358,7 @@
 <!--팔로우 가능한 사용자 목록-->
                            <div class="bg-white rounded-4 overflow-hidden mb-4 shadow-sm">
                               <!-- Account Item -->
-                              {{#userList}}
+                              {{#users}}
                               <div class="p-3 border-bottom d-flex text-dark text-decoration-none account-item pf-item">
                                 <a href="/profile/{{nickname}}" class="d-flex text-decoration-none">
                                     <img src={{profileImg}} class="img-fluid rounded-circle me-3" alt="profile-img">
@@ -376,7 +375,7 @@
                                     <span class="btn btn-outline-primary btn-sm px-3 rounded-pill follow-button" >+ Follow</span>
                                 </div>
                               </div>
-                              {{/userList}}
+                              {{/users}}
                            </div>
 
                            <h6 class="mb-3 fw-bold text-body">Popular</h6>

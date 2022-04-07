@@ -100,6 +100,9 @@ public class UserController {
 
         Integer userId = userSession.getUserId(); //팔로우를 누른 사용자 아이디
         Integer followId = userService.getUserIdByNickname(followNickname); //팔로우 당한 사용자 아이디
+        if(userId == followId) {
+            return ResponseEntity.status(HttpStatus.OK).body("follow myself");
+        }
         if(!userService.checkFollow(userId, followId)) {
             userService.followUser(userId, followId);
         }

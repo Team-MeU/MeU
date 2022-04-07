@@ -6,10 +6,8 @@ import com.codepresso.meu.controller.dto.PostResponseDto;
 import com.codepresso.meu.service.CommentService;
 import com.codepresso.meu.service.PostService;
 import com.codepresso.meu.service.UserService;
-import com.codepresso.meu.vo.Comment;
-import com.codepresso.meu.vo.FeedItem;
-import com.codepresso.meu.vo.Post;
-import com.codepresso.meu.vo.User;
+import com.codepresso.meu.service.UserSessionService;
+import com.codepresso.meu.vo.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -27,23 +25,30 @@ public class IndexController {
     private PostService postService;
     private CommentService commentService;
     private UserService userService;
+    private UserSessionService userSessionService;
 
 
-    public IndexController(PostService postService, CommentService commentService, UserService userService) {
+    public IndexController(PostService postService, CommentService commentService, UserService userService, UserSessionService userSessionService) {
         this.postService = postService;
         this.commentService = commentService;
         this.userService = userService;
+        this.userSessionService = userSessionService;
     }
 
     @RequestMapping(value= "/")
     public String index(Model model, @RequestBody(required = false) FeedRequestDto feedDto,
-                        @CookieValue(value = "page",required = false) String currentPage, HttpServletResponse response, HttpServletRequest request) {
+                        @CookieValue(value = "page",required = false) String currentPage, HttpServletResponse response,
+                        HttpServletRequest request, @CookieValue(name="id", required = false) Integer sessionId) {
+
         List<FeedItem> feedItems = new ArrayList<>();
         List<PostResponseDto> postResponseDtos = new ArrayList<>();
         List<Post> postList = new ArrayList<>();
         boolean isFinalPage = false;
 
-        if (feedDto == null) feedDto = new FeedRequestDto(1,0);
+        if (feedDto == null) {
+            feedDto = new FeedRequestDto(1,0);
+        }
+
         if(currentPage == null) {
             currentPage = "1";
             Cookie cookie = new Cookie("page", currentPage);
@@ -52,24 +57,56 @@ public class IndexController {
             response.addCookie(cookie);
         }
 
-        Integer maxSearchPostCnt = postService.getAllPost().size();
-        if(postService.getViewPostSize() * Integer.parseInt(currentPage) > maxSearchPostCnt) {isFinalPage = true;}
+        List<User> users = userService.getAllUsers(); //전체 사용자 조회 및 팔로우 추천
+        Integer maxSearchPostCnt;
 
-        postList = postService.getPostByPage(Integer.parseInt(currentPage));
-        for(Post post : postList) {
-            postResponseDtos.add(new PostResponseDto(post));
-            List<Comment> commentList = commentService.getCommentListByPostInFeed(post.getPostId(), 1);
-            FeedItem feeditem = new FeedItem(new PostResponseDto(post), commentList);
-            feeditem.setLikeCnt(postService.getLikesOfPost(post.getPostId()).size());
-            feeditem.setCommentCnt(commentService.getCommentsOfPost(post.getPostId()));
-            feedItems.add(feeditem);
+        if(sessionId==null) { // no login
+            maxSearchPostCnt = postService.getAllPost().size();
+
+            if(postService.getViewPostSize() * Integer.parseInt(currentPage) > maxSearchPostCnt) {
+                isFinalPage = true;
+            }
+
+            postList = postService.getPostByPage(Integer.parseInt(currentPage));
+            for(Post post : postList) {
+                postResponseDtos.add(new PostResponseDto(post));
+                List<Comment> commentList = commentService.getCommentListByPostInFeed(post.getPostId(), 1);
+                FeedItem feeditem = new FeedItem(new PostResponseDto(post), commentList);
+                feeditem.setLikeCnt(postService.getLikesOfPost(post.getPostId()).size());
+                feeditem.setCommentCnt(commentService.getCommentsOfPost(post.getPostId()));
+                feedItems.add(feeditem);
+            }
+
         }
+        else { //login
+            UserSession userSession = userSessionService.getUserSessionById(sessionId);
+            for(User u : users) { //팔로우 목록에서 본인 제외
+                if(u.getUserId() == userSession.getUserId()) {
+                    users.remove(u);
+                    break;
+                }
+            }
+            maxSearchPostCnt = postService.getFeed(userSession.getUserId()).size();
+
+            if(postService.getViewPostSize() * Integer.parseInt(currentPage) > maxSearchPostCnt) {
+                isFinalPage = true;
+            }
+
+            postList = postService.getFeedByPage(userSession.getUserId(), Integer.parseInt(currentPage));
+            for(Post post : postList) {
+                postResponseDtos.add(new PostResponseDto(post));
+                List<Comment> commentList = commentService.getCommentListByPostInFeed(post.getPostId(), 1);
+                FeedItem feeditem = new FeedItem(new PostResponseDto(post), commentList);
+                feeditem.setLikeCnt(postService.getLikesOfPost(post.getPostId()).size());
+                feeditem.setCommentCnt(commentService.getCommentsOfPost(post.getPostId()));
+                feedItems.add(feeditem);
+            }
+        }
+
         model.addAttribute("isFinalPage", isFinalPage);
         model.addAttribute("feedItems", feedItems);
+        model.addAttribute("users", users);
 
-        //전체 사용자 조회 및 팔로우 추천
-        List<User> userList = userService.getAllUsers();
-        model.addAttribute("userList", userList);
         return "index";
     }
 
