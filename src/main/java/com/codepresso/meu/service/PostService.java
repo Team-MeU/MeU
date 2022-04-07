@@ -63,6 +63,7 @@ public class PostService {
         }
 
         Integer result = postMapper.update(post);
+        tagService.createTagList(post);
         return result == 1;
     }
 

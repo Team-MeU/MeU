@@ -489,4 +489,34 @@ Version: 1.0
 			});
 	});
 
+	$("#submitButton").click(function(){
+		var username = $("#name").val();
+		var email = $("#phone").val();
+		var content = $("#message").val();
+
+		console.log(username);
+		console.log(email);
+		console.log(content);
+
+		$.ajax({
+			method: "POST",
+			url: "/contact",
+			data: JSON.stringify({
+				"username": username,
+				"email": email,
+				"content": content
+			}),
+			contentType: "application/json",
+			success: function(data){
+				console.log("success!");
+				alert("문의글 작성 성공! 메일을 확인해주세요.");
+				window.location.href = '/';
+			},
+			err: function (err){
+				alert("문의글 작성 실패!");
+				return false;
+			}
+		})
+	});
+
 })(jQuery); // End of use strict

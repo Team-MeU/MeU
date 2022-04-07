@@ -33,4 +33,7 @@ public interface PostMapper {
     Integer saveFeed(@Param("userId") Integer userId, @Param("postId") Integer postId);
     List<Post> getFeed(@Param("userId") Integer userId);
     List<Post> findFeedByPage(@Param("userId") Integer userId, @Param("limit") Integer limit);
+  
+    List<Post> findTrending(@Param("limit") Integer limit);
+
 }

@@ -9,5 +9,6 @@
         <mapper resource="mybatis/mapper/comment-mapper.xml"/>
         <mapper resource="mybatis/mapper/tag-mapper.xml"/>
         <mapper resource="mybatis/mapper/tagpost-mapper.xml"/>
+        <mapper resource="mybatis/mapper/contact-mapper.xml"/>
     </mappers>
 </configuration>

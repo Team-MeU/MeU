@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.codepresso.meu.mapper.ContactMapper">
+    <insert id="saveContact">
+        INSERT INTO Contact(contactId, username, email, content)
+        VALUES (#{contact.contactId}, #{contact.username}, #{contact.email}, #{contact.content});
+    </insert>
+</mapper>

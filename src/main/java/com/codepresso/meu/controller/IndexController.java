@@ -1,16 +1,16 @@
 package com.codepresso.meu.controller;
 
-import com.codepresso.meu.controller.dto.CommentResponseDto;
 import com.codepresso.meu.controller.dto.FeedRequestDto;
 import com.codepresso.meu.controller.dto.PostResponseDto;
 import com.codepresso.meu.service.CommentService;
 import com.codepresso.meu.service.PostService;
+import com.codepresso.meu.service.TrendingService;
+import com.codepresso.meu.service.TagService;
 import com.codepresso.meu.service.UserService;
 import com.codepresso.meu.service.UserSessionService;
 import com.codepresso.meu.vo.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
@@ -25,13 +25,17 @@ public class IndexController {
     private PostService postService;
     private CommentService commentService;
     private UserService userService;
+    private TagService tagService;
+    private TrendingService trendingService;
     private UserSessionService userSessionService;
-
-
-    public IndexController(PostService postService, CommentService commentService, UserService userService, UserSessionService userSessionService) {
+    
+    public IndexController(PostService postService, CommentService commentService, UserService userService, TagService tagService, 
+                           TrendingService trendingService, UserSessionService userSessionService) {
         this.postService = postService;
         this.commentService = commentService;
         this.userService = userService;
+        this.tagService = tagService;
+        this.trendingService = trendingService;
         this.userSessionService = userSessionService;
     }
 
@@ -43,8 +47,8 @@ public class IndexController {
         List<FeedItem> feedItems = new ArrayList<>();
         List<PostResponseDto> postResponseDtos = new ArrayList<>();
         List<Post> postList = new ArrayList<>();
+      
         boolean isFinalPage = false;
-
         if (feedDto == null) {
             feedDto = new FeedRequestDto(1,0);
         }
@@ -112,13 +116,36 @@ public class IndexController {
 
     // Trending Page
     @RequestMapping(value = "/trending")
-    public String getTrendingPage() {
-        return "tags";
+    public String getTrendingPage(Model model, @CookieValue(value = "page",required = false) String trendCurrentPage, HttpServletResponse response) {
+        boolean isFinalPage = false;
+        List<FeedItem> trendingItems = new ArrayList<>();
+        List<PostResponseDto> trendingResponseDtos = new ArrayList<>();
+        List<Post> trendingList = new ArrayList<>();
+        trendingList = trendingService.getTrendingPage();
+        Integer maxPostCnt = 30;
+
+
+        for(Post trend : trendingList) {
+            trendingResponseDtos.add(new PostResponseDto(trend));
+            List<Comment> commentList = commentService.getCommentListByPostInFeed(trend.getPostId(), 1);
+            FeedItem trenditem = new FeedItem(new PostResponseDto(trend), commentList);
+            trenditem.setLikeCnt(postService.getLikesOfPost(trend.getPostId()).size());
+            trenditem.setCommentCnt(commentService.getCommentsOfPost(trend.getPostId()));
+            trendingItems.add(trenditem);
+        }
+
+        model.addAttribute("trendingItems",trendingItems);
+        List<User> userList = userService.getAllUsers();
+        model.addAttribute("userList", userList);
+
+        return "trending";
     }
 
     // Explore Page
     @RequestMapping(value = "/explore")
-    public String getExplorePage() {
+    public String getExplorePage(Model model) {
+        List<Tag> tagList = tagService.findByTagCount();
+        model.addAttribute("tagList", tagList);
         return "explore";
     }
 
@@ -134,5 +161,10 @@ public class IndexController {
         return "contact";
     }
 
+    // 404 Page
+    @RequestMapping(value = "/404")
+    public String get404Page() {
+        return "404";
+    }
 
 }
