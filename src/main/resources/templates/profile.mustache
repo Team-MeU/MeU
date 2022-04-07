@@ -54,10 +54,6 @@
                                 <h6 class="mb-0 d-flex align-items-start text-body fs-6 fw-bold">{{user.userName}} <span class="ms-2 material-icons bg-primary p-0 md-16 fw-bold text-white rounded-circle ov-icon">done</span></h6>
                                 <p class="text-muted mb-0">@{{user.email}}</p>
                             </div>
-                            <!--                            <div class="ms-auto btn-group" role="group" aria-label="Basic checkbox toggle button group">-->
-                            <!--                                <input type="checkbox" class="btn-check" id="btncheck1">-->
-                            <!--                                <label class="btn btn-outline-primary btn-sm px-3 rounded-pill" for="btncheck1"><span class="follow">+ Follow</span><span class="following d-none">Following</span></label>-->
-                            <!--                            </div>-->
                         </div>
                         <div class="p-3">
                             <p class="mb-2 fs-6">{{user.introduce}}</p>
@@ -65,24 +61,16 @@
                                 <span class="material-icons me-2 text-muted md-16 ms-4">calendar_today</span><span>Joined on {{user.createdAt}}</span>
                             </p>
                             <div class="d-flex followers">
-                                <!--                                팔로우팔로잉위치-->
+                                <!-- 팔로우팔로잉위치-->
                                 <div>
-                                    <p class="mb-0">{{followersCount}} <span class="text-muted">Followers</span></p>
-                                    <!--                                    <div class="d-flex">-->
-                                    <!--                                        <img src="img/rmate1.jpg" class="img-fluid rounded-circle" alt="follower-img">-->
-                                    <!--                                        <img src="img/rmate2.jpg" class="img-fluid rounded-circle" alt="follower-img">-->
-                                    <!--                                        <img src="img/rmate3.jpg" class="img-fluid rounded-circle" alt="follower-img">-->
-                                    <!--                                        <img src="img/rmate4.jpg" class="img-fluid rounded-circle" alt="follower-img">-->
-                                    <!--                                        <img src="img/rmate5.jpg" class="img-fluid rounded-circle" alt="follower-img">-->
-                                    <!--                                    </div>-->
+                                    <a href="/follower" class="text-decoration-none d-flex align-items-center">
+                                        <p class="mb-0">{{followersCount}} <span class="text-muted">Followers</span></p>
+                                    </a>
                                 </div>
                                 <div class="ms-5 ps-5">
-                                    <p class="mb-0">{{followingsCount}} <span class="text-muted">Following</span></p>
-                                    <!--                                    <div class="d-flex">-->
-                                    <!--                                        <img src="img/rmate1.jpg" class="img-fluid rounded-circle" alt="follower-img">-->
-                                    <!--                                        <img src="img/rmate2.jpg" class="img-fluid rounded-circle" alt="follower-img">-->
-                                    <!--                                        <img src="img/rmate3.jpg" class="img-fluid rounded-circle" alt="follower-img">-->
-                                    <!--                                    </div>-->
+                                    <a href="/following" class="text-decoration-none d-flex align-items-center">
+                                        <p class="mb-0">{{followingsCount}} <span class="text-muted">Following</span></p>
+                                    </a>
                                 </div>
                             </div>
                         </div>

@@ -21,4 +21,6 @@ public interface UserMapper {
     Integer getFollowings(@Param("userId") Integer userId);
     Integer getFollowers(@Param("userId") Integer userId);
     List<Integer> getFollowersUserId(@Param("userId") Integer userId);
+    List<User> getFollowingUsers(@Param("userId") Integer userId);
+    List<User> getFollowerUsers(@Param("userId") Integer userId);
 }
