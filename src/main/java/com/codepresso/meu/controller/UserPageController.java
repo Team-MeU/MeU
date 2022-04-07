@@ -67,9 +67,7 @@ public class UserPageController {
 
         // 팔로우 정보
         Integer followingsCount = userService.getFollowingsCount(userSession.getUserId());
-        System.out.println("followingsCount = " + followingsCount);
         Integer followersCount = userService.getFollowersCount(userSession.getUserId());
-        System.out.println("followersCount = " + followersCount);
         model.addAttribute("followingsCount", followingsCount);
         model.addAttribute("followersCount", followersCount);
         return "profile";
@@ -93,6 +91,12 @@ public class UserPageController {
         }
         model.addAttribute("user", user);
         model.addAttribute("feedItems", feedItems);
+
+        // 팔로우 정보
+        Integer followingsCount = userService.getFollowingsCount(userId);
+        Integer followersCount = userService.getFollowersCount(userId);
+        model.addAttribute("followingsCount", followingsCount);
+        model.addAttribute("followersCount", followersCount);
         return "profile";
     }
 

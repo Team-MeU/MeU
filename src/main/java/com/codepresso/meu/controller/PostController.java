@@ -63,7 +63,9 @@ public class PostController {
             }
 
             postService.savePost(post, multipartFile);
-
+            System.out.println("postId = " + post.getPostId());
+            // 피드테이블에 작성한 글 추가
+            postService.saveFeed(post.getUserId(), post.getPostId());
             return ResponseEntity.status(HttpStatus.OK).body("success");
     }
 

@@ -4,7 +4,7 @@
 
 <mapper namespace="com.codepresso.meu.mapper.PostMapper">
     <insert id="save" useGeneratedKeys="true"
-            keyProperty="postId" keyColumn="postId">
+            keyProperty="postId" keyColumn="postId" parameterType="com.codepresso.meu.vo.Post" >
         INSERT INTO Post(userId, content, imgUrl)
         VALUES (#{post.userId}, #{post.content}, #{post.imgUrl});
     </insert>
@@ -71,8 +71,6 @@
     </select>
 
 
-
-
     <select id="getMyPosts" resultType="com.codepresso.meu.vo.Post">
         SELECT
             p.postId,
@@ -123,6 +121,46 @@
         WHERE postID = #{postId}
     </select>
 
+    <insert id="saveFeed">
+        INSERT into Feed(userId, postId)
+        VALUES (#{userId}, #{postId})
+    </insert>
+
+    <select id="getFeed" resultType="com.codepresso.meu.vo.Post">
+        select
+            p.postId,
+            p.userId,
+            u.profileImg,
+            p.content,
+            p.createdAt,
+            p.imgUrl,
+            u.email,
+            u.nickname
+        FROM Post as p
+                 JOIN User as u
+                      ON p.userId = u.userId
+        where p.postId in (select postId from Feed where userId=#{userId})
+        ORDER BY p.postId DESC
+    </select>
+
+
+    <select id="findFeedByPage" resultType="com.codepresso.meu.vo.Post">
+        select
+            p.postId,
+            p.userId,
+            u.profileImg,
+            p.content,
+            p.createdAt,
+            p.imgUrl,
+            u.email,
+            u.nickname
+        FROM Post as p
+                 JOIN User as u
+                      ON p.userId = u.userId
+        where p.postId in (select postId from Feed where userId=#{userId})
+        ORDER BY p.postId DESC
+            LIMIT #{limit}
+    </select>
 
     <select id="findTrending" resultType="com.codepresso.meu.vo.Post">
         SELECT

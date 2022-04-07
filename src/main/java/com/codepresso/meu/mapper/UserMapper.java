@@ -20,4 +20,5 @@ public interface UserMapper {
     boolean checkFollow(@Param("userId") Integer userId, @Param("followId") Integer followId);
     Integer getFollowings(@Param("userId") Integer userId);
     Integer getFollowers(@Param("userId") Integer userId);
+    List<Integer> getFollowersUserId(@Param("userId") Integer userId);
 }
