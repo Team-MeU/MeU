@@ -76,4 +76,8 @@ public class UserService {
     public List<User> getFollowingUsers(Integer userId) {
         return userMapper.getFollowingUsers(userId);
     }
+
+    public List<User> getFollowerUsers(Integer userId) {
+        return userMapper.getFollowerUsers(userId);
+    }
 }
