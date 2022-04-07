@@ -135,5 +135,19 @@ public class UserPageController {
         return "check-password";
     }
 
-
+    @RequestMapping("/following")
+    public String followingPage(Model model, @CookieValue(name="id", required = false) Integer sessionId) {
+        if(sessionId==null){
+            System.out.println("No Cookie!");
+            return "login";
+        }
+        UserSession userSession = userSessionService.getUserSessionById(sessionId);
+        if(userSession==null) {
+            System.out.println("login first!!");
+            return "login";
+        }
+        List<User> followings = userService.getFollowingUsers(userSession.getUserId());
+        model.addAttribute("followings", followings);
+        return "follow";
+    }
 }

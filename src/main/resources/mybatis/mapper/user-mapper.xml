@@ -61,4 +61,8 @@
         select userId from Follow where followId=#{userId};
     </select>
 
+    <select id="getFollowingUsers" resultType="com.codepresso.meu.vo.User">
+        select * from User where userId in (select followId from Follow where userId=#{userId});
+    </select>
+
 </mapper>
