@@ -42,13 +42,13 @@
                 <div class="main-content">
                     <ul class="top-osahan-nav-tab nav nav-pills justify-content-center nav-justified mb-4 shadow-sm rounded-4 overflow-hidden bg-white sticky-sidebar2" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="p-3 nav-link text-muted" id="pills-feed-tab" data-bs-toggle="pill" data-bs-target="#pills-feed" type="button" role="tab" aria-controls="pills-feed" aria-selected="true">Feed</button>
+                            <button class="p-3 nav-link text-muted" id="pills-feed-tab" data-bs-toggle="pill" onclick="location.href='/'" type="button" role="tab" aria-controls="pills-feed" aria-selected="true">Feed</button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="p-3 nav-link text-muted" id="pills-people-tab" data-bs-toggle="pill" data-bs-target="#pills-people" type="button" role="tab" aria-controls="pills-people" aria-selected="false">People</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="p-3 nav-link text-muted active" id="pills-trending-tab" data-bs-toggle="pill" data-bs-target="#pills-trending" type="button" role="tab" aria-controls="pills-trending" aria-selected="false">Trending</button>
+                            <button class="p-3 nav-link text-muted active" id="pills-trending-tab"  type="button" role="tab" aria-selected="false">Trending</button>
                         </li>
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
@@ -56,8 +56,7 @@
                             <!-- Follow People -->
                             <div>
                                 <div class="d-flex align-items-center justify-content-between mb-1">
-                                    <h5 align="center" class="mb-0 fw-bold text-body">🔥🔥 인기 게시글 🔥🔥</h5>
-                                    <a href="#" class="text-dark text-decoration-none material-icons">east</a>
+                                    <h5 align="center" class="mb-0 fw-bold text-body">#Trending 30 🔥</h5>
                                 </div>
                                 <!-- Slider Accounts -->
                                 <div class="account-slider">
@@ -142,7 +141,7 @@
                                                                     <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">chat_bubble_outline</span><span>{{commentCnt}}</span></a>
                                                                 </div>
                                                                 <div>
-                                                                    <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">repeat</span><span>617</span></a>
+                                                                    <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">repeat</span><span></span></a>
                                                                 </div>
                                                                 <div>
                                                                     <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-18 me-2">share</span><span>Share</span></a>
@@ -1191,23 +1190,6 @@
         }
         </script>
 
-
-<script type="text/javascript">
-        function getCookie(cName) {
-            cName = cName + '=';
-            var cookieData = document.cookie;
-            var start = cookieData.indexOf(cName);
-            var cValue = '';
-            if(start != -1){
-                start += cName.length;
-                var end = cookieData.indexOf(';', start);
-                if(end == -1) end = cookieData.length;
-                cValue = cookieData.substring(start, end);
-            }
-            return unescape(cValue);
-        }
-        </script>
-
 <script type="text/javascript">
         function setCookie(id, value){
             document.cookie = id+'='+value;
@@ -1222,10 +1204,10 @@
 
 
 <!-- Infinity scroll -->
-<script type="text/javascript">
+<!-- script type="text/javascript">
         let isRequestPost = false;
         let current_page = parseInt(getCookie("page"));
-        var is_final_page = {{isFinalPage}};
+        var is_final_page = {isFinalPage}};
 
         window.addEventListener('scroll',() => {
             const domPositionY = $("#mainPost").height() + $("#mainPost").offset().top;
@@ -1251,6 +1233,6 @@
 		        });
             }
         });
-        </script>
+        </script-->
 </body>
 </html>

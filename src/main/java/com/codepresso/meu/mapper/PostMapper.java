@@ -30,6 +30,6 @@ public interface PostMapper {
     Integer countPostLiker(@Param("postId") Integer postId);
     Integer checkLike(@Param("postId") Integer postId, @Param("userId") Integer userId);
 
-    List<Post> findTrending();
+    List<Post> findTrending(@Param("limit") Integer limit);
 
 }

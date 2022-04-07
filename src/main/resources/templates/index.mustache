@@ -48,7 +48,7 @@
                             <button class="p-3 nav-link text-muted" id="pills-people-tab" data-bs-toggle="pill" data-bs-target="#pills-people" type="button" role="tab" aria-controls="pills-people" aria-selected="false">People</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="p-3 nav-link text-muted" id="pills-trending-tab" data-bs-toggle="pill" data-bs-target="#pills-trending" type="button" role="tab" aria-controls="pills-trending" aria-selected="false">Trending</button>
+                            <button class="p-3 nav-link text-muted" id="pills-trending-tab" data-bs-toggle="pill" onclick="location.href='/trending'" type="button" role="tab" aria-controls="pills-trending" aria-selected="false">Trending</button>
                         </li>
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
@@ -1414,7 +1414,7 @@
                                         <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">thumb_up_off_alt</span><span>30.4k</span></a>
                                     </div>
                                     <div>
-                                        <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">repeat</span><span>617</span></a>
+                                        <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-20 me-2">repeat</span><span></span></a>
                                     </div>
                                     <div>
                                         <a href="#" class="text-muted text-decoration-none d-flex align-items-start fw-light"><span class="material-icons md-18 me-2">share</span><span>Share</span></a>
@@ -1483,6 +1483,7 @@
 <script type="text/javascript">
         function setCookie(id, value){
             document.cookie = id+'='+value;
+
         }
       </script>
 

@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class TrendingService {
     private PostMapper postMapper;
+    private CommentService commentService;
     private S3Service s3Service;
     private TagService tagService;
 
@@ -18,7 +19,8 @@ public class TrendingService {
 
     public List<Post> getTrendingPage() {
         System.out.println("트렌드 서비스 실행" );
-        System.out.println(postMapper.findTrending());
-        return postMapper.findTrending();
+        Integer limit = 30;
+        System.out.println(postMapper.findTrending(limit));
+        return postMapper.findTrending(limit);
     }
 }

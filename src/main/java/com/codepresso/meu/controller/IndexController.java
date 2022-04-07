@@ -75,12 +75,15 @@ public class IndexController {
 
     // Trending Page
     @RequestMapping(value = "/trending")
-    public String getTrendingPage(Model model) {
+    public String getTrendingPage(Model model, @CookieValue(value = "page",required = false) String trendCurrentPage, HttpServletResponse response) {
+        boolean isFinalPage = false;
         List<FeedItem> trendingItems = new ArrayList<>();
         List<PostResponseDto> trendingResponseDtos = new ArrayList<>();
         List<Post> trendingList = new ArrayList<>();
-
         trendingList = trendingService.getTrendingPage();
+        Integer maxPostCnt = 30;
+
+
         for(Post trend : trendingList) {
             trendingResponseDtos.add(new PostResponseDto(trend));
             List<Comment> commentList = commentService.getCommentListByPostInFeed(trend.getPostId(), 1);
@@ -89,7 +92,11 @@ public class IndexController {
             trenditem.setCommentCnt(commentService.getCommentsOfPost(trend.getPostId()));
             trendingItems.add(trenditem);
         }
+
         model.addAttribute("trendingItems",trendingItems);
+        List<User> userList = userService.getAllUsers();
+        model.addAttribute("userList", userList);
+
         return "trending";
     }
 

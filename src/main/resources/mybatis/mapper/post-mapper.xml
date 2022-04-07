@@ -147,7 +147,8 @@
                 ON Trend.postId = P.postId)
             as TrendPost JOIN User as u
             ON TrendPost.userId = u.userId
-        Order By cnt DESC;
+        Order By cnt DESC
+        LIMIT #{limit};
     </select>
 
 </mapper>
