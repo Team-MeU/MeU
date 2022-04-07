@@ -61,24 +61,16 @@
                                 <span class="material-icons me-2 text-muted md-16 ms-4">calendar_today</span><span>Joined on {{user.createdAt}}</span>
                             </p>
                             <div class="d-flex followers">
-                                <!--                                팔로우팔로잉위치-->
+                                <!-- 팔로우팔로잉위치-->
                                 <div>
-                                    <p class="mb-0">{{followersCount}} <span class="text-muted">Followers</span></p>
-                                    <!--                                    <div class="d-flex">-->
-                                    <!--                                        <img src="img/rmate1.jpg" class="img-fluid rounded-circle" alt="follower-img">-->
-                                    <!--                                        <img src="img/rmate2.jpg" class="img-fluid rounded-circle" alt="follower-img">-->
-                                    <!--                                        <img src="img/rmate3.jpg" class="img-fluid rounded-circle" alt="follower-img">-->
-                                    <!--                                        <img src="img/rmate4.jpg" class="img-fluid rounded-circle" alt="follower-img">-->
-                                    <!--                                        <img src="img/rmate5.jpg" class="img-fluid rounded-circle" alt="follower-img">-->
-                                    <!--                                    </div>-->
+                                    <a href="/follower" class="text-decoration-none d-flex align-items-center">
+                                        <p class="mb-0">{{followersCount}} <span class="text-muted">Followers</span></p>
+                                    </a>
                                 </div>
                                 <div class="ms-5 ps-5">
-                                    <p class="mb-0">{{followingsCount}} <span class="text-muted">Following</span></p>
-                                    <!--                                    <div class="d-flex">-->
-                                    <!--                                        <img src="img/rmate1.jpg" class="img-fluid rounded-circle" alt="follower-img">-->
-                                    <!--                                        <img src="img/rmate2.jpg" class="img-fluid rounded-circle" alt="follower-img">-->
-                                    <!--                                        <img src="img/rmate3.jpg" class="img-fluid rounded-circle" alt="follower-img">-->
-                                    <!--                                    </div>-->
+                                    <a href="/following" class="text-decoration-none d-flex align-items-center">
+                                        <p class="mb-0">{{followingsCount}} <span class="text-muted">Following</span></p>
+                                    </a>
                                 </div>
                             </div>
                         </div>
