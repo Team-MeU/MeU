@@ -1,13 +1,13 @@
 package com.codepresso.meu.vo;
+import java.util.Date;
 
-import javax.xml.crypto.Data;
 
 public class Contact {
     Integer contactId;
     String username;
     String email;
     String content;
-    Data createdAt;
+    Date createdAt;
 
     public Contact(Integer contactId, String username, String email, String content) {
         this.contactId = contactId;
