@@ -49,9 +49,7 @@ public class IndexController {
         List<Post> postList = new ArrayList<>();
       
         boolean isFinalPage = false;
-        if (feedDto == null) {
-            feedDto = new FeedRequestDto(1,0);
-        }
+        if (feedDto == null) { feedDto = new FeedRequestDto(1,0); }
 
         if(currentPage == null) {
             currentPage = "1";
@@ -66,51 +64,41 @@ public class IndexController {
 
         if(sessionId==null) { // no login
             maxSearchPostCnt = postService.getAllPost().size();
-
             if(postService.getViewPostSize() * Integer.parseInt(currentPage) > maxSearchPostCnt) {
                 isFinalPage = true;
             }
-
+            System.out.println("no login 실행됨");
             postList = postService.getPostByPage(Integer.parseInt(currentPage));
-            for(Post post : postList) {
-                postResponseDtos.add(new PostResponseDto(post));
-                List<Comment> commentList = commentService.getCommentListByPostInFeed(post.getPostId(), 1);
-                FeedItem feeditem = new FeedItem(new PostResponseDto(post), commentList);
-                feeditem.setLikeCnt(postService.getLikesOfPost(post.getPostId()).size());
-                feeditem.setCommentCnt(commentService.getCommentsOfPost(post.getPostId()));
-                feedItems.add(feeditem);
-            }
-
+            System.out.println(postList);
         }
         else { //login
             UserSession userSession = userSessionService.getUserSessionById(sessionId);
-            for(User u : users) { //팔로우 목록에서 본인 제외
-                if(u.getUserId() == userSession.getUserId()) {
+            for (User u : users) { //팔로우 목록에서 본인 제외
+                if (u.getUserId() == userSession.getUserId()) {
                     users.remove(u);
                     break;
                 }
             }
             maxSearchPostCnt = postService.getFeed(userSession.getUserId()).size();
 
-            if(postService.getViewPostSize() * Integer.parseInt(currentPage) > maxSearchPostCnt) {
+            if (postService.getViewPostSize() * Integer.parseInt(currentPage) > maxSearchPostCnt) {
                 isFinalPage = true;
             }
-
             postList = postService.getFeedByPage(userSession.getUserId(), Integer.parseInt(currentPage));
-            for(Post post : postList) {
-                postResponseDtos.add(new PostResponseDto(post));
-                List<Comment> commentList = commentService.getCommentListByPostInFeed(post.getPostId(), 1);
-                FeedItem feeditem = new FeedItem(new PostResponseDto(post), commentList);
-                feeditem.setLikeCnt(postService.getLikesOfPost(post.getPostId()).size());
-                feeditem.setCommentCnt(commentService.getCommentsOfPost(post.getPostId()));
-                feedItems.add(feeditem);
-            }
+        }
+
+        for(Post post : postList) {
+            postResponseDtos.add(new PostResponseDto(post));
+            List<Comment> commentList = commentService.getCommentListByPostInFeed(post.getPostId(), 1);
+            FeedItem feeditem = new FeedItem(new PostResponseDto(post), commentList);
+            feeditem.setLikeCnt(postService.getLikesOfPost(post.getPostId()).size());
+            feeditem.setCommentCnt(commentService.getCommentsOfPost(post.getPostId()));
+            feedItems.add(feeditem);
         }
 
         model.addAttribute("isFinalPage", isFinalPage);
         model.addAttribute("feedItems", feedItems);
         model.addAttribute("users", users);
-
         return "index";
     }
 
