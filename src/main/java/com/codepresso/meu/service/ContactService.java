@@ -2,8 +2,6 @@ package com.codepresso.meu.service;
 
 import com.codepresso.meu.mapper.ContactMapper;
 import com.codepresso.meu.vo.Contact;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
