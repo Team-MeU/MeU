@@ -49,9 +49,7 @@ public class IndexController {
         List<Post> postList = new ArrayList<>();
       
         boolean isFinalPage = false;
-        if (feedDto == null) {
-            feedDto = new FeedRequestDto(1,0);
-        }
+        if (feedDto == null) { feedDto = new FeedRequestDto(1,0); }
 
         if(currentPage == null) {
             currentPage = "1";
@@ -61,56 +59,48 @@ public class IndexController {
             response.addCookie(cookie);
         }
 
-        List<User> users = userService.getAllUsers(); //전체 사용자 조회 및 팔로우 추천
         Integer maxSearchPostCnt;
-
-        if(sessionId==null) { // no login
-            maxSearchPostCnt = postService.getAllPost().size();
-
-            if(postService.getViewPostSize() * Integer.parseInt(currentPage) > maxSearchPostCnt) {
-                isFinalPage = true;
-            }
-
-            postList = postService.getPostByPage(Integer.parseInt(currentPage));
-            for(Post post : postList) {
-                postResponseDtos.add(new PostResponseDto(post));
-                List<Comment> commentList = commentService.getCommentListByPostInFeed(post.getPostId(), 1);
-                FeedItem feeditem = new FeedItem(new PostResponseDto(post), commentList);
-                feeditem.setLikeCnt(postService.getLikesOfPost(post.getPostId()).size());
-                feeditem.setCommentCnt(commentService.getCommentsOfPost(post.getPostId()));
-                feedItems.add(feeditem);
-            }
-
-        }
-        else { //login
+        List<User> users = userService.getAllUsers(); //전체 사용자 조회 및 팔로우 추천
+        if(sessionId != null) { //login
             UserSession userSession = userSessionService.getUserSessionById(sessionId);
-            for(User u : users) { //팔로우 목록에서 본인 제외
-                if(u.getUserId() == userSession.getUserId()) {
-                    users.remove(u);
-                    break;
+            List<Integer> follows = userService.getFollowingsUserId(userSession.getUserId());
+            if(!users.isEmpty()) {
+                for (int u=0;u< users.size();u++) { //팔로우 목록에서 본인 제외
+                    System.out.println("u.getUserId() = " + users.get(u).getUserId());
+                    if (users.get(u).getUserId().equals(userSession.getUserId()) || follows.contains(users.get(u).getUserId())) {
+                        users.remove(users.get(u));
+                    }
                 }
             }
-            maxSearchPostCnt = postService.getFeed(userSession.getUserId()).size();
 
+            maxSearchPostCnt = postService.getFeed(userSession.getUserId()).size();
+            if (postService.getViewPostSize() * Integer.parseInt(currentPage) > maxSearchPostCnt) {
+                isFinalPage = true;
+            }
+            postList = postService.getFeedByPage(userSession.getUserId(), Integer.parseInt(currentPage));
+        }
+        else {
+            maxSearchPostCnt = postService.getAllPost().size();
             if(postService.getViewPostSize() * Integer.parseInt(currentPage) > maxSearchPostCnt) {
                 isFinalPage = true;
             }
+            System.out.println("no login 실행됨");
+            postList = postService.getPostByPage(Integer.parseInt(currentPage));
+            System.out.println(postList);
+        }
 
-            postList = postService.getFeedByPage(userSession.getUserId(), Integer.parseInt(currentPage));
-            for(Post post : postList) {
-                postResponseDtos.add(new PostResponseDto(post));
-                List<Comment> commentList = commentService.getCommentListByPostInFeed(post.getPostId(), 1);
-                FeedItem feeditem = new FeedItem(new PostResponseDto(post), commentList);
-                feeditem.setLikeCnt(postService.getLikesOfPost(post.getPostId()).size());
-                feeditem.setCommentCnt(commentService.getCommentsOfPost(post.getPostId()));
-                feedItems.add(feeditem);
-            }
+        for(Post post : postList) {
+            postResponseDtos.add(new PostResponseDto(post));
+            List<Comment> commentList = commentService.getCommentListByPostInFeed(post.getPostId(), 1);
+            FeedItem feeditem = new FeedItem(new PostResponseDto(post), commentList);
+            feeditem.setLikeCnt(postService.getLikesOfPost(post.getPostId()).size());
+            feeditem.setCommentCnt(commentService.getCommentsOfPost(post.getPostId()));
+            feedItems.add(feeditem);
         }
 
         model.addAttribute("isFinalPage", isFinalPage);
         model.addAttribute("feedItems", feedItems);
         model.addAttribute("users", users);
-
         return "index";
     }
 

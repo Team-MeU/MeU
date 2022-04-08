@@ -58,13 +58,16 @@ Version: 1.0
 				"email": email,
 				"password": password
 			}),
-			contentType: "application/json"
+			contentType: "application/json",
+			success: function (result) {
+				alert("로그인 성공!");
+				window.location.href = '/';
+			},
+			error: function () {
+				alert("로그인 실패!");
+				location.reload();
+			}
 		})
-		.done(function(response) {
-			console.log("로그인!");
-			window.location.href = '/';
-		});
-
 	});
 
 	$(document).on("click","#logout-button",function(){
@@ -263,11 +266,12 @@ Version: 1.0
 		})
 	});
 
-	$("#post-edit-modal").click(function(){
-		var postId = $(this).attr("original-postId");
-		document.getElementById("post-edit-content" + postId).value = $(this).attr("original-content");
-		// document.getElementById("uploadEditFile").value = $("input[id=uploadFile]")[0].files[0];
-	})
+	// $(".post-edit-modal").click(function(){
+	// 	var postId = $(this).attr("original-postId");
+	// 	console.log($(this).attr("original-postId"));
+	// 	document.getElementById("post-edit-content" + postId).value = $(this).attr("original-content");
+	// 	// document.getElementById("uploadEditFile").value = $("input[id=uploadFile]")[0].files[0];
+	// })
 
 	$(document).on("click","#post-edit",function(){
 		var postId = $(this).attr("post-id")
@@ -276,7 +280,7 @@ Version: 1.0
 
 		var formData = new FormData();
 		var file = $("input[id=uploadEditFile"+postId+"]")[0].files[0];
-		// console.log(file);
+
 		if (file == null){
 			alert("파일을 선택해 주세요");
 			return false;

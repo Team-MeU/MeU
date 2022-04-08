@@ -39,21 +39,22 @@
                   <div class="main-content">
                      <div class="d-flex align-items-center mb-3">
                         <a href="/" class="material-icons text-dark text-decoration-none m-none me-3">arrow_back</a>
-                        <p class="ms-2 mb-0 fw-bold text-body fs-6">Explore - Hot Hashtag Top 10 🔥</p>
+                        <p class="ms-2 mb-0 fw-bold text-body fs-6">Follower List ◀</p>
                      </div>
                      <div class="bg-white rounded-4 overflow-hidden shadow-sm mb-4 mb-lg-0">
 
                         <!-- Trending Item -->
-                        {{#tagList}}
+                        {{#followers}}
                         <a class="p-3 border-bottom d-flex align-items-center text-dark text-decoration-none">
-                           <div>
-                              <p class="fw-bold mb-0 pe-3">
-                              <span class="text-primary">#{{content}}</span><br>
-                              </p>
-                              <small class="text-muted">Mentioned {{tagCount}} times.</small><br/>
-                           </div>
+                            <div class="d-flex align-items-center px-3 pt-3 profile">
+                                <img src={{profileImg}} class="img-fluid rounded-circle" alt="/img/rmate2.jpg">
+                                <div class="ms-3">
+                                    <h6 class="mb-0 d-flex align-items-start text-body fs-6 fw-bold">{{userName}} <span class="ms-2 material-icons bg-primary p-0 md-16 fw-bold text-white rounded-circle ov-icon">done</span></h6>
+                                    <p class="text-muted mb-0">@{{email}}</p>
+                                </div>
+                            </div>
                         </a>
-                        {{/tagList}}
+                        {{/followers}}
 
 
                      </div>
@@ -72,10 +73,10 @@
                               <a href="/" class="nav-link"><span class="material-icons me-3">house</span> <span>Feed</span></a>
                            </li>
                            <li class="nav-item">
-                              <a href="/myprofile" class="nav-link"><span class="material-icons me-3">account_circle</span> <span>Profile</span></a>
+                              <a href="/myprofile" class="nav-link active"><span class="material-icons me-3">account_circle</span> <span>Profile</span></a>
                            </li>
                            <li class="nav-item">
-                              <a href="/explore" class="nav-link active"><span class="material-icons me-3">explore</span> <span>Explore</span></a>
+                              <a href="/explore" class="nav-link"><span class="material-icons me-3">explore</span> <span>Explore</span></a>
                            </li>
                            <li class="nav-item">
                               <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#languageModal"><span class="material-icons me-3">translate</span> <span>Language</span></a>
@@ -99,6 +100,7 @@
                            </li>
                         </ul>
                      </div>
+                     <a href="/user/signin" class="btn btn-primary w-100 text-decoration-none rounded-4 py-3 fw-bold text-uppercase m-0" data-bs-toggle="modal" data-bs-target="#signModal">Sign In +</a>
                   </div>
                   <!-- Sidebar -->
                   <div class="ps-0 m-none fix-sidebar">
@@ -113,10 +115,10 @@
                               <a href="/" class="nav-link"><span class="material-icons me-3">house</span> <span>Feed</span></a>
                            </li>
                            <li class="nav-item">
-                              <a href="/myprofile" class="nav-link"><span class="material-icons me-3">account_circle</span> <span>Profile</span></a>
+                              <a href="/myprofile" class="nav-link active"><span class="material-icons me-3">account_circle</span> <span>Profile</span></a>
                            </li>
                            <li class="nav-item">
-                              <a href="/explore" class="nav-link active"><span class="material-icons me-3">explore</span> <span>Explore</span></a>
+                              <a href="/explore" class="nav-link"><span class="material-icons me-3">explore</span> <span>Explore</span></a>
                            </li>
                            <li class="nav-item">
                               <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#languageModal"><span class="material-icons me-3">translate</span> <span>Language</span></a>

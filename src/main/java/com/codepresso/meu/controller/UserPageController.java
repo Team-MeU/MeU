@@ -1,6 +1,5 @@
 package com.codepresso.meu.controller;
 
-import com.codepresso.meu.controller.dto.FollowDto;
 import com.codepresso.meu.controller.dto.PostResponseDto;
 import com.codepresso.meu.service.CommentService;
 import com.codepresso.meu.service.PostService;
@@ -13,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,13 +78,14 @@ public class UserPageController {
         User user = userService.getUserbyId(userId);
         List<Post> myPost = postService.getMyPosts(userId);
         List<PostResponseDto> postResponseDtos = new ArrayList<>();
-        //List<Comment> commentList = new ArrayList<>();
         List<FeedItem> feedItems = new ArrayList<>();
 
         for(Post post : myPost) {
             postResponseDtos.add(new PostResponseDto(post));
             List<Comment> commentList = commentService.getCommentListByPostInFeed(post.getPostId(), 1);
             FeedItem feeditem = new FeedItem(new PostResponseDto(post), commentList);
+            feeditem.setLikeCnt(postService.getLikesOfPost(post.getPostId()).size());
+            feeditem.setCommentCnt(commentService.getCommentsOfPost(post.getPostId()));
             feedItems.add(feeditem);
         }
         model.addAttribute("user", user);
@@ -134,5 +133,38 @@ public class UserPageController {
         return "check-password";
     }
 
+    @RequestMapping("/following")
+    public String followingPage(Model model, @CookieValue(name="id", required = false) Integer sessionId) {
+        if(sessionId==null){
+            System.out.println("No Cookie!");
+            return "login";
+        }
+        UserSession userSession = userSessionService.getUserSessionById(sessionId);
+        if(userSession==null) {
+            System.out.println("login first!!");
+            return "login";
+        }
+        List<User> followings = userService.getFollowingUsers(userSession.getUserId());
+        model.addAttribute("followings", followings);
+        return "following";
+    }
 
+    @RequestMapping("/follower")
+    public String followerPage(Model model, @CookieValue(name="id", required = false) Integer sessionId) {
+        if(sessionId==null){
+            System.out.println("No Cookie!");
+            return "login";
+        }
+        UserSession userSession = userSessionService.getUserSessionById(sessionId);
+        if(userSession==null) {
+            System.out.println("login first!!");
+            return "login";
+        }
+        List<User> followers = userService.getFollowerUsers(userSession.getUserId());
+        for(User u : followers) {
+            System.out.println("u.getUserId() = " + u.getUserId());
+        }
+        model.addAttribute("followers", followers);
+        return "follower";
+    }
 }

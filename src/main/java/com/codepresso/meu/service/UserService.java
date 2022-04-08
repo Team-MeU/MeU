@@ -62,14 +62,26 @@ public class UserService {
     }
 
     public Integer getFollowingsCount(Integer userId) {
-        return userMapper.getFollowings(userId);
+        return userMapper.getFollowingsNum(userId);
     }
 
     public Integer getFollowersCount(Integer userId) {
-        return userMapper.getFollowers(userId);
+        return userMapper.getFollowersNum(userId);
     }
 
     public List<Integer> getFollowersUserId(Integer userId) {
         return userMapper.getFollowersUserId(userId);
+    }
+
+    public List<Integer> getFollowingsUserId(Integer userId) {
+        return userMapper.getFollowingsUserId(userId);
+    }
+
+    public List<User> getFollowingUsers(Integer userId) {
+        return userMapper.getFollowingUsers(userId);
+    }
+
+    public List<User> getFollowerUsers(Integer userId) {
+        return userMapper.getFollowerUsers(userId);
     }
 }
