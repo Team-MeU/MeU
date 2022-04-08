@@ -60,16 +60,17 @@ public class IndexController {
         }
 
         Integer maxSearchPostCnt;
-        List<User> users = userService.getAllUsers(); //전체 사용자 조회 및 팔로우 추천
+        List<User> users = userService.getAllUsers();
+
         if(sessionId != null) { //login
             UserSession userSession = userSessionService.getUserSessionById(sessionId);
             List<Integer> follows = userService.getFollowingsUserId(userSession.getUserId());
-            if(!users.isEmpty()) {
-                for (int u=0;u< users.size();u++) { //팔로우 목록에서 본인 제외
-                    System.out.println("u.getUserId() = " + users.get(u).getUserId());
-                    if (users.get(u).getUserId().equals(userSession.getUserId()) || follows.contains(users.get(u).getUserId())) {
-                        users.remove(users.get(u));
-                    }
+            ArrayList<User> canFollows = new ArrayList<User>();
+
+            for(int index=0; index<users.size();index++) {
+                User user1 = users.get(index);
+                if(!user1.getUserId().equals(userSession.getUserId()) && !follows.contains(user1.getUserId())) {
+                    canFollows.add(user1);
                 }
             }
 
@@ -78,15 +79,17 @@ public class IndexController {
                 isFinalPage = true;
             }
             postList = postService.getFeedByPage(userSession.getUserId(), Integer.parseInt(currentPage));
+            model.addAttribute("users", canFollows);
         }
-        else {
+
+        if(sessionId == null) {
             maxSearchPostCnt = postService.getAllPost().size();
             if(postService.getViewPostSize() * Integer.parseInt(currentPage) > maxSearchPostCnt) {
                 isFinalPage = true;
             }
             System.out.println("no login 실행됨");
             postList = postService.getPostByPage(Integer.parseInt(currentPage));
-            System.out.println(postList);
+            model.addAttribute("users", users);
         }
 
         for(Post post : postList) {
@@ -100,7 +103,6 @@ public class IndexController {
 
         model.addAttribute("isFinalPage", isFinalPage);
         model.addAttribute("feedItems", feedItems);
-        model.addAttribute("users", users);
         return "index";
     }
 
