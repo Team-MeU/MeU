@@ -58,6 +58,8 @@ public class UserPageController {
             postResponseDtos.add(new PostResponseDto(post));
             List<Comment> commentList = commentService.getCommentListByPostInFeed(post.getPostId(), 1);
             FeedItem feeditem = new FeedItem(new PostResponseDto(post), commentList);
+            feeditem.setLikeCnt(postService.getLikesOfPost(post.getPostId()).size());
+            feeditem.setCommentCnt(commentService.getCommentsOfPost(post.getPostId()));
             feedItems.add(feeditem);
         }
         model.addAttribute("user",user);
@@ -76,6 +78,7 @@ public class UserPageController {
     public String getProfilePage(@PathVariable("nickname") String nickname, Model model) {
         Integer userId = userService.getUserIdByNickname(nickname);
         User user = userService.getUserbyId(userId);
+
         List<Post> myPost = postService.getMyPosts(userId);
         List<PostResponseDto> postResponseDtos = new ArrayList<>();
         List<FeedItem> feedItems = new ArrayList<>();
@@ -87,6 +90,7 @@ public class UserPageController {
             feeditem.setLikeCnt(postService.getLikesOfPost(post.getPostId()).size());
             feeditem.setCommentCnt(commentService.getCommentsOfPost(post.getPostId()));
             feedItems.add(feeditem);
+
         }
         model.addAttribute("user", user);
         model.addAttribute("feedItems", feedItems);
