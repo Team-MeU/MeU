@@ -58,13 +58,16 @@ Version: 1.0
 				"email": email,
 				"password": password
 			}),
-			contentType: "application/json"
+			contentType: "application/json",
+			success: function (result) {
+				alert("로그인 성공!");
+				window.location.href = '/';
+			},
+			error: function () {
+				alert("로그인 실패!");
+				location.reload();
+			}
 		})
-		.done(function(response) {
-			console.log("로그인!");
-			window.location.href = '/';
-		});
-
 	});
 
 	$(document).on("click","#logout-button",function(){
