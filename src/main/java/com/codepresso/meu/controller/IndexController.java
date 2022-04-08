@@ -59,10 +59,27 @@ public class IndexController {
             response.addCookie(cookie);
         }
 
-        List<User> users = userService.getAllUsers(); //전체 사용자 조회 및 팔로우 추천
         Integer maxSearchPostCnt;
+        List<User> users = userService.getAllUsers(); //전체 사용자 조회 및 팔로우 추천
+        if(sessionId != null) { //login
+            UserSession userSession = userSessionService.getUserSessionById(sessionId);
+            List<Integer> follows = userService.getFollowingsUserId(userSession.getUserId());
+            if(!users.isEmpty()) {
+                for (int u=0;u< users.size();u++) { //팔로우 목록에서 본인 제외
+                    System.out.println("u.getUserId() = " + users.get(u).getUserId());
+                    if (users.get(u).getUserId().equals(userSession.getUserId()) || follows.contains(users.get(u).getUserId())) {
+                        users.remove(users.get(u));
+                    }
+                }
+            }
 
-        if(sessionId==null) { // no login
+            maxSearchPostCnt = postService.getFeed(userSession.getUserId()).size();
+            if (postService.getViewPostSize() * Integer.parseInt(currentPage) > maxSearchPostCnt) {
+                isFinalPage = true;
+            }
+            postList = postService.getFeedByPage(userSession.getUserId(), Integer.parseInt(currentPage));
+        }
+        else {
             maxSearchPostCnt = postService.getAllPost().size();
             if(postService.getViewPostSize() * Integer.parseInt(currentPage) > maxSearchPostCnt) {
                 isFinalPage = true;
@@ -70,21 +87,6 @@ public class IndexController {
             System.out.println("no login 실행됨");
             postList = postService.getPostByPage(Integer.parseInt(currentPage));
             System.out.println(postList);
-        }
-        else { //login
-            UserSession userSession = userSessionService.getUserSessionById(sessionId);
-            for (User u : users) { //팔로우 목록에서 본인 제외
-                if (u.getUserId() == userSession.getUserId()) {
-                    users.remove(u);
-                    break;
-                }
-            }
-            maxSearchPostCnt = postService.getFeed(userSession.getUserId()).size();
-
-            if (postService.getViewPostSize() * Integer.parseInt(currentPage) > maxSearchPostCnt) {
-                isFinalPage = true;
-            }
-            postList = postService.getFeedByPage(userSession.getUserId(), Integer.parseInt(currentPage));
         }
 
         for(Post post : postList) {

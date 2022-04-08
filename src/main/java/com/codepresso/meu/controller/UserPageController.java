@@ -161,6 +161,9 @@ public class UserPageController {
             return "login";
         }
         List<User> followers = userService.getFollowerUsers(userSession.getUserId());
+        for(User u : followers) {
+            System.out.println("u.getUserId() = " + u.getUserId());
+        }
         model.addAttribute("followers", followers);
         return "follower";
     }

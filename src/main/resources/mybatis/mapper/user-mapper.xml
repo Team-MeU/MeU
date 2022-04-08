@@ -49,11 +49,11 @@
         select exists(select * from Follow where followId=#{followId} and userId=#{userId});
     </select>
 
-    <select id="getFollowings" resultType="Integer">
+    <select id="getFollowingsNum" resultType="Integer">
         select count(followId) from Follow where userId=#{userId};
     </select>
 
-    <select id="getFollowers" resultType="Integer">
+    <select id="getFollowersNum" resultType="Integer">
         select count(userId) from Follow where followId=#{userId};
     </select>
 
@@ -61,11 +61,15 @@
         select userId from Follow where followId=#{userId};
     </select>
 
+    <select id="getFollowingsUserId" resultType="Integer">
+        select followId from Follow where userId=#{userId};
+    </select>
+
     <select id="getFollowingUsers" resultType="com.codepresso.meu.vo.User">
         select * from User where userId in (select followId from Follow where userId=#{userId});
     </select>
 
     <select id="getFollowerUsers" resultType="com.codepresso.meu.vo.User">
-        select * from User where userId in (select userId from Follow where userId=#{userId});
+        select * from User where userId in (select userId from Follow where followId=#{userId});
     </select>
 </mapper>
