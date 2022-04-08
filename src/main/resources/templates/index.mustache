@@ -24,6 +24,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
 </head>
 <body class="bg-light">
 <div class="web-none d-flex align-items-center px-3 pt-3">
@@ -237,7 +238,7 @@
                                                                     <a href="#" class="text-muted text-decoration-none material-icons ms-2 md-20 rounded-circle bg-light p-1" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">more_vert</a>
                                                                     <ul class="dropdown-menu fs-13 dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
                                                                         <input type="hidden" id="dropdown-postId" value="{{postId}}">
-                                                                        <li><a class="dropdown-item text-muted" id="post-edit-modal" data-bs-toggle="modal" data-bs-target="#postEditModal{{postId}}" original-postId="{{postId}}" original-content="{{content}}"><span class="material-icons md-13 me-1">edit</span>Edit</a></li>
+                                                                        <li><a class="dropdown-item text-muted" class="post-edit-modal" data-bs-toggle="modal" data-bs-target="#postEditModal{{postId}}" original-postId="{{postId}}" original-content="{{content}}"><span class="material-icons md-13 me-1">edit</span>Edit</a></li>
                                                                         <li><a class="dropdown-item text-muted" id="post-delete" href="#"><span class="material-icons md-13 me-1">delete</span>Delete</a></li>
                                                                         <li><a class="dropdown-item text-muted" href="#"><span class="material-icons md-13 me-1 ltsp-n5">arrow_back_ios arrow_forward_ios</span>Embed Vogel</a></li>
                                                                         <li><a class="dropdown-item text-muted d-flex align-items-center" href="#"><span class="material-icons md-13 me-1">share</span>Share via another apps</a></li>
@@ -253,7 +254,7 @@
                                                                                 </div>
                                                                                 <div class="modal-body p-0 mb-3">
                                                                                     <div class="form-floating">
-                                                                                        <textarea class="form-control rounded-5 border-0 shadow-sm" id="post-edit-content{{postId}}" id="floatingTextarea3" style="height: 200px"></textarea>
+                                                                                        <textarea class="form-control rounded-5 border-0 shadow-sm" id="post-edit-content{{postId}}" style="height: 200px">{{content}}</textarea>
                                                                                         <label for="floatingTextarea2" class="h6 text-muted mb-0">What's on your mind...</label>
                                                                                     </div>
                                                                                 </div>
