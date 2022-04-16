@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.codepresso.meu.mapper.UserSessionMapper">
+    <select id="findOneById" resultType="com.codepresso.meu.vo.UserSession">
+        SELECT *
+        FROM UserSession
+        WHERE sessionId = #{sessionId};
+    </select>
+
+    <select id="findIdByUser" resultType="Integer">
+        SELECT sessionId
+        FROM UserSession
+        WHERE userId = #{userId};
+    </select>
+
+    <select id="existUser" resultType="boolean">
+        SELECT EXISTS (SELECT sessionId FROM UserSession WHERE userId = #{userId});
+    </select>
+
+    <insert id="save">
+        INSERT INTO UserSession(userId)
+        VALUES (#{userSession.userId});
+    </insert>
+
+    <update id="updateSession">
+        UPDATE UserSession SET updatedAt=NOW() WHERE userId=(#{userId});
+    </update>
+
+    <delete id="delete">
+        DELETE FROM UserSession
+        WHERE sessionId=#{id};
+    </delete>
+
+</mapper>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.codepresso.meu.mapper.PostMapper">
+    <insert id="save" useGeneratedKeys="true"
+            keyProperty="postId" keyColumn="postId" parameterType="com.codepresso.meu.vo.Post" >
+        INSERT INTO Post(userId, content, imgUrl)
+        VALUES (#{post.userId}, #{post.content}, #{post.imgUrl});
+    </insert>
+
+    <update id="update" useGeneratedKeys="true"
+            keyProperty="postId" keyColumn="postId">
+        UPDATE Post
+        SET content=#{post.content}, imgUrl=#{post.imgUrl}
+        WHERE postId=#{post.postId};
+    </update>
+
+    <delete id="delete">
+        DELETE FROM Post
+        WHERE postId=#{id};
+    </delete>
+
+    <select id="findOne" resultType="com.codepresso.meu.vo.Post">
+        select
+            p.postId,
+            p.userId,
+            u.profileImg,
+            p.content,
+            p.createdAt,
+            p.imgUrl,
+            u.email,
+            u.nickname
+        FROM Post as p
+        JOIN User as u
+        ON p.userId = u.userId
+        WHERE p.postId=#{id};
+    </select>
+
+    <select id="findAll" resultType="com.codepresso.meu.vo.Post">
+        select
+            p.postId,
+            p.userId,
+            u.profileImg,
+            p.content,
+            p.createdAt,
+            p.imgUrl,
+            u.email,
+            u.nickname
+        FROM Post as p
+        JOIN User as u
+        ON p.userId = u.userId
+        ORDER BY p.postId DESC
+    </select>
+
+    <select id="findByPage" resultType="com.codepresso.meu.vo.Post">
+        select
+        p.postId,
+        p.userId,
+        u.profileImg,
+        p.content,
+        p.createdAt,
+        p.imgUrl,
+        u.email,
+        u.nickname
+        FROM Post as p
+        JOIN User as u
+        ON p.userId = u.userId
+        ORDER BY p.postId DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="getMyPosts" resultType="com.codepresso.meu.vo.Post">
+        SELECT
+            p.postId,
+            p.userId,
+            u.profileImg,
+            p.content,
+            p.createdAt,
+            p.imgUrl,
+            u.email,
+            u.nickname
+        FROM Post as p
+        JOIN User as u
+        ON p.userId = u.userId
+        WHERE p.userId = #{userId}
+        ORDER BY p.postId DESC
+    </select>
+
+    <select id="likesOfUser" resultType="com.codepresso.meu.vo.Likes">
+        SELECT *
+        FROM Likes
+        WHERE userId = #{userId}
+    </select>
+
+    <select id="likesOfPost" resultType="com.codepresso.meu.vo.Likes">
+        SELECT *
+        FROM Likes
+        WHERE postID = #{postId}
+    </select>
+
+    <insert id="insertLike">
+        INSERT into Likes(postId, userId)
+        VALUES (#{postId}, #{userId})
+    </insert>
+
+    <delete id="deleteLike">
+        DELETE FROM Likes
+        WHERE postId=#{postId} AND userId=#{userId}
+    </delete>
+
+   <select id="checkLike" resultType="Integer">
+        SELECT COUNT(*)
+        FROM Likes
+        WHERE postId=#{postId} AND userId=#{userId}
+   </select>
+
+    <select id="countForLike" resultType="Integer">
+        SELECT COUNT(*)
+        FROM Likes
+        WHERE postID = #{postId}
+    </select>
+
+    <insert id="saveFeed">
+        INSERT into Feed(userId, postId)
+        VALUES (#{userId}, #{postId})
+    </insert>
+
+    <select id="getFeed" resultType="com.codepresso.meu.vo.Post">
+        select
+            p.postId,
+            p.userId,
+            u.profileImg,
+            p.content,
+            p.createdAt,
+            p.imgUrl,
+            u.email,
+            u.nickname
+        FROM Post as p
+                 JOIN User as u
+                      ON p.userId = u.userId
+        where p.postId in (select postId from Feed where userId=#{userId})
+        ORDER BY p.postId DESC
+    </select>
+
+
+    <select id="findFeedByPage" resultType="com.codepresso.meu.vo.Post">
+        select
+            p.postId,
+            p.userId,
+            u.profileImg,
+            p.content,
+            p.createdAt,
+            p.imgUrl,
+            u.email,
+            u.nickname
+        FROM Post as p
+                 JOIN User as u
+                      ON p.userId = u.userId
+        where p.postId in (select postId from Feed where userId=#{userId})
+        ORDER BY p.postId DESC
+            LIMIT #{limit}
+    </select>
+
+    <select id="findTrending" resultType="com.codepresso.meu.vo.Post">
+        SELECT
+            TrendPost.postId,
+            TrendPost.userId,
+            u.profileImg,
+            TrendPost.content,
+            TrendPost.createdAt,
+            TrendPost.imgUrl,
+            u.email,
+            u.nickname
+        FROM
+            (SELECT
+                P.*,
+                cnt from
+                (SELECT
+                    LikeCnt.postId,
+                    COUNT(*) as cnt
+                from meu.Likes as LikeCnt
+                group by postId) as Trend
+                INNER JOIN meu.Post as P
+                ON Trend.postId = P.postId)
+            as TrendPost JOIN User as u
+            ON TrendPost.userId = u.userId
+        Order By cnt DESC
+        LIMIT #{limit};
+    </select>
+
+</mapper>

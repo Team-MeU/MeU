@@ -1,0 +1,1 @@
+Insert into Likes(postId, userId, createdAt) values (5, 3, '2022-03-15 18:09:42');

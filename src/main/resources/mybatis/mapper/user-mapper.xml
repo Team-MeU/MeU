@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.codepresso.meu.mapper.UserMapper">
+    <select id="getUserbyId" resultType="com.codepresso.meu.vo.User">
+        SELECT *
+        FROM User
+        WHERE userId = #{id};
+    </select>
+
+    <insert id="save">
+        INSERT INTO User(email, nickname, password, profileImg)
+        VALUES (#{user.email}, #{user.nickname}, #{user.password}, #{user.profileImg});
+    </insert>
+
+    <select id="findOneByEmailAndPassword" resultType="com.codepresso.meu.vo.User">
+        SELECT *
+        FROM User
+        WHERE email = #{email} AND password = #{password};
+    </select>
+
+    <update id="modify">
+        UPDATE User
+        SET nickname = #{user.nickname}
+        ,email = #{user.email}
+        ,password = #{user.password}
+        WHERE userId = #{user.userId};
+    </update>
+
+    <select id="getAllUsers" resultType="com.codepresso.meu.vo.User">
+        SELECT * FROM User;
+    </select>
+
+    <insert id="followUser">
+        INSERT INTO Follow(followId, userId)
+        VALUES (#{followId}, #{userId});
+    </insert>
+
+    <select id="getUserIdByNickname" resultType="Integer">
+        SELECT userId FROM User WHERE nickname = #{nickname};
+    </select>
+
+    <delete id="unfollowUser">
+        DELETE FROM Follow WHERE followId=#{followId} AND userId=#{userId};
+    </delete>
+
+    <select id="checkFollow" resultType="boolean">
+        select exists(select * from Follow where followId=#{followId} and userId=#{userId});
+    </select>
+
+    <select id="getFollowingsNum" resultType="Integer">
+        select count(followId) from Follow where userId=#{userId};
+    </select>
+
+    <select id="getFollowersNum" resultType="Integer">
+        select count(userId) from Follow where followId=#{userId};
+    </select>
+
+    <select id="getFollowersUserId" resultType="Integer">
+        select userId from Follow where followId=#{userId};
+    </select>
+
+    <select id="getFollowingsUserId" resultType="Integer">
+        select followId from Follow where userId=#{userId};
+    </select>
+
+    <select id="getFollowingUsers" resultType="com.codepresso.meu.vo.User">
+        select * from User where userId in (select followId from Follow where userId=#{userId});
+    </select>
+
+    <select id="getFollowerUsers" resultType="com.codepresso.meu.vo.User">
+        select * from User where userId in (select userId from Follow where followId=#{userId});
+    </select>
+</mapper>
